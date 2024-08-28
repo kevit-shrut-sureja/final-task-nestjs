@@ -1,31 +1,34 @@
-import { Model } from "mongoose";
-import { User, UserDocument } from "./users.schema";
-import { InjectModel } from "@nestjs/mongoose";
-import { Injectable, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
-import { CreateUserDTO } from "./dtos/create-user.dto";
+import { Model } from 'mongoose';
+import { User, UserDocument } from './users.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { HttpException, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
+import { CreateUserDTO } from './dtos/create-user.dto';
 
 @Injectable()
-export class UserRepository{
-    constructor(@InjectModel(User.name) private userModel : Model<UserDocument>){}
+export class UserRepository {
+    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-    async createUser(userData : CreateUserDTO) : Promise<User>{
+    async createUser(userData: CreateUserDTO): Promise<User> {
         try {
-            const createdUser = await this.userModel.create(userData)
-            return createdUser
+            const createdUser = await this.userModel.create(userData);
+            return createdUser;
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
 
-    async findUserByEmail(email : string) : Promise<User> {
+    async findUserByEmail(email: string): Promise<UserDocument> {
         try {
-            const user = await this.userModel.findOne({ email });            
-            if(!user){
-                throw new NotFoundException('User not found.')
+            const user = await this.userModel.findOne({ email });
+            if (!user) {
+                throw new NotFoundException('User not found.');
             }
             return user;
         } catch (error) {
-            throw new ServiceUnavailableException()
+            if (error instanceof HttpException) {
+                throw error;
+            }
+            throw new ServiceUnavailableException();
         }
     }
 }
