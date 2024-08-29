@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInUser } from './dtos/sign-in-user.dto';
 
@@ -7,6 +7,7 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @Post('login')
+    @HttpCode(HttpStatus.OK)
     async loginUser(@Body() credentials: SignInUser) {
         try {
             const result = await this.authService.validateUser(credentials);
