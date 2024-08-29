@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 import { ROLE } from 'src/constants/role.constants';
 import { hash } from 'bcrypt'
 
@@ -21,17 +21,20 @@ export class User {
     @Prop([String])
     tokens?: string[];
 
-    @Prop({
-        type: {
-            branchId: { type: String, ref: 'Branch' },
-            branchName : String,
-            phone : String,
-            batch : Number,
-            currentSemester : Number
-        },
-        _id : false
-    })
-    userDetails?: Record<string, any>;
+    @Prop({ type: Types.ObjectId, ref: 'Branch' })
+    branchId: Types.ObjectId;
+
+    @Prop({ type: String })
+    branchName: string;
+
+    @Prop({ type: String })
+    phone: string;
+
+    @Prop({ type: Number })
+    batch: number;
+
+    @Prop({ type: Number })
+    currentSemester: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

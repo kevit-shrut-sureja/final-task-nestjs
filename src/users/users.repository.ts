@@ -3,6 +3,7 @@ import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/create-user.dto';
+import { ROLE } from 'src/constants/role.constants';
 
 @Injectable()
 export class UserRepository {
@@ -10,12 +11,18 @@ export class UserRepository {
 
     async createUser(userData: CreateUserDTO): Promise<User> {
         try {
-            const createdUser = await this.userModel.create(userData);
+            const validatedUserData = this.validateRoleSpecificDetails(userData);
+            const createdUser = await this.userModel.create(validatedUserData);
             return createdUser;
         } catch (error) {
             if (error.code === 11000) {
                 throw new HttpException('User already exists', 400);
             }
+
+            if (error instanceof HttpException) {
+                throw error;
+            }
+
             throw new ServiceUnavailableException();
         }
     }
@@ -35,11 +42,11 @@ export class UserRepository {
         }
     }
 
-    async findUserById(id : string) : Promise<UserDocument>{
+    async findUserById(id: string): Promise<UserDocument> {
         try {
             const user = this.userModel.findById(id);
 
-            if(!user){
+            if (!user) {
                 throw new NotFoundException('User not found');
             }
             return user;
@@ -49,5 +56,52 @@ export class UserRepository {
             }
             throw new ServiceUnavailableException();
         }
+    }
+
+    validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
+        const { role } = user;
+
+        switch (role) {
+            case ROLE.STUDENT: {
+                const requiredFieldsForUser = ['branchId', 'phone', 'batch', 'currentSemester', 'branchName'];
+                const missingUserFields = requiredFieldsForUser.filter((field) => !user[field]);
+
+                if (missingUserFields.length) {
+                    console.log('Throwing HttpException:', HttpException);
+                    throw new HttpException('Student details missing.', 400);
+                }
+                break;
+            }
+            case ROLE.STAFF: {
+                const requiredFieldsForStaff = ['branchId'];
+                const missingStaffFields = requiredFieldsForStaff.filter((field) => !user[field]);
+
+                if (missingStaffFields.length) {
+                    throw new HttpException('Staff details missing.', 400);
+                }
+
+                // Clean up fields that are not needed for staff
+                user.phone = undefined;
+                user.batch = undefined;
+                user.currentSemester = undefined;
+                user.branchName = undefined;
+
+                break;
+            }
+            case ROLE.ADMIN: {
+                // Clean up fields that are not needed for admin
+                user.branchId = undefined;
+                user.phone = undefined;
+                user.batch = undefined;
+                user.currentSemester = undefined;
+                user.branchName = undefined;
+
+                break;
+            }
+            default: {
+                throw new HttpException('User role missing.', 400);
+            }
+        }
+        return user;
     }
 }

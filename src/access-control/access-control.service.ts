@@ -95,8 +95,6 @@ export class AccessControlService {
      * @returns true if allowed other wise false or undefined
      */
     checkAccessPermission(role: RoleType, operation: OperationsType, resource: ResourceType) {
-        console.log(role, operation, resource);
-        
         return this.roles[role][operation]?.[resource];
     }
 }
