@@ -13,6 +13,9 @@ export class UserRepository {
             const createdUser = await this.userModel.create(userData);
             return createdUser;
         } catch (error) {
+            if (error.code === 11000) {
+                throw new HttpException('User already exists', 400);
+            }
             throw new ServiceUnavailableException();
         }
     }
@@ -22,6 +25,22 @@ export class UserRepository {
             const user = await this.userModel.findOne({ email });
             if (!user) {
                 throw new NotFoundException('User not found.');
+            }
+            return user;
+        } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
+            throw new ServiceUnavailableException();
+        }
+    }
+
+    async findUserById(id : string) : Promise<UserDocument>{
+        try {
+            const user = this.userModel.findById(id);
+
+            if(!user){
+                throw new NotFoundException('User not found');
             }
             return user;
         } catch (error) {
