@@ -1,4 +1,4 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from 'src/users/users.repository';
 import { SignInUser } from './dtos/sign-in-user.dto';
 import { compare } from 'bcrypt';
@@ -14,7 +14,10 @@ export class AuthService {
     async validateUser({ email, password }: SignInUser) {
         try {
             const user = await this.userRepository.findUserByEmail(email);
-
+            if (!user) {
+                throw new NotFoundException('User not found.');
+            }
+            
             const isPasswordMatch = await compare(password, user.password);
 
             if (!isPasswordMatch) {

@@ -1,7 +1,8 @@
 export enum ROLE {
     ADMIN = 'admin',
     STAFF = 'staff',
-    STUDENT = 'student'
+    STUDENT = 'student',
+    SUPER_ADMIN = 'super-admin'
 }
 
 export enum OPERATIONS { 
@@ -16,7 +17,8 @@ export enum RESOURCE {
     ADMIN = ROLE.ADMIN,
     STAFF = ROLE.STAFF,
     STUDENT = ROLE.STUDENT,
-
+    SUPER_ADMIN = ROLE.SUPER_ADMIN,
+    
     // other resources
     BRANCH = 'branch',
     ATTENDANCE = 'attendance',

@@ -30,9 +30,9 @@ export class UserRepository {
     async findUserByEmail(email: string): Promise<UserDocument> {
         try {
             const user = await this.userModel.findOne({ email });
-            if (!user) {
-                throw new NotFoundException('User not found.');
-            }
+            // if (!user) {
+            //     throw new NotFoundException('User not found.');
+            // }
             return user;
         } catch (error) {
             if (error instanceof HttpException) {
@@ -75,6 +75,14 @@ export class UserRepository {
         }
     }
 
+    async getUsers(match: any, sort: any, limit: number, skip: number) : Promise<User[]>{
+        try {
+            return await this.userModel.find(match).sort(sort).limit(limit).skip(skip);
+        } catch (error) {
+            throw new ServiceUnavailableException();
+        }
+    }
+
     validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
         const { role } = user;
 
@@ -112,7 +120,14 @@ export class UserRepository {
                 user.batch = undefined;
                 user.currentSemester = undefined;
                 user.branchName = undefined;
-
+                break;
+            }
+            case ROLE.SUPER_ADMIN: {
+                user.branchId = undefined;
+                user.phone = undefined;
+                user.batch = undefined;
+                user.currentSemester = undefined;
+                user.branchName = undefined;
                 break;
             }
             default: {

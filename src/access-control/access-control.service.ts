@@ -5,6 +5,20 @@ import { OPERATIONS, OperationsType, RESOURCE, ResourceType, ROLE, RoleType } fr
 export class AccessControlService {
     // Roles assigned to different users
     private readonly roles = {
+        [ROLE.SUPER_ADMIN]: {
+            [OPERATIONS.CREATE]: {
+                [RESOURCE.ADMIN] : true,
+            },
+            [OPERATIONS.READ]: {
+                [RESOURCE.ADMIN] : true,
+            },
+            [OPERATIONS.UPDATE]: {
+                [RESOURCE.ADMIN] : true,
+            },
+            [OPERATIONS.DELETE]: {
+                [RESOURCE.ADMIN] : true,
+            },
+        },
         [ROLE.ADMIN]: {
             [OPERATIONS.CREATE]: {
                 [RESOURCE.STAFF]: true,
@@ -19,7 +33,11 @@ export class AccessControlService {
                 [RESOURCE.STUDENT]: true,
                 [RESOURCE.BRANCH]: true,
                 [RESOURCE.ATTENDANCE]: true,
-                [RESOURCE.ANALYSIS]: true,
+                [RESOURCE.ANALYSIS]: {
+                    [RESOURCE.STAFF]: true,
+                    [RESOURCE.STUDENT]: true,
+                    [RESOURCE.ADMIN] : true
+                },
                 [RESOURCE.BATCH_ANALYSIS]: true,
             },
             [OPERATIONS.UPDATE]: {
