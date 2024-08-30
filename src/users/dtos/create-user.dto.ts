@@ -1,4 +1,5 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Max, min, Min, MinLength, ValidateNested } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Max, Min, MinLength } from "class-validator";
+import { Types } from "mongoose";
 import { ROLE, RoleType } from "src/constants/role.constants";
 
 export class CreateUserDTO {
@@ -22,7 +23,7 @@ export class CreateUserDTO {
     @IsOptional()
     @IsNotEmpty()
     @IsString()
-    branchId?: string;
+    branchId?: Types.ObjectId;
 
     @IsOptional()
     @IsNotEmpty()

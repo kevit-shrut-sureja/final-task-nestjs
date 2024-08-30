@@ -6,7 +6,6 @@ import { OPERATIONS, RESOURCE, ROLE, RoleType } from 'src/constants/role.constan
 import { AccessControlService } from 'src/access-control/access-control.service';
 import { BranchRepository } from 'src/branch/branch.repository';
 import { GetUsersQueryDto } from './dtos/get-user-query.dto';
-import { UsersInterceptor } from './users.interceptor';
 import { UpdateUserDTO } from './dtos/update-user.dto';
 
 @Injectable()
@@ -29,12 +28,12 @@ export class UsersService {
             // staff can only add data of the student in their branch
             const branchId = createUserDto?.branchId;
             const authedUserBranchId = authedUser?.branchId;
-            if (branchId && authedUserRole === ROLE.STAFF && authedUserBranchId.toString() !== branchId) {
+            if (branchId && authedUserRole === ROLE.STAFF && authedUserBranchId.toString() !== branchId.toString()) {
                 throw new HttpException('Staff user cannot change details of other staff user', HttpStatus.FORBIDDEN);
             }
 
             // if branch does not exist then this throws error
-            const branch = await this.branchRepository.findBranchById(branchId);
+            const branch = await this.branchRepository.findBranchById(branchId.toString());
             if (!branch) {
                 throw new HttpException('Branch not found.', HttpStatus.NOT_FOUND);
             }
@@ -46,7 +45,7 @@ export class UsersService {
             }
 
             // check if the totalStudentsIntake is less or not
-            const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(branchId);
+            const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(branchId.toString());
             if (studentCount + 1 > branch.totalStudentsIntake) {
                 throw new HttpException('Total students count exceeding.', HttpStatus.NOT_FOUND);
             }
@@ -199,7 +198,7 @@ export class UsersService {
 
         const branchId = editedUser.branchId;
         if (requestedUser.role !== ROLE.ADMIN && branchId && editedUser.branchId) {
-            const branchExists = await this.branchRepository.findBranchById(editedUser.branchId);
+            const branchExists = await this.branchRepository.findBranchById(editedUser.branchId.toString());
             if (!branchExists) {
                 throw new HttpException('Branch not found.', HttpStatus.NOT_FOUND);
             }
@@ -212,5 +211,9 @@ export class UsersService {
 
         const updatedUser = await this.userRepository.updatedUser(requestedUser, editedUser)
         return updatedUser
+    }
+
+    async batchAnalysis(){
+        return await this.userRepository.getBatchWiseAnalysis()
     }
 }

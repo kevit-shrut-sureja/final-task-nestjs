@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { Model, Mongoose, Types } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, HttpStatus, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
@@ -14,6 +14,7 @@ export class UserRepository {
     async createUser(userData: CreateUserDTO): Promise<User> {
         try {
             const validatedUserData = this.validateRoleSpecificDetails(userData);
+            validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId)
             const createdUser = await this.userModel.create(validatedUserData);
             return createdUser;
         } catch (error) {
@@ -47,7 +48,7 @@ export class UserRepository {
             return user;
         } catch (error) {
             console.log(error);
-            
+
             throw new ServiceUnavailableException();
         }
     }
@@ -62,14 +63,14 @@ export class UserRepository {
 
     async findTotalNumberOfStudentsInABranch(branchId: string) {
         try {
-            const result = await this.userModel.find({ role: 'student', 'branchId' : branchId }).countDocuments()
+            const result = await this.userModel.find({ role: 'student', branchId: branchId }).countDocuments();
             return result;
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
 
-    async getUsers(match: any, sort: any, limit: number, skip: number) : Promise<User[]>{
+    async getUsers(match: any, sort: any, limit: number, skip: number): Promise<User[]> {
         try {
             return await this.userModel.find(match).sort(sort).limit(limit).skip(skip);
         } catch (error) {
@@ -77,27 +78,34 @@ export class UserRepository {
         }
     }
 
-    async deleteUserById(id : string){
+    async deleteUserById(id: string) {
         try {
-            return await this.userModel.findByIdAndDelete(id)
+            return await this.userModel.findByIdAndDelete(id);
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
 
-    async updatedUser(user : UserDocument, editedUser : UpdateUserDTO) : Promise<User>{
+    async updatedUser(user: UserDocument, editedUser: UpdateUserDTO): Promise<User> {
         try {
             const fields = Object.keys(editedUser);
-            const updatedUserDetails = {...user}
-            fields.forEach(field => {
-                updatedUserDetails[field] = editedUser[field]
-            })
+            const updatedUserDetails = { ...user };
+            fields.forEach((field) => {
+                updatedUserDetails[field] = editedUser[field];
+            });
 
             // Now merging the changes
-            Object.assign(user, updatedUserDetails)
-            return await user.save()
+            Object.assign(user, updatedUserDetails);
+            return await user.save();
         } catch (error) {
-            throw new ServiceUnavailableException()
+            if (error.code === 11000) {
+                throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+            }
+
+            if (error instanceof HttpException) {
+                throw error;
+            }
+            throw new ServiceUnavailableException();
         }
     }
 
@@ -153,5 +161,14 @@ export class UserRepository {
             }
         }
         return user;
+    }
+
+    async getBatchWiseAnalysis() {
+        try {
+            const result = await this.userModel.aggregate();
+            return result;
+        } catch (error) {
+            throw new ServiceUnavailableException();
+        }
     }
 }

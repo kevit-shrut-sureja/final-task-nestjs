@@ -5,7 +5,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { User, UserDocument } from './users.schema';
 import { AccessControlGuard } from 'src/access-control/access-control.guard';
 import { AccessControl } from 'src/access-control/decorator/access-control.decorator';
-import { RoleType } from 'src/constants/role.constants';
+import { OPERATIONS, RESOURCE, RoleType } from 'src/constants/role.constants';
 import { AuthedUser } from './decorator/user.decorator';
 import { GetUsersQueryDto } from './dtos/get-user-query.dto';
 import { Serialize } from './users.interceptor';
@@ -28,6 +28,12 @@ export class UsersController {
     @AccessControl(false)
     async getUsers(@AuthedUser<User>('role') authedUserRole: RoleType, @Query() query: GetUsersQueryDto): Promise<User[]> {
         return await this.userService.getUsers(authedUserRole, query);
+    }
+
+    @Get('analysis/batch')
+    @AccessControl(OPERATIONS.READ, RESOURCE.BATCH_ANALYSIS)
+    async getBatchAnalysis(){
+        return await this.userService.batchAnalysis()
     }
 
     @Get(':id')
