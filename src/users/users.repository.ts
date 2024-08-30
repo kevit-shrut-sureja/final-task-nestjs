@@ -58,6 +58,14 @@ export class UserRepository {
         }
     }
 
+    async findUsersByBranchId(branchId: string) {
+        try {
+            return await this.userModel.find({ branchId });
+        } catch (error) {
+            throw new ServiceUnavailableException();
+        }
+    }
+
     validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
         const { role } = user;
 
