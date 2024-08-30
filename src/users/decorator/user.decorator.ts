@@ -1,9 +1,9 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { AuthedUserType } from 'src/types/user.types';
-import { User } from '../users.schema';
 
-export const AuthedUser = createParamDecorator((data: keyof User | undefined, ctx: ExecutionContext) : User | User[keyof User] => {
-    const request = ctx.switchToHttp().getRequest<AuthedUserType>();
+// Generic decorator with type T
+export const AuthedUser = createParamDecorator(<T>(data: keyof T | undefined, ctx: ExecutionContext): T | T[keyof T] => {
+    const request = ctx.switchToHttp().getRequest<{ user: T }>();
     const user = request.user;
 
     return data ? user[data] : user;

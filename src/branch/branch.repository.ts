@@ -23,11 +23,6 @@ export class BranchRepository {
     async findBranchById(id: string): Promise<BranchDocument> {
         try {
             const branch = await this.branchModel.findById(id);
-
-            if (!branch) {
-                throw new HttpException('Branch not found.', 404);
-            }
-
             return branch;
         } catch (error) {
             if (error instanceof HttpException) {

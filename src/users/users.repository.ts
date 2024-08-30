@@ -1,9 +1,11 @@
 import { Model } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { HttpException, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { ROLE } from 'src/constants/role.constants';
+import { UpdateUserDTO } from './dtos/update-user.dto';
+import { fileURLToPath } from 'url';
 
 @Injectable()
 export class UserRepository {
@@ -16,7 +18,7 @@ export class UserRepository {
             return createdUser;
         } catch (error) {
             if (error.code === 11000) {
-                throw new HttpException('User already exists', 400);
+                throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
             }
 
             if (error instanceof HttpException) {
@@ -30,9 +32,6 @@ export class UserRepository {
     async findUserByEmail(email: string): Promise<UserDocument> {
         try {
             const user = await this.userModel.findOne({ email });
-            // if (!user) {
-            //     throw new NotFoundException('User not found.');
-            // }
             return user;
         } catch (error) {
             if (error instanceof HttpException) {
@@ -45,15 +44,10 @@ export class UserRepository {
     async findUserById(id: string): Promise<UserDocument> {
         try {
             const user = this.userModel.findById(id);
-
-            if (!user) {
-                throw new NotFoundException('User not found');
-            }
             return user;
         } catch (error) {
-            if (error instanceof HttpException) {
-                throw error;
-            }
+            console.log(error);
+            
             throw new ServiceUnavailableException();
         }
     }
@@ -83,6 +77,30 @@ export class UserRepository {
         }
     }
 
+    async deleteUserById(id : string){
+        try {
+            return await this.userModel.findByIdAndDelete(id)
+        } catch (error) {
+            throw new ServiceUnavailableException()
+        }
+    }
+
+    async updatedUser(user : UserDocument, editedUser : UpdateUserDTO) : Promise<User>{
+        try {
+            const fields = Object.keys(editedUser);
+            const updatedUserDetails = {...user}
+            fields.forEach(field => {
+                updatedUserDetails[field] = editedUser[field]
+            })
+
+            // Now merging the changes
+            Object.assign(user, updatedUserDetails)
+            return await user.save()
+        } catch (error) {
+            throw new ServiceUnavailableException()
+        }
+    }
+
     validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
         const { role } = user;
 
@@ -93,7 +111,7 @@ export class UserRepository {
 
                 if (missingUserFields.length) {
                     console.log('Throwing HttpException:', HttpException);
-                    throw new HttpException('Student details missing.', 400);
+                    throw new HttpException('Student details missing.', HttpStatus.BAD_REQUEST);
                 }
                 break;
             }
@@ -102,7 +120,7 @@ export class UserRepository {
                 const missingStaffFields = requiredFieldsForStaff.filter((field) => !user[field]);
 
                 if (missingStaffFields.length) {
-                    throw new HttpException('Staff details missing.', 400);
+                    throw new HttpException('Staff details missing.', HttpStatus.BAD_REQUEST);
                 }
 
                 // Clean up fields that are not needed for staff
@@ -131,7 +149,7 @@ export class UserRepository {
                 break;
             }
             default: {
-                throw new HttpException('User role missing.', 400);
+                throw new HttpException('User role missing.', HttpStatus.BAD_REQUEST);
             }
         }
         return user;

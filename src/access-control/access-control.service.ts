@@ -7,16 +7,16 @@ export class AccessControlService {
     private readonly roles = {
         [ROLE.SUPER_ADMIN]: {
             [OPERATIONS.CREATE]: {
-                [RESOURCE.ADMIN] : true,
+                [RESOURCE.ADMIN]: true,
             },
             [OPERATIONS.READ]: {
-                [RESOURCE.ADMIN] : true,
+                [RESOURCE.ADMIN]: true,
             },
             [OPERATIONS.UPDATE]: {
-                [RESOURCE.ADMIN] : true,
+                [RESOURCE.ADMIN]: true,
             },
             [OPERATIONS.DELETE]: {
-                [RESOURCE.ADMIN] : true,
+                [RESOURCE.ADMIN]: true,
             },
         },
         [ROLE.ADMIN]: {
@@ -36,7 +36,7 @@ export class AccessControlService {
                 [RESOURCE.ANALYSIS]: {
                     [RESOURCE.STAFF]: true,
                     [RESOURCE.STUDENT]: true,
-                    [RESOURCE.ADMIN] : true
+                    [RESOURCE.ADMIN]: true,
                 },
                 [RESOURCE.BATCH_ANALYSIS]: true,
             },
@@ -77,8 +77,8 @@ export class AccessControlService {
                 [RESOURCE.STUDENT]: true,
                 [RESOURCE.ATTENDANCE]: true,
                 [RESOURCE.SELF]: true,
-                [RESOURCE.SELF_NOT_ALLOWED_FIELDS]: ['role', 'userDetails.branchId', 'tokens'],
-                [RESOURCE.NOT_ALLOWED_FIELDS]: ['role', 'userDetails.branchId', 'tokens', 'userDetails.batch', 'userDetails.branch'],
+                [RESOURCE.SELF_NOT_ALLOWED_FIELDS]: ['role', 'branchId', 'tokens'],
+                [RESOURCE.NOT_ALLOWED_FIELDS]: ['role', 'branchId', 'tokens', 'batch', 'branchName'],
             },
             [OPERATIONS.DELETE]: {
                 [RESOURCE.STUDENT]: true,
@@ -92,14 +92,7 @@ export class AccessControlService {
             },
             [OPERATIONS.UPDATE]: {
                 [RESOURCE.SELF]: true,
-                [RESOURCE.SELF_NOT_ALLOWED_FIELDS]: [
-                    'role',
-                    'tokens',
-                    'userDetails.branchId',
-                    'userDetails.batch',
-                    'userDetails.branch',
-                    'userDetails.currentSemester',
-                ],
+                [RESOURCE.SELF_NOT_ALLOWED_FIELDS]: ['role', 'tokens', 'branchId', 'batch', 'branchName', 'currentSemester'],
             },
             [OPERATIONS.DELETE]: {},
         },

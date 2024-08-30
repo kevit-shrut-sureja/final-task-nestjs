@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/users/users.repository';
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     ) {}
     async canActivate(context: ExecutionContext): Promise<boolean> {
         // getting the token from the request headers
-        const request = context.switchToHttp().getRequest<AuthedUserType>();
+        const request = context.switchToHttp().getRequest<AuthedUserType<UserDocument>>();
         const [type, token] = request.headers['authorization']?.split(' ') || [];
         if (type !== 'Bearer' || !token) {
             throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
@@ -27,6 +27,9 @@ export class AuthGuard implements CanActivate {
             const payload = await this.jwtService.verifyAsync(token, { publicKey: PUBLIC_KEY, algorithms: ['RS256'] });
             
             const user = await this.userRepository.findUserById(payload.id);
+            if (!user) {
+                throw new NotFoundException('User not found');
+            }
 
             // if token not found in the users tokens array
             if (!user.tokens.includes(token)) {

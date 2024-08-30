@@ -16,7 +16,11 @@ export class BranchService {
     }
 
     async findBranchById(id: string): Promise<Branch> {
-        return await this.branchRepository.findBranchById(id);
+        const branch =  await this.branchRepository.findBranchById(id);
+        if (!branch) {
+            throw new HttpException('Branch not found.', 404);
+        }
+        return branch
     }
 
     async findBranch(match: any, sort: any, limit: number, skip: number): Promise<Branch[]> {
@@ -24,8 +28,10 @@ export class BranchService {
     }
 
     async deleteBranch(id: string): Promise<Branch> {
-        // awaiting if the branch exists or not
         const branch = await this.branchRepository.findBranchById(id);
+        if (!branch) {
+            throw new HttpException('Branch not found.', 404);
+        }
 
         const usersWithBranchId = await this.usersRepository.findUsersByBranchId(id);
         if (usersWithBranchId.length > 0) {
@@ -38,8 +44,10 @@ export class BranchService {
     }
 
     async updateBranch(id: string, editedBranch: UpdateBranchDTO) : Promise<Branch> {
-        // will throw not found error if not found
         const branch = await this.branchRepository.findBranchById(id);
+        if (!branch) {
+            throw new HttpException('Branch not found.', 404);
+        }
 
         if (editedBranch.batch !== branch.batch || editedBranch.name !== branch.name) {
             const usersWithBranchId = await this.usersRepository.findUsersByBranchId(id);
