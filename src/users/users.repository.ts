@@ -66,6 +66,15 @@ export class UserRepository {
         }
     }
 
+    async findTotalNumberOfStudentsInABranch(branchId: string) {
+        try {
+            const result = await this.userModel.find({ role: 'student', 'branchId' : branchId }).countDocuments()
+            return result;
+        } catch (error) {
+            throw new ServiceUnavailableException()
+        }
+    }
+
     validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
         const { role } = user;
 

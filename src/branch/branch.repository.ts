@@ -2,6 +2,7 @@ import { HttpException, Injectable, ServiceUnavailableException } from '@nestjs/
 import { InjectModel } from '@nestjs/mongoose';
 import { Branch, BranchDocument } from './branch.schema';
 import { Model } from 'mongoose';
+import { UpdateBranchDTO } from './dtos/update-branch.dto';
 
 @Injectable()
 export class BranchRepository {
@@ -47,6 +48,28 @@ export class BranchRepository {
     async deleteUserBranch(branch: BranchDocument) {
         try {
             return await branch.deleteOne();
+        } catch (error) {
+            throw new ServiceUnavailableException();
+        }
+    }
+
+    async updateBranch(branch: BranchDocument, editedBranch: UpdateBranchDTO) : Promise<Branch> {
+        try {
+            // Create a new branch object with updated values
+            const updatedBranch = {
+                ...branch.toObject(), // Convert Mongoose document to plain object
+                name: editedBranch.name,
+                totalStudentsIntake: editedBranch.totalStudentsIntake,
+                batch: editedBranch.batch,
+            };
+
+            // eslint-disable-next-line
+            if (editedBranch.description !== branch.description) updatedBranch['description'] = editedBranch.description;
+
+            // Apply the updates to the found branch document
+            Object.assign(branch, updatedBranch);
+
+            return await branch.save();
         } catch (error) {
             throw new ServiceUnavailableException();
         }

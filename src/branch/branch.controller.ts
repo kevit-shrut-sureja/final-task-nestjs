@@ -7,6 +7,7 @@ import { AccessControl } from 'src/access-control/decorator/access-control.decor
 import { OPERATIONS, RESOURCE } from 'src/constants/role.constants';
 import { Branch, BranchDocument } from './branch.schema';
 import { GetBranchQueryDTO } from './dtos/get-branch-query.dto';
+import { UpdateBranchDTO } from './dtos/update-branch.dto';
 
 @Controller('branch')
 @UseGuards(AuthGuard, AccessControlGuard)
@@ -42,12 +43,15 @@ export class BranchController {
         return await this.branchService.findBranch(match, sort, Number(limit), Number(skip));
     }
 
-    // TODO - complete the PUT route
-    // @Put()
-
     @Delete(':id')
     @AccessControl(OPERATIONS.DELETE, RESOURCE.BRANCH)
     async deleteBranch(@Param('id') id: string) {
         return await this.branchService.deleteBranch(id);
+    }
+
+    @Put(':id')
+    @AccessControl(OPERATIONS.UPDATE, RESOURCE.BRANCH)
+    async updateBranch(@Param('id') id : string, @Body() updateBranchDto : UpdateBranchDTO){
+        return await this.branchService.updateBranch(id, updateBranchDto)
     }
 }
