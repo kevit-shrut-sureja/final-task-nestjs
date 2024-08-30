@@ -1,50 +1,49 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 import { ROLE } from 'src/constants/role.constants';
-import { hash } from 'bcrypt'
-
+import { hash } from 'bcrypt';
 
 @Schema({ timestamps: true })
 export class User {
-    @Prop({ required: true, trim: true })
+    @Prop({ type: String, required: true, trim: true })
     name: string;
 
-    @Prop({ required: true, unique: true, trim: true, lowercase: true })
+    @Prop({ type: String, required: true, unique: true, trim: true, lowercase: true })
     email: string;
 
-    @Prop({ required: true, minlength: 7, trim: true })
+    @Prop({ type: String, required: true, minlength: 7, trim: true })
     password: string;
 
-    @Prop({ required: true, enum: ROLE })
-    role: string;
+    @Prop({ type: String, required: true, enum: ROLE })
+    role: ROLE;
 
     @Prop([String])
     tokens?: string[];
 
     @Prop({ type: Types.ObjectId, ref: 'Branch' })
-    branchId: Types.ObjectId;
+    branchId?: Types.ObjectId;
 
     @Prop({ type: String })
-    branchName: string;
+    branchName?: string;
 
     @Prop({ type: String })
-    phone: string;
+    phone?: string;
 
     @Prop({ type: Number })
-    batch: number;
+    batch?: number;
 
     @Prop({ type: Number })
-    currentSemester: number;
+    currentSemester?: number;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const UserSchema = SchemaFactory.createForClass(User);
 
-export type UserDocument = HydratedDocument<User>
+export type UserDocument = HydratedDocument<User>;
 
 // Pre-Hook to save the hashed password
-UserSchema.pre<UserDocument>('save',async function (next){
+UserSchema.pre<UserDocument>('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await hash(this.password, 13);
     }
     next();
-})
+});
