@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/users/users.repository';
 import { User, UserDocument } from '../users/users.schema';
+import { Request } from 'express';
+import { AuthedUserType } from 'src/types/user.types';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -13,7 +15,7 @@ export class AuthGuard implements CanActivate {
     ) {}
     async canActivate(context: ExecutionContext): Promise<boolean> {
         // getting the token from the request headers
-        const request = context.switchToHttp().getRequest();
+        const request = context.switchToHttp().getRequest<AuthedUserType>();
         const [type, token] = request.headers['authorization']?.split(' ') || [];
         if (type !== 'Bearer' || !token) {
             throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { ROLE } from 'src/constants/role.constants';
+import { ROLE, RoleType } from 'src/constants/role.constants';
 import { hash } from 'bcrypt';
 
 @Schema({ timestamps: true })
@@ -15,7 +15,7 @@ export class User {
     password: string;
 
     @Prop({ type: String, required: true, enum: ROLE })
-    role: ROLE;
+    role: RoleType;
 
     @Prop([String])
     tokens?: string[];
