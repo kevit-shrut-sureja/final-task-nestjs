@@ -14,42 +14,46 @@ import { UpdateUserDTO } from './dtos/update-user.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard, AccessControlGuard)
-@Serialize(OutputUserDTO)
 export class UsersController {
     constructor(private readonly userService: UsersService) {}
 
     @Post()
     @AccessControl(false)
+    @Serialize(OutputUserDTO)
     async createNewUser(@AuthedUser<User>() user: User, @Body() createUserDto: CreateUserDTO): Promise<User> {
         return await this.userService.createNewUser(user, createUserDto);
     }
 
     @Get()
     @AccessControl(false)
+    @Serialize(OutputUserDTO)
     async getUsers(@AuthedUser<User>('role') authedUserRole: RoleType, @Query() query: GetUsersQueryDto): Promise<User[]> {
         return await this.userService.getUsers(authedUserRole, query);
     }
 
     @Get('analysis/batch')
     @AccessControl(OPERATIONS.READ, RESOURCE.BATCH_ANALYSIS)
-    async getBatchAnalysis(){
-        return await this.userService.batchAnalysis()
+    async getBatchAnalysis(): Promise<any[]> {
+        return await this.userService.batchAnalysis();
     }
 
     @Get(':id')
     @AccessControl(false)
+    @Serialize(OutputUserDTO)
     async getUserById(@AuthedUser<UserDocument>() user: UserDocument, @Param('id') id: string): Promise<User> {
         return await this.userService.getUserById(user, id);
     }
 
     @Delete(':id')
     @AccessControl(false)
+    @Serialize(OutputUserDTO)
     async deleteUser(@AuthedUser<UserDocument>() user: UserDocument, @Param('id') id: string): Promise<User> {
         return await this.userService.deleteUserWithId(user, id);
     }
 
     @Put(':id')
     @AccessControl(false)
+    @Serialize(OutputUserDTO)
     async editUser(@AuthedUser<UserDocument>() user: UserDocument, @Param('id') id: string, @Body() editedUser: UpdateUserDTO): Promise<User> {
         return await this.userService.updateUser(user, id, editedUser);
     }

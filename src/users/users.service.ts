@@ -213,7 +213,7 @@ export class UsersService {
         return updatedUser
     }
 
-    async batchAnalysis(){
+    async batchAnalysis() : Promise<any[]>{
         return await this.userRepository.getBatchWiseAnalysis()
     }
 }

@@ -163,9 +163,91 @@ export class UserRepository {
         return user;
     }
 
-    async getBatchWiseAnalysis() {
+    async getBatchWiseAnalysis(): Promise<any[]> {
         try {
-            const result = await this.userModel.aggregate();
+            const result = await this.userModel.aggregate([
+                {
+                    $match: {
+                        role: 'student',
+                    },
+                },
+                {
+                    $lookup: {
+                        from: 'branches',
+                        localField: 'branchId',
+                        foreignField: '_id',
+                        pipeline: [
+                            {
+                                $project: {
+                                    _id: 0,
+                                    totalStudentsIntake: 1,
+                                },
+                            },
+                        ],
+                        as: 'branchDetails',
+                    },
+                },
+                {
+                    $addFields: {
+                        branchDetails: {
+                            $arrayElemAt: ['$branchDetails', 0],
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        branchName: '$branchName',
+                        totalStudentsIntake: '$branchDetails.totalStudentsIntake',
+                        batch: '$batch',
+                    },
+                },
+                {
+                    $group: {
+                        _id: {
+                            branch: '$branchName',
+                            batch: '$batch',
+                        },
+                        totalStudentsBranchWise: {
+                            $sum: 1,
+                        },
+                    },
+                },
+                {
+                    $group: {
+                        _id: '$_id.batch',
+                        totalStudents: {
+                            $sum: '$totalStudentsBranchWise',
+                        },
+                        branches: {
+                            $push: {
+                                branch: '$_id.branch',
+                                total: '$totalStudentsBranchWise',
+                            },
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        batch: '$_id',
+                        totalStudents: 1,
+                        branches: {
+                            $arrayToObject: {
+                                $map: {
+                                    input: '$branches',
+                                    as: 'branch',
+                                    in: {
+                                        k: '$$branch.branch',
+                                        v: '$$branch.total',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            ]);
+            console.log(result);
             return result;
         } catch (error) {
             throw new ServiceUnavailableException();
