@@ -26,21 +26,11 @@ export class BranchController {
         return await this.branchService.findBranchById(id);
     }
 
+    // TODO: Implement this in the service layer
     @Get()
     @AccessControl(OPERATIONS.READ, RESOURCE.BRANCH)
     async getBranch(@Query() query: GetBranchQueryDTO) {
-        const { sortBy, matchBy, order, skip, limit } = query;
-
-        const sort: Record<string, 1 | -1> = {
-            [sortBy as string]: order === 'asce' ? 1 : -1,
-        };
-
-        const match = {};
-
-        // eslint-disable-next-line
-        if (matchBy) match['$or'] = [{ name: new RegExp(matchBy as string, 'i') }];
-
-        return await this.branchService.findBranch(match, sort, Number(limit), Number(skip));
+        return await this.branchService.findBranch(query);
     }
 
     @Delete(':id')

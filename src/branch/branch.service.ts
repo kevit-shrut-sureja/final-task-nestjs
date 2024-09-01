@@ -3,6 +3,7 @@ import { BranchRepository } from './branch.repository';
 import { Branch } from './branch.schema';
 import { UserRepository } from 'src/users/users.repository';
 import { UpdateBranchDTO } from './dtos/update-branch.dto';
+import { GetBranchQueryDTO } from './dtos/get-branch-query.dto';
 
 @Injectable()
 export class BranchService {
@@ -16,15 +17,25 @@ export class BranchService {
     }
 
     async findBranchById(id: string): Promise<Branch> {
-        const branch =  await this.branchRepository.findBranchById(id);
+        const branch = await this.branchRepository.findBranchById(id);
         if (!branch) {
             throw new HttpException('Branch not found.', 404);
         }
-        return branch
+        return branch;
     }
 
-    async findBranch(match: any, sort: any, limit: number, skip: number): Promise<Branch[]> {
-        return await this.branchRepository.findBranch(match, sort, limit, skip);
+    async findBranch(query: GetBranchQueryDTO): Promise<Branch[]> {
+        const { sortBy, matchBy, order, skip, limit } = query;
+
+        const sort: Record<string, 1 | -1> = {
+            [sortBy as string]: order === 'asce' ? 1 : -1,
+        };
+
+        const match = {};
+
+        // eslint-disable-next-line
+        if (matchBy) match['$or'] = [{ name: new RegExp(matchBy as string, 'i') }];
+        return await this.branchRepository.findBranch(match, sort, Number(limit), Number(skip));
     }
 
     async deleteBranch(id: string): Promise<Branch> {
@@ -43,7 +54,7 @@ export class BranchService {
         return branch;
     }
 
-    async updateBranch(id: string, editedBranch: UpdateBranchDTO) : Promise<Branch> {
+    async updateBranch(id: string, editedBranch: UpdateBranchDTO): Promise<Branch> {
         const branch = await this.branchRepository.findBranchById(id);
         if (!branch) {
             throw new HttpException('Branch not found.', 404);
