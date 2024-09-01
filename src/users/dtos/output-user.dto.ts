@@ -1,15 +1,22 @@
-import { Expose } from "class-transformer";
+import { Expose, Transform } from "class-transformer";
+import { Types } from "mongoose";
 import { RoleType } from "src/constants/role.constants";
 
 export class OutputUserDTO {
     @Expose()
-    name : string;
-    
-    @Expose()
-    email : string;
+    @Transform(({ obj }) => {
+        return obj._id instanceof Types.ObjectId ? obj._id.toHexString() : obj._id;
+    })
+    _id: string;
 
     @Expose()
-    role : RoleType
+    name: string;
+
+    @Expose()
+    email: string;
+
+    @Expose()
+    role: RoleType;
 
     @Expose()
     branchId?: string;

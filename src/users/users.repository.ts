@@ -86,6 +86,16 @@ export class UserRepository {
         }
     }
 
+    async findStudentById(id : string){
+        try {
+            return await this.userModel.findOne({ _id : new Types.ObjectId(id), role : ROLE.STUDENT })
+        } catch (error) {
+            console.log(error);
+            
+            throw new ServiceUnavailableException()
+        }
+    }
+
     async updatedUser(user: UserDocument, editedUser: UpdateUserDTO): Promise<User> {
         try {
             const fields = Object.keys(editedUser);

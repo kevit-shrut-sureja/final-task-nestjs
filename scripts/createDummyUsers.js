@@ -34,11 +34,23 @@ async function createResource(token, endpoint, data) {
     }
 }
 
-async function createUsers(token, users) {
-    for (const user of users) {
-       const s =  await createResource(token, 'users', user)
-       console.log(s)
+async function createAttendance(token, allAttendance){
+    const attendancePromise = []
+    for (const attendance of allAttendance){
+        attendancePromise.push(createResource(token, 'attendance', attendance));
     }
+    console.log(attendancePromise.length)
+    const res = await Promise.allSettled(attendancePromise)
+    // console.log(res)
+    return res
+}
+
+async function createUsers(token, users) {
+    const userPromise = [];
+    for (const user of users) {
+        userPromise.push(createResource(token, 'users', user))
+    }
+    return await Promise.allSettled(userPromise)
 }
 
 async function createBranches(adminToken, branches) {
@@ -50,6 +62,10 @@ async function createBranches(adminToken, branches) {
     }
     console.log(branchIds);
     return branchIds;
+}
+
+function getRandomBoolean(probability) {
+    return Math.random() < probability;
 }
 
 async function main() {
@@ -89,7 +105,8 @@ async function main() {
                 branchId: branchIds[branch]
             })
         }
-        await createUsers(adminToken, staff)
+        const createdStaff = await createUsers(adminToken, staff)
+        console.log(createdStaff);
 
         // creating some student in all the different branches, 2 students for every branch
         const students = []
@@ -106,9 +123,31 @@ async function main() {
                 })
             }
         }
-        await createUsers(adminToken, students)
+        const createdStudents = await createUsers(adminToken, students)
+        console.log(createdStudents)
 
+        // fetching student Ids in a array
+        const studentIds = [];
+        for(const student of createdStudents){
+            studentIds.push(student.value._id)
+        }
+        console.log(studentIds);
+        
         // creaing attendance for all the students
+        const allAttendance = []
+        const startDate = '2024-08-'; // 01
+        for(let i = 0; i < studentIds.length; i+=1){
+            for(let j = 1; j <= 30; j+=1){
+                const data = {
+                    studentId : studentIds[i],
+                    date : new Date(startDate + (j < 10 ? '0' + j : j)),
+                    present : getRandomBoolean(0.75)
+                }
+                allAttendance.push(data)
+            }
+        }
+        await createAttendance(adminToken, allAttendance)
+        
         console.log('Dummy users created successfully');
     } catch (error) {
         console.error('An error occurred:', error);

@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AccessControlModule } from './access-control/access-control.module';
 import { BranchModule } from './branch/branch.module';
 import { UserRepository } from './users/users.repository';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
     imports: [
@@ -25,6 +26,7 @@ import { UserRepository } from './users/users.repository';
         AuthModule,
         AccessControlModule,
         BranchModule,
+        AttendanceModule,
     ],
     controllers: [AppController],
     providers: [AppService],
