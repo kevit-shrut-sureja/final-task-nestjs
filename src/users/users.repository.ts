@@ -14,7 +14,7 @@ export class UserRepository {
     async createUser(userData: CreateUserDTO): Promise<User> {
         try {
             const validatedUserData = this.validateRoleSpecificDetails(userData);
-            validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId)
+            validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId);
             const createdUser = await this.userModel.create(validatedUserData);
             return createdUser;
         } catch (error) {
@@ -248,6 +248,150 @@ export class UserRepository {
                 },
             ]);
             console.log(result);
+            return result;
+        } catch (error) {
+            throw new ServiceUnavailableException();
+        }
+    }
+
+    async getVacantAnalysis(batch: number, branch: string) : Promise<any[]> {
+        try {
+            console.log(batch )
+            const stages: any = [
+                {
+                    $match: {
+                        role: 'student',
+                    },
+                },
+                {
+                    $lookup: {
+                        from: 'branches',
+                        localField: 'branchId',
+                        foreignField: '_id',
+                        pipeline: [
+                            {
+                                $project: {
+                                    _id: 0,
+                                    totalStudentsIntake: 1,
+                                },
+                            },
+                        ],
+                        as: 'branchDetails',
+                    },
+                },
+                {
+                    $addFields: {
+                        branchDetails: {
+                            $arrayElemAt: ['$branchDetails', 0],
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        branchName: '$branchName',
+                        totalStudentsIntake: '$branchDetails.totalStudentsIntake',
+                        batch: '$batch',
+                    },
+                },
+                // {
+                //     $match:
+                //         /**
+                //          * query: The query in MQL.
+                //          */
+                //         {
+                //             batch: 2022,
+                //             branchName: 'CE',
+                //         },
+                // },
+                {
+                    $group: {
+                        _id: {
+                            branch: '$branchName',
+                            batch: '$batch',
+                        },
+                        totalStudents: {
+                            $sum: 1,
+                        },
+                        totalStudentsIntake: {
+                            $first: '$totalStudentsIntake',
+                        },
+                    },
+                },
+                {
+                    $group: {
+                        _id: '$_id.batch',
+                        totalStudents: {
+                            $sum: '$totalStudents',
+                        },
+                        totalStudentsIntake: {
+                            $sum: '$totalStudentsIntake',
+                        },
+                        totalVacantSeats: {
+                            $sum: {
+                                $subtract: ['$totalStudentsIntake', '$totalStudents'],
+                            },
+                        },
+                        branches: {
+                            $push: {
+                                branch: '$_id.branch',
+                                totalStudents: '$totalStudents',
+                                totalStudentsIntake: '$totalStudentsIntake',
+                                totalVacantSeats: {
+                                    $subtract: ['$totalStudentsIntake', '$totalStudents'],
+                                },
+                            },
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        batch: '$_id',
+                        totalStudents: 1,
+                        totalStudentsIntake: 1,
+                        totalVacantSeats: 1,
+                        branches: {
+                            $arrayToObject: {
+                                $map: {
+                                    input: '$branches',
+                                    as: 'branch',
+                                    in: {
+                                        k: '$$branch.branch',
+                                        v: {
+                                            totalStudents: '$$branch.totalStudents',
+                                            totalStudentsIntake: '$$branch.totalStudentsIntake',
+                                            totalVacantSeats: '$$branch.totalVacantSeats',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            ];
+            const matchStage = {};
+            if (branch) {
+                // eslint-disable-next-line
+                matchStage['branchName'] = branch;
+            }
+            if (batch) {
+                // eslint-disable-next-line
+                matchStage['batch'] = batch;
+                console.log(typeof batch);
+                
+            }
+            if (Object.keys(matchStage).length > 0) {
+                const stageToAdd = {};
+                // eslint-disable-next-line
+                stageToAdd['$match'] = matchStage;
+                stages.splice(4, 0, stageToAdd);
+            }
+
+            console.log(stages);
+            
+            const result = await this.userModel.aggregate(stages);
+            console.log(result)
             return result;
         } catch (error) {
             throw new ServiceUnavailableException();

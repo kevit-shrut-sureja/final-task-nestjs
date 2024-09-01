@@ -216,4 +216,8 @@ export class UsersService {
     async batchAnalysis() : Promise<any[]>{
         return await this.userRepository.getBatchWiseAnalysis()
     }
+
+    async vacantAnalysis(batch : number, branch : string) : Promise<any[]> {
+        return await this.userRepository.getVacantAnalysis(batch, branch)
+    }
 }

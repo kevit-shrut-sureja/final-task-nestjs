@@ -11,6 +11,7 @@ import { GetUsersQueryDto } from './dtos/get-user-query.dto';
 import { Serialize } from './users.interceptor';
 import { OutputUserDTO } from './dtos/output-user.dto';
 import { UpdateUserDTO } from './dtos/update-user.dto';
+import { VacantSeatQueryDTO } from './dtos/vacant-seat-query.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard, AccessControlGuard)
@@ -35,6 +36,13 @@ export class UsersController {
     @AccessControl(OPERATIONS.READ, RESOURCE.BATCH_ANALYSIS)
     async getBatchAnalysis(): Promise<any[]> {
         return await this.userService.batchAnalysis();
+    }
+
+    @Get('analysis/vacantSeats')
+    @AccessControl(OPERATIONS.READ, RESOURCE.BATCH_ANALYSIS)
+    async getVacantAnalysis(@Query() query: VacantSeatQueryDTO) : Promise<any[]> {
+        const { batch, branchName } = query;
+        return await this.userService.vacantAnalysis(Number(batch), branchName);
     }
 
     @Get(':id')
