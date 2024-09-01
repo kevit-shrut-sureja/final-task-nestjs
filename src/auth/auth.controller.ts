@@ -1,6 +1,10 @@
-import { Body, Controller, HttpCode, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInUser } from './dtos/sign-in-user.dto';
+import { AuthGuard } from './auth.guard';
+import { AuthedUser } from 'src/users/decorator/user.decorator';
+import { UserDocument } from 'src/users/users.schema';
+import { AuthedUserType } from 'src/types/user.types';
 
 @Controller('auth')
 export class AuthController {
@@ -19,5 +23,12 @@ export class AuthController {
             // Handle unexpected errors
             throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Post('logout')
+    @HttpCode(HttpStatus.OK)
+    @UseGuards(AuthGuard)
+    async logoutUser(@AuthedUser<UserDocument>() user: UserDocument, @Body('all') all: boolean, @Req() req: AuthedUserType<UserDocument>) {
+        return await this.authService.logoutUser(user, all, req.token);
     }
 }

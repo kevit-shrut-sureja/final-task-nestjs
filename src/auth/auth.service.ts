@@ -3,8 +3,12 @@ import { UserRepository } from 'src/users/users.repository';
 import { SignInUser } from './dtos/sign-in-user.dto';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UserDocument } from 'src/users/users.schema';
+import { Serialize } from 'src/users/users.interceptor';
+import { OutputUserDTO } from 'src/users/dtos/output-user.dto';
 
 @Injectable()
+@Serialize(OutputUserDTO)
 export class AuthService {
     constructor(
         private readonly userRepository: UserRepository,
@@ -17,7 +21,7 @@ export class AuthService {
             if (!user) {
                 throw new NotFoundException('User not found.');
             }
-            
+
             const isPasswordMatch = await compare(password, user.password);
 
             if (!isPasswordMatch) {
@@ -38,6 +42,20 @@ export class AuthService {
             }
 
             throw new HttpException('Error in token generation.', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async logoutUser(user: UserDocument, all: boolean, token: string) {
+        try {
+            if (all) {
+                user.tokens = [];
+            } else {
+                user.tokens = user.tokens.filter((t) => t !== token);
+            }
+            await user.save()
+            return { message : 'success'}
+        } catch (error) {
+            throw new HttpException('Error in token deletion.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
