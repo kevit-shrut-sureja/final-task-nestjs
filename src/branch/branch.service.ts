@@ -1,8 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { BranchRepository } from './branch.repository';
 import { Branch } from './branch.schema';
-import { UpdateBranchDTO } from './dtos/update-branch.dto';
-import { GetBranchQueryDTO } from './dtos/get-branch-query.dto';
+import { GetBranchQueryDTO, UpdateBranchDTO } from './dtos';
 import { UserRepository } from 'src/users';
 
 @Injectable()

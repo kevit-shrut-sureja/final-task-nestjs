@@ -2,7 +2,7 @@ import { HttpException, Injectable, ServiceUnavailableException } from '@nestjs/
 import { InjectModel } from '@nestjs/mongoose';
 import { Branch, BranchDocument } from './branch.schema';
 import { Model } from 'mongoose';
-import { UpdateBranchDTO } from './dtos/update-branch.dto';
+import { UpdateBranchDTO } from './dtos';
 
 @Injectable()
 export class BranchRepository {
