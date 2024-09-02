@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, ParseArrayPipe, Post, Put, Query, Res, U
 import { AttendanceService } from './attendance.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AccessControlGuard } from 'src/access-control/access-control.guard';
-import { AccessControl } from 'src/access-control/decorator/access-control.decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants/role.constants';
+import { AccessControl } from 'src/access-control/decorator';
+import { OPERATIONS, RESOURCE } from 'src/constants';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 import { Response } from 'express';
 

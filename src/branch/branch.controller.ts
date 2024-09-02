@@ -3,8 +3,8 @@ import { BranchService } from './branch.service';
 import { CreateBranchDTO, GetBranchQueryDTO, UpdateBranchDTO } from './dtos';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AccessControlGuard } from 'src/access-control/access-control.guard';
-import { AccessControl } from 'src/access-control/decorator/access-control.decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants/role.constants';
+import { AccessControl } from 'src/access-control/decorator';
+import { OPERATIONS, RESOURCE } from 'src/constants';
 import { Branch } from './branch.schema';
 
 @Controller('branch')

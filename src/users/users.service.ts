@@ -1,7 +1,7 @@
 import { ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from './users.repository';
 import { User, UserDocument } from './users.schema';
-import { OPERATIONS, RESOURCE, ROLE, RoleType } from 'src/constants/role.constants';
+import { OPERATIONS, RESOURCE, ROLE, RoleType } from 'src/constants';
 import { AccessControlService } from 'src/access-control/access-control.service';
 import { BranchRepository } from 'src/branch/branch.repository';
 import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO } from './dtos';

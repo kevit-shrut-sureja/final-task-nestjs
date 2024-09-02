@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AccessControlModule } from './access-control/access-control.module';
 import { BranchModule } from './branch/branch.module';
 import { AttendanceModule } from './attendance/attendance.module';
-import { UserRepository } from './users';
+import { UserRepository } from './users/users.repository';
 
 @Module({
     imports: [

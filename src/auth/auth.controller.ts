@@ -2,8 +2,9 @@ import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, Req, UseGu
 import { AuthService } from './auth.service';
 import { SignInUser } from './dtos';
 import { AuthGuard } from './auth.guard';
-import { AuthedUserType } from 'src/types/user.types';
-import { AuthedUser, UserDocument } from 'src/users';
+import { AuthedUserType } from 'src/types';
+import { AuthedUser } from 'src/users/decorator/user.decorator';
+import { UserDocument } from 'src/users/users.schema';
 
 @Controller('auth')
 export class AuthController {

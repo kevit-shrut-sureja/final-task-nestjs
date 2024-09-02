@@ -2,8 +2,8 @@ import { CanActivate, ExecutionContext, Injectable, Logger } from '@nestjs/commo
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { AccessControlService } from './access-control.service';
-import { ACCESS_CONTROL_METADATA_KEYS } from './decorator/access-control.decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants/role.constants';
+import { ACCESS_CONTROL_METADATA_KEYS } from './decorator';
+import { OPERATIONS, RESOURCE } from 'src/constants';
 
 @Injectable()
 export class AccessControlGuard implements CanActivate {

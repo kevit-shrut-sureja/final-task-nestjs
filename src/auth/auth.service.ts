@@ -2,7 +2,10 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundExc
 import { SignInUser } from './dtos';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { OutputUserDTO, Serialize, UserDocument, UserRepository } from 'src/users';
+import { UserRepository } from 'src/users/users.repository';
+import { OutputUserDTO } from 'src/users/dtos';
+import { Serialize } from 'src/users/users.interceptor';
+import { UserDocument } from 'src/users/users.schema';
 
 @Injectable()
 @Serialize(OutputUserDTO)

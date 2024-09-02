@@ -2,7 +2,7 @@ import { Model, Mongoose, Types } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
-import { ROLE } from 'src/constants/role.constants';
+import { ROLE } from 'src/constants';
 import { CreateUserDTO, UpdateUserDTO } from './dtos';
 
 @Injectable()
