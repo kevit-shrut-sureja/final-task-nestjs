@@ -3,10 +3,7 @@ import { Model, Types } from 'mongoose';
 import { Attendance, AttendanceDocument } from './attendance.schema';
 import { AttendanceDTO } from './dtos/create-attendance.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserRepository } from 'src/users/users.repository';
-import { ROLE } from 'src/constants/role.constants';
-import { GetAbsentStudentsListDTO } from './dtos/absent-student-query.dto';
-import { GetAttendancePercentageDTO } from './dtos/attendance-percentage-query.dto';
+import { UserRepository } from 'src/users';
 
 @Injectable()
 export class AttendanceRepository {

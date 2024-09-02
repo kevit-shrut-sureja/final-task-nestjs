@@ -7,8 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AccessControlModule } from './access-control/access-control.module';
 import { BranchModule } from './branch/branch.module';
-import { UserRepository } from './users/users.repository';
 import { AttendanceModule } from './attendance/attendance.module';
+import { UserRepository } from './users';
 
 @Module({
     imports: [

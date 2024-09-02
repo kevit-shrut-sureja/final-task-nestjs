@@ -6,7 +6,7 @@ import { AccessControlModule } from 'src/access-control/access-control.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Branch, BranchSchema } from './branch.schema';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from 'src/users/users.module';
+import { UsersModule } from 'src/users';
 
 @Module({
     imports: [forwardRef(() => UsersModule) ,JwtModule, AccessControlModule, MongooseModule.forFeature([{ name: Branch.name, schema: BranchSchema }])],
