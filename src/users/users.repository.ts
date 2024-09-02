@@ -1,11 +1,9 @@
 import { Model, Mongoose, Types } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { HttpException, HttpStatus, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
-import { CreateUserDTO } from './dtos/create-user.dto';
+import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { ROLE } from 'src/constants/role.constants';
-import { UpdateUserDTO } from './dtos/update-user.dto';
-import { fileURLToPath } from 'url';
+import { CreateUserDTO, UpdateUserDTO } from './dtos';
 
 @Injectable()
 export class UserRepository {
@@ -47,8 +45,6 @@ export class UserRepository {
             const user = this.userModel.findById(id);
             return user;
         } catch (error) {
-            console.log(error);
-
             throw new ServiceUnavailableException();
         }
     }
@@ -90,8 +86,6 @@ export class UserRepository {
         try {
             return await this.userModel.findOne({ _id : new Types.ObjectId(id), role : ROLE.STUDENT })
         } catch (error) {
-            console.log(error);
-            
             throw new ServiceUnavailableException()
         }
     }
@@ -128,7 +122,6 @@ export class UserRepository {
                 const missingUserFields = requiredFieldsForUser.filter((field) => !user[field]);
 
                 if (missingUserFields.length) {
-                    console.log('Throwing HttpException:', HttpException);
                     throw new HttpException('Student details missing.', HttpStatus.BAD_REQUEST);
                 }
                 break;
@@ -257,7 +250,6 @@ export class UserRepository {
                     },
                 },
             ]);
-            console.log(result);
             return result;
         } catch (error) {
             throw new ServiceUnavailableException();
@@ -266,7 +258,6 @@ export class UserRepository {
 
     async getVacantAnalysis(batch: number, branch: string) : Promise<any[]> {
         try {
-            console.log(batch )
             const stages: any = [
                 {
                     $match: {
@@ -304,16 +295,6 @@ export class UserRepository {
                         batch: '$batch',
                     },
                 },
-                // {
-                //     $match:
-                //         /**
-                //          * query: The query in MQL.
-                //          */
-                //         {
-                //             batch: 2022,
-                //             branchName: 'CE',
-                //         },
-                // },
                 {
                     $group: {
                         _id: {
@@ -388,8 +369,6 @@ export class UserRepository {
             if (batch) {
                 // eslint-disable-next-line
                 matchStage['batch'] = batch;
-                console.log(typeof batch);
-                
             }
             if (Object.keys(matchStage).length > 0) {
                 const stageToAdd = {};
@@ -398,10 +377,7 @@ export class UserRepository {
                 stages.splice(4, 0, stageToAdd);
             }
 
-            console.log(stages);
-            
             const result = await this.userModel.aggregate(stages);
-            console.log(result)
             return result;
         } catch (error) {
             throw new ServiceUnavailableException();

@@ -1,6 +1,6 @@
 import { IsOptional, IsString, IsIn, IsInt, IsPositive, IsNumberString } from 'class-validator';
 
-export class GetUsersQueryDto {
+export class GetUsersQueryDTO {
   @IsOptional()
   @IsString()
   matchingBy?: string;

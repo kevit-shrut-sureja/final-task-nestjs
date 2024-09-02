@@ -1,17 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDTO } from './dtos/create-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { User, UserDocument } from './users.schema';
 import { AccessControlGuard } from 'src/access-control/access-control.guard';
 import { AccessControl } from 'src/access-control/decorator/access-control.decorator';
 import { OPERATIONS, RESOURCE, RoleType } from 'src/constants/role.constants';
 import { AuthedUser } from './decorator/user.decorator';
-import { GetUsersQueryDto } from './dtos/get-user-query.dto';
 import { Serialize } from './users.interceptor';
-import { OutputUserDTO } from './dtos/output-user.dto';
-import { UpdateUserDTO } from './dtos/update-user.dto';
-import { VacantSeatQueryDTO } from './dtos/vacant-seat-query.dto';
+import { CreateUserDTO, GetUsersQueryDTO, OutputUserDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
 
 @Controller('users')
 @UseGuards(AuthGuard, AccessControlGuard)
@@ -28,7 +24,7 @@ export class UsersController {
     @Get()
     @AccessControl(false)
     @Serialize(OutputUserDTO)
-    async getUsers(@AuthedUser<User>('role') authedUserRole: RoleType, @Query() query: GetUsersQueryDto): Promise<User[]> {
+    async getUsers(@AuthedUser<User>('role') authedUserRole: RoleType, @Query() query: GetUsersQueryDTO): Promise<User[]> {
         return await this.userService.getUsers(authedUserRole, query);
     }
 

@@ -1,12 +1,10 @@
-import { ForbiddenException, forwardRef, HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDTO } from './dtos/create-user.dto';
+import { ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from './users.repository';
 import { User, UserDocument } from './users.schema';
 import { OPERATIONS, RESOURCE, ROLE, RoleType } from 'src/constants/role.constants';
 import { AccessControlService } from 'src/access-control/access-control.service';
 import { BranchRepository } from 'src/branch/branch.repository';
-import { GetUsersQueryDto } from './dtos/get-user-query.dto';
-import { UpdateUserDTO } from './dtos/update-user.dto';
+import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO } from './dtos';
 
 @Injectable()
 export class UsersService {
@@ -54,7 +52,7 @@ export class UsersService {
         return await this.userRepository.createUser(createUserDto);
     }
 
-    async getUsers(authedUserRole: RoleType, query: GetUsersQueryDto): Promise<User[]> {
+    async getUsers(authedUserRole: RoleType, query: GetUsersQueryDTO): Promise<User[]> {
         const { matchingBy, sortBy, order, limit, skip } = query;
 
         // check the access level
