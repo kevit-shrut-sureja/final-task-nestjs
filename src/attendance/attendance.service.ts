@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AttendanceRepository } from './attendance.repository';
-import { AttendanceDTO } from './dtos/create-attendance.dto';
 import { Attendance } from './attendance.schema';
 import { PartialAttendanceType } from 'src/types/attendance.types';
-import { GetAbsentStudentsListDTO } from './dtos/absent-student-query.dto';
-import { GetAttendancePercentageDTO } from './dtos/attendance-percentage-query.dto';
+import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 
 @Injectable()
 export class AttendanceService {

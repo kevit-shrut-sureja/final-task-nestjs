@@ -1,5 +1,5 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { SignInUser } from './dtos/sign-in-user.dto';
+import { SignInUser } from './dtos';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { OutputUserDTO, Serialize, UserDocument, UserRepository } from 'src/users';

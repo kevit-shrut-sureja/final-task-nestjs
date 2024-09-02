@@ -4,10 +4,8 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { AccessControlGuard } from 'src/access-control/access-control.guard';
 import { AccessControl } from 'src/access-control/decorator/access-control.decorator';
 import { OPERATIONS, RESOURCE } from 'src/constants/role.constants';
-import { AttendanceDTO } from './dtos/create-attendance.dto';
+import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 import { Response } from 'express';
-import { GetAbsentStudentsListDTO } from './dtos/absent-student-query.dto';
-import { GetAttendancePercentageDTO } from './dtos/attendance-percentage-query.dto';
 
 @Controller('attendance')
 @UseGuards(AuthGuard, AccessControlGuard)

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { Model, Types } from 'mongoose';
 import { Attendance, AttendanceDocument } from './attendance.schema';
-import { AttendanceDTO } from './dtos/create-attendance.dto';
+import { AttendanceDTO } from './dtos';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserRepository } from 'src/users';
 
