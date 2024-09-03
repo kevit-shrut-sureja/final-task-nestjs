@@ -42,13 +42,13 @@ export class BranchRepository {
 
     async deleteUserBranch(branch: BranchDocument) {
         try {
-            return await branch.deleteOne();
+            return await this.branchModel.findOneAndDelete({ id: branch.id });
         } catch (error) {
             throw new ServiceUnavailableException();
         }
     }
 
-    async updateBranch(branch: BranchDocument, editedBranch: UpdateBranchDTO) : Promise<Branch> {
+    async updateBranch(branch: BranchDocument, editedBranch: UpdateBranchDTO): Promise<Branch> {
         try {
             // Create a new branch object with updated values
             const updatedBranch = {

@@ -49,13 +49,13 @@ export class AttendanceRepository {
         }
     }
 
-    async deleteAttendance({ date, studentId }: AttendanceDTO) {
+    async deleteAttendance({ date, studentId }: AttendanceDTO) : Promise<Attendance> {
         try {
-            const attendance = await this.attendanceModel.findOne({ date, studentId : new Types.ObjectId(studentId) });
+            const attendance = await this.attendanceModel.findOne({ date, studentId: new Types.ObjectId(studentId) });
             if (!attendance) {
                 throw new HttpException('Attendance not found.', HttpStatus.NOT_FOUND);
             }
-            return await attendance.deleteOne();
+            return await this.attendanceModel.findOneAndDelete({ date, studentId: new Types.ObjectId(studentId) });
         } catch (error) {
             if (error instanceof HttpException) {
                 throw error;

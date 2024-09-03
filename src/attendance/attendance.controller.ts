@@ -6,6 +6,7 @@ import { AccessControl } from 'src/access-control/decorator';
 import { OPERATIONS, RESOURCE } from 'src/constants';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 import { Response } from 'express';
+import { Attendance } from './attendance.schema';
 
 @Controller('attendance')
 @UseGuards(AuthGuard, AccessControlGuard)
@@ -27,7 +28,7 @@ export class AttendanceController {
     @Post()
     @AccessControl(OPERATIONS.CREATE, RESOURCE.ATTENDANCE)
     // ParseArrayPipe to validate in the array see https://docs.nestjs.com/techniques/validation#parsing-and-validating-arrays
-    async createAttendance(@Body(new ParseArrayPipe({ items: AttendanceDTO })) data: AttendanceDTO[] | AttendanceDTO, @Res() res: Response) {
+    async createAttendance(@Body(new ParseArrayPipe({ items: AttendanceDTO })) data: AttendanceDTO[], @Res() res: Response) {
         const result = await this.attendanceService.createAttendance(data);
 
         // check if both successRecords and failedRecords exist
@@ -40,16 +41,20 @@ export class AttendanceController {
             });
         }
 
-        // If all records were successfully created
-        if ('successRecords' in result) {
-            return res.status(201).json({
-                status: 'success',
-                message: 'All records were successfully created.',
-                ...result,
-            });
+        // in case, if all have failed
+        if (result.successRecords.length === 0 ){
+            return res.status(400).json({
+                status : "failed",
+                message : 'Due to some error no records have been saved successfully.',
+                ...result
+            })
         }
 
-        return res.status(201).json(result);
+        return res.status(201).json({
+            status: 'success',
+            message: 'All records were successfully created.',
+            ...result,
+        });
     }
 
     @Put()
@@ -60,7 +65,7 @@ export class AttendanceController {
 
     @Delete()
     @AccessControl(OPERATIONS.DELETE, RESOURCE.ATTENDANCE)
-    async deleteAttendance(@Body() deleteAttendance: AttendanceDTO) {
+    async deleteAttendance(@Body() deleteAttendance: AttendanceDTO) : Promise<Attendance> {
         return await this.attendanceService.deleteAttendance(deleteAttendance);
     }
 }

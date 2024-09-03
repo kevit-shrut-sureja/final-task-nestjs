@@ -37,7 +37,7 @@ async function createResource(token, endpoint, data) {
 async function createAttendance(token, allAttendance){
     const attendancePromise = []
     for (const attendance of allAttendance){
-        attendancePromise.push(createResource(token, 'attendance', attendance));
+        attendancePromise.push(createResource(token, 'attendance', [{...attendance}]));
     }
     console.log(attendancePromise.length)
     const res = await Promise.allSettled(attendancePromise)
