@@ -30,4 +30,8 @@ describe('AuthService', () => {
     it('should be defined', () => {
         expect(service).toBeDefined();
     });
+
+    describe.skip('validateUser', () => {});
+    describe.skip('logoutUser', () => {});
+
 });

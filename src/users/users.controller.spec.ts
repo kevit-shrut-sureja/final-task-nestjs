@@ -40,4 +40,13 @@ describe('UsersController', () => {
     it('should be defined', () => {
         expect(controller).toBeDefined();
     });
+
+    describe.skip('createNewUser', () => {});
+    describe.skip('getUsers', () => {});
+    describe.skip('getBatchAnalysis', () => {});
+    describe.skip('getVacantAnalysis', () => {});
+    describe.skip('getUserById', () => {});
+    describe.skip('deleteUser', () => {});
+    describe.skip('editUser', () => {});
+
 });

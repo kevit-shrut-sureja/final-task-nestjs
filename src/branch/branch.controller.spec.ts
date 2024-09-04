@@ -49,4 +49,11 @@ describe('BranchController', () => {
     it('should be defined', () => {
         expect(controller).toBeDefined();
     });
+
+    describe.skip('createNewBranch', () => {});
+    describe.skip('getBranchWithId', () => {});
+    describe.skip('getBranch', () => {});
+    describe.skip('deleteBranch', () => {});
+    describe.skip('updateBranch', () => {});
+
 });

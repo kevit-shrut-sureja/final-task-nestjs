@@ -117,5 +117,8 @@ describe('AttendanceController', () => {
         });
     });
 
-    describe('createAttendance', () => {});
+    describe.skip('createAttendance', () => {});
+    describe.skip('editAttendance', () => {});
+    describe.skip('deleteAttendance', () => {});
+    
 });

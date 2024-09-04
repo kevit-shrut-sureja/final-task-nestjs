@@ -40,4 +40,8 @@ describe('AuthController', () => {
     it('should be defined', () => {
         expect(controller).toBeDefined();
     });
+
+    describe.skip('loginUser', () => {});
+    describe.skip('logoutUser', () => {});
+
 });
