@@ -10,8 +10,11 @@ export class GetAbsentStudentsListDTO {
     branch?: string;
 
     @IsOptional()
-    @IsNumberString()
-    batch?: string;
+    @Transform(({ value }) => parseInt(value, 10))
+    @IsInt()
+    @Min(1900)
+    @Max(9999)
+    batch?: number;
 
     @IsOptional()
     @Transform(({ value }) => parseInt(value, 10)) // Converts the string to a number
