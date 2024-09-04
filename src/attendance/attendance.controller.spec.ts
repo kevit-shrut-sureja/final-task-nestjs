@@ -8,9 +8,9 @@ import { AuthGuard } from '../auth/auth.guard';
 import { AccessControlGuard } from '../access-control/access-control.guard';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 import { mock } from 'jest-mock-extended';
-import { getDate, getObjectID } from './attendance.service.spec';
 import { Attendance } from './attendance.schema';
 import { Response } from 'express';
+import { getDate, getObjectID } from '../utils/helper-functions';
 
 const mockAuthGuard = {
     canActivate: jest.fn(() => true),

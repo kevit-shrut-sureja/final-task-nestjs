@@ -5,17 +5,7 @@ import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } f
 import { Types } from 'mongoose';
 import { mock } from 'jest-mock-extended';
 import { Attendance } from './attendance.schema';
-
-/**
- * Helper Funciton
- */
-export function getObjectID(id: string) {
-    return new Types.ObjectId(id);
-}
-
-export function getDate(date: string) {
-    return new Date(date);
-}
+import { getDate, getObjectID } from '../utils/helper-functions';
 
 describe('AttendanceService', () => {
     let attendanceService: AttendanceService;
