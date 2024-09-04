@@ -8,11 +8,7 @@ import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } f
 export class AttendanceService {
     constructor(private readonly attendanceRepository: AttendanceRepository) {}
 
-    async createAttendance(data: AttendanceDTO[] | AttendanceDTO): Promise<Attendance | PartialAttendanceType> {
-        if (!(data instanceof Array)) {
-            // add single data
-            return await this.attendanceRepository.createSingleAttendance(data);
-        }
+    async createAttendance(data: AttendanceDTO[]): Promise<PartialAttendanceType> {
 
         // pushing all the attendance
         const results = await Promise.allSettled(
@@ -48,7 +44,7 @@ export class AttendanceService {
         return await this.attendanceRepository.editAttendance(data);
     }
 
-    async deleteAttendance(data: AttendanceDTO) {
+    async deleteAttendance(data: AttendanceDTO) : Promise<Attendance> {
         return await this.attendanceRepository.deleteAttendance(data);
     }
 
