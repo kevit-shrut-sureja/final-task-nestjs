@@ -24,7 +24,6 @@ export class BranchController {
         return await this.branchService.findBranchById(id);
     }
 
-    // TODO: Implement this in the service layer
     @Get()
     @AccessControl(OPERATIONS.READ, RESOURCE.BRANCH)
     async getBranch(@Query() query: GetBranchQueryDTO) {

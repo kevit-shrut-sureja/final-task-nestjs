@@ -12,7 +12,7 @@ export class AttendanceRepository {
         private readonly userRepository: UserRepository,
     ) {}
 
-    async createSingleAttendance(data: AttendanceDTO) {
+    async createSingleAttendance(data: AttendanceDTO) : Promise<Attendance> {
         try {
             const studentExists = await this.userRepository.findStudentById(data.studentId.toString());
             if (!studentExists) {
