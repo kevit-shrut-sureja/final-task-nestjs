@@ -9,11 +9,11 @@ import { Attendance } from './attendance.schema';
 /**
  * Helper Funciton
  */
-function getObjectID(id: string) {
+export function getObjectID(id: string) {
     return new Types.ObjectId(id);
 }
 
-function getDate(date: string) {
+export function getDate(date: string) {
     return new Date(date);
 }
 
@@ -163,7 +163,7 @@ describe('AttendanceService', () => {
         it('should edit attendance successfully', async () => {
             attendanceRepository.editAttendance.mockResolvedValue(dummyAttendance[0]);
 
-            const result = await attendanceRepository.editAttendance(attendanceDTO);
+            const result = await attendanceService.editAttendance(attendanceDTO);
 
             expect(result).toBeDefined();
             expect(result.studentId.toHexString()).toBe(attendanceDTO.studentId.toHexString());
@@ -173,7 +173,7 @@ describe('AttendanceService', () => {
         it('should throw error if attendace is not found', async () => {
             attendanceRepository.editAttendance.mockRejectedValue(new Error('Some error has occured'));
 
-            await expect(attendanceRepository.editAttendance(attendanceDTO)).rejects.toThrow('Some error has occured');
+            await expect(attendanceService.editAttendance(attendanceDTO)).rejects.toThrow('Some error has occured');
 
             expect(attendanceRepository.editAttendance).toHaveBeenCalledWith(attendanceDTO);
         });
@@ -189,7 +189,7 @@ describe('AttendanceService', () => {
         it('should delete the attendance record', async () => {
             attendanceRepository.deleteAttendance.mockResolvedValue(dummyAttendance[0]);
 
-            const result = await attendanceRepository.deleteAttendance(attendanceDTO);
+            const result = await attendanceService.deleteAttendance(attendanceDTO);
 
             expect(result).toBeDefined();
             expect(attendanceRepository.deleteAttendance).toHaveBeenCalledWith(attendanceDTO);
@@ -198,7 +198,7 @@ describe('AttendanceService', () => {
         it('should throw error for non-existing record', async () => {
             attendanceRepository.deleteAttendance.mockRejectedValue(new Error('Value does not exist'));
 
-            await expect(attendanceRepository.deleteAttendance(attendanceDTO)).rejects.toThrow('Value does not exist');
+            await expect(attendanceService.deleteAttendance(attendanceDTO)).rejects.toThrow('Value does not exist');
 
             expect(attendanceRepository.deleteAttendance).toHaveBeenCalledWith(attendanceDTO);
         });
@@ -215,11 +215,7 @@ describe('AttendanceService', () => {
         it('should fetch list of attendance record', async () => {
             attendanceRepository.getAbsentStudentList.mockResolvedValue([]);
 
-            const result = await attendanceRepository.getAbsentStudentList(
-                new Date(absentStudent.date),
-                absentStudent.branch,
-                absentStudent.batch,
-                absentStudent.semester,
+            const result = await attendanceService.absentStudentList(absentStudent
             );
 
             expect(result).toBeInstanceOf(Array);
@@ -229,7 +225,7 @@ describe('AttendanceService', () => {
             attendanceRepository.getAbsentStudentList.mockRejectedValue(new Error('Cannot fetch the data'));
 
             const result = await expect(
-                attendanceRepository.getAbsentStudentList(new Date(absentStudent.date), absentStudent.branch, absentStudent.batch, absentStudent.semester),
+                attendanceService.absentStudentList(absentStudent),
             ).rejects.toThrow('Cannot fetch the data');
 
             expect(result).not.toBeDefined();
@@ -247,12 +243,7 @@ describe('AttendanceService', () => {
         it('should get list the attendance record', async () => {
             attendanceRepository.getStudentsByAttendancePercentage.mockResolvedValue([]);
 
-            const result = await attendanceRepository.getStudentsByAttendancePercentage(
-                attendancePercentage.percentage,
-                attendancePercentage.batch,
-                attendancePercentage.semester,
-                attendancePercentage.branch,
-            );
+            const result = await attendanceService.getStudentsByAttendancePercentage(attendancePercentage);
 
             expect(result).toBeInstanceOf(Array);
         });
@@ -260,14 +251,9 @@ describe('AttendanceService', () => {
         it('should throw error', async () => {
             attendanceRepository.getStudentsByAttendancePercentage.mockRejectedValue(new Error('Cannot find the attendance'));
 
-            const result = await expect(
-                attendanceRepository.getStudentsByAttendancePercentage(
-                    attendancePercentage.percentage,
-                    attendancePercentage.batch,
-                    attendancePercentage.semester,
-                    attendancePercentage.branch,
-                ),
-            ).rejects.toThrow('Cannot find the attendance');
+            const result = await expect(attendanceService.getStudentsByAttendancePercentage(attendancePercentage)).rejects.toThrow(
+                'Cannot find the attendance',
+            );
 
             expect(result).not.toBeDefined();
         });

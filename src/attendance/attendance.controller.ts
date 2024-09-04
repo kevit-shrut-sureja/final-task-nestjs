@@ -32,7 +32,7 @@ export class AttendanceController {
         const result = await this.attendanceService.createAttendance(data);
 
         // check if both successRecords and failedRecords exist
-        if ('successRecords' in result && 'failedRecords' in result) {
+        if (result.successRecords.length > 0 && result.failedRecords.length > 0) {
             // Partial success
             return res.status(207).json({
                 status: 'partial',
@@ -49,7 +49,7 @@ export class AttendanceController {
                 ...result
             })
         }
-
+        
         return res.status(201).json({
             status: 'success',
             message: 'All records were successfully created.',
