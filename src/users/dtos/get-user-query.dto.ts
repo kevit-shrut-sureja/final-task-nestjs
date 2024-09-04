@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsIn, IsInt, IsPositive, IsNumberString } from 'class-validator';
+import { IsOptional, IsString, IsIn, IsNumberString } from 'class-validator';
 
 export class GetUsersQueryDTO {
   @IsOptional()

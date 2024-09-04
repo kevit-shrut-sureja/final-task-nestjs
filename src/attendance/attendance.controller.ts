@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, ParseArrayPipe, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { AccessControlGuard } from 'src/access-control/access-control.guard';
-import { AccessControl } from 'src/access-control/decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
 import { Response } from 'express';
 import { Attendance } from './attendance.schema';
+import { AccessControlGuard } from '../access-control/access-control.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { AccessControl } from '../access-control/decorator';
+import { OPERATIONS, RESOURCE } from '../constants';
 
 @Controller('attendance')
 @UseGuards(AuthGuard, AccessControlGuard)

@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { User, UserDocument } from './users.schema';
-import { AccessControlGuard } from 'src/access-control/access-control.guard';
-import { AccessControl } from 'src/access-control/decorator';
-import { OPERATIONS, RESOURCE, RoleType } from 'src/constants';
+import { AccessControlGuard } from '../access-control/access-control.guard';
+import { AccessControl } from '../access-control/decorator';
+import { OPERATIONS, RESOURCE, RoleType } from '../constants';
 import { AuthedUser } from './decorator/user.decorator';
 import { Serialize } from './users.interceptor';
 import { CreateUserDTO, GetUsersQueryDTO, OutputUserDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OPERATIONS, OperationsType, RESOURCE, ResourceType, ROLE, RoleType } from 'src/constants';
+import { OPERATIONS, OperationsType, RESOURCE, ResourceType, ROLE, RoleType } from '../constants';
 
 @Injectable()
 export class AccessControlService {

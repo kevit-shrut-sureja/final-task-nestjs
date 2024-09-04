@@ -3,7 +3,7 @@ import { Model, Types } from 'mongoose';
 import { Attendance, AttendanceDocument } from './attendance.schema';
 import { AttendanceDTO } from './dtos';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserRepository } from 'src/users/users.repository';
+import { UserRepository } from '../users/users.repository';
 
 @Injectable()
 export class AttendanceRepository {

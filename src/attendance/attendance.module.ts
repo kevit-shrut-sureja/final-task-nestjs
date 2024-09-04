@@ -5,8 +5,8 @@ import { AttendanceService } from './attendance.service';
 import { AttendanceController } from './attendance.controller';
 import { Attendance, AttendanceSchema } from './attendance.schema';
 import { AttendanceRepository } from './attendance.repository';
-import { UsersModule } from 'src/users/users.module';
-import { AccessControlModule } from 'src/access-control/access-control.module';
+import { UsersModule } from '../users/users.module';
+import { AccessControlModule } from '../access-control/access-control.module';
 
 @Module({
     imports: [UsersModule, AccessControlModule, JwtModule, MongooseModule.forFeature([{ name: Attendance.name, schema: AttendanceSchema }])],

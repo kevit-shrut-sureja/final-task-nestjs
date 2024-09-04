@@ -1,4 +1,4 @@
-import { Attendance } from "src/attendance/attendance.schema";
+import { Attendance } from "../attendance/attendance.schema"
 
 export interface PartialAttendanceType {
     successRecords : Attendance[], 

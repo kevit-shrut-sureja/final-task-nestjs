@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { AccessControlService } from './access-control.service';
 import { ACCESS_CONTROL_METADATA_KEYS } from './decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants';
+import { OPERATIONS, RESOURCE } from '../constants';
 
 @Injectable()
 export class AccessControlGuard implements CanActivate {

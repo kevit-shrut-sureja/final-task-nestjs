@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { OperationsType, ResourceType } from 'src/constants/role.constants';
+import { OperationsType, ResourceType } from '../../constants';
 
 export enum ACCESS_CONTROL_METADATA_KEYS {
     OPERATION_KEY = 'operation',

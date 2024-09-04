@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { ROLE, RoleType } from 'src/constants/role.constants';
+import { ROLE, RoleType } from '../constants';
 import { hash } from 'bcrypt';
 
 @Schema({ timestamps: true })

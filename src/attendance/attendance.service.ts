@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AttendanceRepository } from './attendance.repository';
 import { Attendance } from './attendance.schema';
-import { PartialAttendanceType } from 'src/types/attendance.types';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from './dtos';
+import { PartialAttendanceType } from '../types';
 
 @Injectable()
 export class AttendanceService {

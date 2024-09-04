@@ -1,6 +1,6 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Max, Min, MinLength } from "class-validator";
 import { Types } from "mongoose";
-import { ROLE, RoleType } from "src/constants/role.constants";
+import { ROLE, RoleType } from "../../constants";
 
 export class CreateUserDTO {
     @IsString()

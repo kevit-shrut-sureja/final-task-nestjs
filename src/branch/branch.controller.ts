@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { BranchService } from './branch.service';
 import { CreateBranchDTO, GetBranchQueryDTO, UpdateBranchDTO } from './dtos';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { AccessControlGuard } from 'src/access-control/access-control.guard';
-import { AccessControl } from 'src/access-control/decorator';
-import { OPERATIONS, RESOURCE } from 'src/constants';
 import { Branch } from './branch.schema';
+import { OPERATIONS, RESOURCE } from '../constants';
+import { AuthGuard } from '../auth/auth.guard';
+import { AccessControlGuard } from '../access-control/access-control.guard';
+import { AccessControl } from '../access-control/decorator';
 
 @Controller('branch')
 @UseGuards(AuthGuard, AccessControlGuard)
