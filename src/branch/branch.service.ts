@@ -34,21 +34,20 @@ export class BranchService {
 
         // eslint-disable-next-line
         if (matchBy) match['$or'] = [{ name: new RegExp(matchBy as string, 'i') }];
-        return await this.branchRepository.findBranch(match, sort, Number(limit), Number(skip));
+        return await this.branchRepository.findBranch(match, sort, limit, skip);
     }
 
     async deleteBranch(id: string): Promise<Branch> {
-        const branch = await this.branchRepository.findBranchById(id);
-        if (!branch) {
-            throw new HttpException('Branch not found.', 404);
-        }
-
+        // findind users for the branch
         const usersWithBranchId = await this.usersRepository.findUsersByBranchId(id);
         if (usersWithBranchId.length > 0) {
             throw new HttpException('Users exists with this branch id so cannot delete branch.', 409);
         }
-
-        await this.branchRepository.deleteUserBranch(branch);
+        
+        const branch = await this.branchRepository.deleteUserBranch(id);
+        if (!branch) {
+            throw new HttpException('Branch not found.', 404);
+        }
 
         return branch;
     }
