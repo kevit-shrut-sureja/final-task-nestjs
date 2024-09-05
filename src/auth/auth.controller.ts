@@ -13,16 +13,7 @@ export class AuthController {
     @Post('login')
     @HttpCode(HttpStatus.OK)
     async loginUser(@Body() credentials: SignInUser) {
-        try {
-            const result = await this.authService.validateUser(credentials);
-            return { statusCode: HttpStatus.OK, ...result };
-        } catch (error) {
-            if (error instanceof HttpException) {
-                throw error;
-            }
-            // Handle unexpected errors
-            throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return await this.authService.validateUser(credentials);
     }
 
     @Post('logout')

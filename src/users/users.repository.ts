@@ -13,8 +13,7 @@ export class UserRepository {
         try {
             const validatedUserData = this.validateRoleSpecificDetails(userData);
             validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId);
-            const createdUser = await this.userModel.create(validatedUserData);
-            return createdUser;
+            return await this.userModel.create(validatedUserData);
         } catch (error) {
             if (error.code === 11000) {
                 throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
@@ -30,8 +29,7 @@ export class UserRepository {
 
     async findUserByEmail(email: string): Promise<UserDocument> {
         try {
-            const user = await this.userModel.findOne({ email });
-            return user;
+            return await this.userModel.findOne({ email });
         } catch (error) {
             if (error instanceof HttpException) {
                 throw error;
@@ -42,14 +40,13 @@ export class UserRepository {
 
     async findUserById(id: string): Promise<UserDocument> {
         try {
-            const user = this.userModel.findById(id);
-            return user;
+            return this.userModel.findById(id);
         } catch (error) {
             throw new ServiceUnavailableException();
         }
     }
 
-    async findUsersByBranchId(branchId: string): Promise<User[]>{
+    async findUsersByBranchId(branchId: string): Promise<User[]> {
         try {
             return await this.userModel.find({ branchId });
         } catch (error) {
@@ -59,8 +56,7 @@ export class UserRepository {
 
     async findTotalNumberOfStudentsInABranch(branchId: string) {
         try {
-            const result = await this.userModel.find({ role: 'student', branchId: branchId }).countDocuments();
-            return result;
+            return await this.userModel.find({ role: 'student', branchId: branchId }).countDocuments();
         } catch (error) {
             throw new ServiceUnavailableException();
         }
@@ -82,11 +78,11 @@ export class UserRepository {
         }
     }
 
-    async findStudentById(id : string){
+    async findStudentById(id: string) {
         try {
-            return await this.userModel.findOne({ _id : new Types.ObjectId(id), role : ROLE.STUDENT })
+            return await this.userModel.findOne({ _id: new Types.ObjectId(id), role: ROLE.STUDENT });
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
 
@@ -168,7 +164,7 @@ export class UserRepository {
 
     async getBatchWiseAnalysis(): Promise<any[]> {
         try {
-            const result = await this.userModel.aggregate([
+            return await this.userModel.aggregate([
                 {
                     $match: {
                         role: 'student',
@@ -250,13 +246,12 @@ export class UserRepository {
                     },
                 },
             ]);
-            return result;
         } catch (error) {
             throw new ServiceUnavailableException();
         }
     }
 
-    async getVacantAnalysis(batch: number, branch: string) : Promise<any[]> {
+    async getVacantAnalysis(batch: number, branch: string): Promise<any[]> {
         try {
             const stages: any = [
                 {
@@ -377,8 +372,7 @@ export class UserRepository {
                 stages.splice(4, 0, stageToAdd);
             }
 
-            const result = await this.userModel.aggregate(stages);
-            return result;
+            return await this.userModel.aggregate(stages);
         } catch (error) {
             throw new ServiceUnavailableException();
         }
