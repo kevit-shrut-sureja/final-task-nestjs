@@ -75,38 +75,38 @@ describe('AuthService', () => {
 
             expect(result).toEqual({ token });
             expect(userRepository.findUserByEmail).toHaveBeenCalledWith('test@test.com');
-            expect(user.save).toHaveBeenCalled();
+            expect(userRepository.updateUserTokens).toHaveBeenCalledTimes(1)
         });
 
         it('should throw HttpException if an internal error occurs', async () => {
             userRepository.findUserByEmail.mockRejectedValue(HttpException);
 
-            await expect(authService.validateUser({email : 'test@test.com', password : '1234345'})).rejects.toThrow(HttpException);
+            await expect(authService.validateUser({ email: 'test@test.com', password: '1234345' })).rejects.toThrow(HttpException);
         });
     });
     describe('logoutUser', () => {
         it('should delete all tokens', async () => {
-            const user = {tokens : ["this is token"], save : jest.fn()} as unknown as UserDocument
-            
-            const result = await authService.logoutUser(user, true, "this is token")
-            
-            expect(result.message).toEqual('success')
-            expect(user.save).toHaveBeenCalled()
-        })
+            const user = { tokens: ['this is token'], save: jest.fn() } as unknown as UserDocument;
+
+            const result = await authService.logoutUser(user, true, 'this is token');
+
+            expect(result.message).toEqual('success');
+            expect(userRepository.updateUserTokens).toHaveBeenCalledTimes(1);
+        });
 
         it('should delete one tokens', async () => {
-            const user = {tokens : ["this is token", "second token"], save : jest.fn()} as unknown as UserDocument
-            
-            const result = await authService.logoutUser(user, false, "this is token")
-            
-            expect(result.message).toEqual('success')
-            expect(user.save).toHaveBeenCalled()
-        })
+            const user = { tokens: ['this is token', 'second token'] } as unknown as UserDocument;
+
+            const result = await authService.logoutUser(user, false, 'this is token');
+
+            expect(result.message).toEqual('success');
+            expect(userRepository.updateUserTokens).toHaveBeenCalledTimes(1);
+        });
 
         it('should throw HttpException if an internal error occurs', async () => {
-            const user = {save : jest.fn()} as unknown as UserDocument;
-            
-            await expect(authService.logoutUser(user, false, "this is token")).rejects.toThrow(HttpException)
-        })
+            const user = { } as unknown as UserDocument;
+
+            await expect(authService.logoutUser(user, false, 'this is token')).rejects.toThrow(HttpException);
+        });
     });
 });

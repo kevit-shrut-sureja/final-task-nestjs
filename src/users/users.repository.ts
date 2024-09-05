@@ -11,7 +11,7 @@ export class UserRepository {
 
     async createUser(userData: CreateUserDTO): Promise<User> {
         try {
-            const validatedUserData = this.validateRoleSpecificDetails(userData);
+            const validatedUserData = this.validateRoleSpecificDetails<CreateUserDTO>(userData);
             validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId);
             return await this.userModel.create(validatedUserData);
         } catch (error) {
@@ -86,17 +86,15 @@ export class UserRepository {
         }
     }
 
-    async updatedUser(user: UserDocument, editedUser: UpdateUserDTO): Promise<User> {
+    async updatedUser(user: User, editedUser: UpdateUserDTO ): Promise<User> {
         try {
             const fields = Object.keys(editedUser);
-            const updatedUserDetails = { ...user };
+            const updatedUserDetails = user;
             fields.forEach((field) => {
                 updatedUserDetails[field] = editedUser[field];
             });
-
-            // Now merging the changes
-            Object.assign(user, updatedUserDetails);
-            return await user.save();
+            const validatedUserData = this.validateRoleSpecificDetails<UpdateUserDTO>(updatedUserDetails);
+            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, validatedUserData, { new : true})
         } catch (error) {
             if (error.code === 11000) {
                 throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
@@ -109,7 +107,17 @@ export class UserRepository {
         }
     }
 
-    validateRoleSpecificDetails(user: CreateUserDTO): CreateUserDTO {
+    async updateUserTokens(user : User, tokens : string[]){
+        try {
+            let updatedUser = user;
+            updatedUser.tokens = tokens;
+            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, updatedUser, { new : true })
+        } catch (error) {
+            throw new ServiceUnavailableException()
+        }
+    }
+    
+    validateRoleSpecificDetails<T extends CreateUserDTO | UpdateUserDTO>(user: T): T {
         const { role } = user;
 
         switch (role) {
