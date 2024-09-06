@@ -12,7 +12,6 @@ export class UserRepository {
     async createUser(userData: CreateUserDTO): Promise<User> {
         try {
             const validatedUserData = this.validateRoleSpecificDetails<CreateUserDTO>(userData);
-            validatedUserData.branchId = new Types.ObjectId(validatedUserData.branchId);
             return await this.userModel.create(validatedUserData);
         } catch (error) {
             if (error.code === 11000) {
@@ -22,7 +21,6 @@ export class UserRepository {
             if (error instanceof HttpException) {
                 throw error;
             }
-
             throw new ServiceUnavailableException();
         }
     }
@@ -54,9 +52,9 @@ export class UserRepository {
         }
     }
 
-    async findTotalNumberOfStudentsInABranch(branchId: string) {
+    async findTotalNumberOfStudentsInABranch(branchId : Types.ObjectId) {
         try {
-            return await this.userModel.find({ role: 'student', branchId: branchId }).countDocuments();
+            return await this.userModel.find({ role: ROLE.STUDENT, branchId }).countDocuments()
         } catch (error) {
             throw new ServiceUnavailableException();
         }
