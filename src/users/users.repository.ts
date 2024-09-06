@@ -21,6 +21,7 @@ export class UserRepository {
             if (error instanceof HttpException) {
                 throw error;
             }
+
             throw new ServiceUnavailableException();
         }
     }
