@@ -32,9 +32,9 @@ export class AuthService {
             const payload = { id: user.id, role: user.role };
             const token = await this.jwtService.signAsync(payload);
 
-            user.tokens = user.tokens.concat(token);
-            await user.save();
-
+            const tokens = user.tokens.concat(token);
+            await this.userRepository.updateUserTokens(user, tokens);
+            
             return { token };
         } catch (error) {
             if (error instanceof HttpException) {
@@ -47,13 +47,14 @@ export class AuthService {
 
     async logoutUser(user: UserDocument, all: boolean, token: string) {
         try {
+            let tokens: string[];
             if (all) {
-                user.tokens = [];
+                tokens = [];
             } else {
-                user.tokens = user.tokens.filter((t) => t !== token);
+                tokens = user.tokens.filter((t) => t !== token);
             }
-            await user.save()
-            return { message : 'success'}
+            await this.userRepository.updateUserTokens(user, tokens);
+            return { message: 'success' };
         } catch (error) {
             throw new HttpException('Error in token deletion.', HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -132,7 +132,7 @@ export class UsersService {
 
     async updateUser(authedUser: UserDocument, id: string, editedUser: UpdateUserDTO) : Promise<User> {
         // Fetching requested User Data
-        const requestedUser = await this.userRepository.findUserById(id);
+        const requestedUser : User = await this.userRepository.findUserById(id);
         if (!requestedUser) {
             throw new NotFoundException('User not found');
         }
@@ -206,7 +206,7 @@ export class UsersService {
                 editedUser.branchName = branchExists.name;
             }
         }
-
+        
         const updatedUser = await this.userRepository.updatedUser(requestedUser, editedUser)
         return updatedUser
     }
