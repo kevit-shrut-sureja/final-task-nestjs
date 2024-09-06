@@ -5,6 +5,8 @@ import { OPERATIONS, RESOURCE, ROLE, RoleType } from '../constants';
 import { AccessControlService } from '../access-control/access-control.service';
 import { BranchRepository } from '../branch/branch.repository';
 import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO } from './dtos';
+import { Branch } from '../branch/branch.schema';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -23,33 +25,42 @@ export class UsersService {
         }
 
         if (roleToBeCreated !== ROLE.ADMIN) {
-            // staff can only add data of the student in their branch
-            const branchId = createUserDto?.branchId;
-            const authedUserBranchId = authedUser?.branchId;
-            if (branchId && authedUserRole === ROLE.STAFF && authedUserBranchId.toString() !== branchId.toString()) {
-                throw new HttpException('Staff user cannot change details of other staff user', HttpStatus.FORBIDDEN);
-            }
-
-            // if branch does not exist then this throws error
-            const branch = await this.branchRepository.findBranchById(branchId.toString());
-            if (!branch) {
-                throw new HttpException('Branch not found.', HttpStatus.NOT_FOUND);
-            }
+            const branch = await this.validateBranchAndUserRole(createUserDto.branchId.toString(), authedUser.branchId?.toString(), authedUser.role);
 
             // If new user is student then adding data from the branch details
             if (roleToBeCreated === ROLE.STUDENT) {
-                createUserDto.batch = branch.batch;
-                createUserDto.branchName = branch.name;
-            }
-
-            // check if the totalStudentsIntake is less or not
-            const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(branchId.toString());
-            if (studentCount + 1 > branch.totalStudentsIntake) {
-                throw new HttpException('Total students count exceeding.', HttpStatus.NOT_FOUND);
+                createUserDto = await this.assignStudentBranchDetails(createUserDto, branch);
             }
         }
-
         return await this.userRepository.createUser(createUserDto);
+    }
+
+    async validateBranchAndUserRole(newUserBranchId: string, authedUserBranchId: string, authedUserRole: RoleType): Promise<Branch> {
+        // staff can only add data of the student in their branch
+        if (newUserBranchId && authedUserRole === ROLE.STAFF && authedUserBranchId !== newUserBranchId) {
+            throw new HttpException('Staff user cannot change details of other staff user', HttpStatus.FORBIDDEN);
+        }
+
+        // if branch does not exist then this throws error
+        const branch = await this.branchRepository.findBranchById(newUserBranchId);
+
+        if (!branch) {
+            throw new HttpException('Branch not found.', HttpStatus.NOT_FOUND);
+        }
+        return branch;
+    }
+
+    async assignStudentBranchDetails(newUser: CreateUserDTO, branch: Branch): Promise<CreateUserDTO> {
+        newUser.batch = branch.batch;
+        newUser.branchName = branch.name;
+
+        // check if the totalStudentsIntake is less or not
+        const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(newUser.branchId);
+        
+        if (studentCount + 1 > branch.totalStudentsIntake) {
+            throw new HttpException('Total students count exceeding.', HttpStatus.NOT_FOUND);
+        }
+        return newUser;
     }
 
     async getUsers(authedUserRole: RoleType, query: GetUsersQueryDTO): Promise<User[]> {
@@ -130,9 +141,9 @@ export class UsersService {
         return requestedUser;
     }
 
-    async updateUser(authedUser: UserDocument, id: string, editedUser: UpdateUserDTO) : Promise<User> {
+    async updateUser(authedUser: UserDocument, id: string, editedUser: UpdateUserDTO): Promise<User> {
         // Fetching requested User Data
-        const requestedUser : User = await this.userRepository.findUserById(id);
+        const requestedUser: User = await this.userRepository.findUserById(id);
         if (!requestedUser) {
             throw new NotFoundException('User not found');
         }
@@ -206,16 +217,16 @@ export class UsersService {
                 editedUser.branchName = branchExists.name;
             }
         }
-        
-        const updatedUser = await this.userRepository.updatedUser(requestedUser, editedUser)
-        return updatedUser
+
+        const updatedUser = await this.userRepository.updatedUser(requestedUser, editedUser);
+        return updatedUser;
     }
 
-    async batchAnalysis() : Promise<any[]>{
-        return await this.userRepository.getBatchWiseAnalysis()
+    async batchAnalysis(): Promise<any[]> {
+        return await this.userRepository.getBatchWiseAnalysis();
     }
 
-    async vacantAnalysis(batch : number, branch : string) : Promise<any[]> {
-        return await this.userRepository.getVacantAnalysis(batch, branch)
+    async vacantAnalysis(batch: number, branch: string): Promise<any[]> {
+        return await this.userRepository.getVacantAnalysis(batch, branch);
     }
 }

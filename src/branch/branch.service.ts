@@ -3,6 +3,7 @@ import { BranchRepository } from './branch.repository';
 import { Branch } from './branch.schema';
 import { GetBranchQueryDTO, UpdateBranchDTO } from './dtos';
 import { UserRepository } from '../users/users.repository';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class BranchService {
@@ -67,7 +68,7 @@ export class BranchService {
         }
 
         if (editedBranch.totalStudentsIntake < branch.totalStudentsIntake) {
-            const currentTotalStudents = await this.usersRepository.findTotalNumberOfStudentsInABranch(id);
+            const currentTotalStudents = await this.usersRepository.findTotalNumberOfStudentsInABranch(new Types.ObjectId(id));
             if (currentTotalStudents > editedBranch.totalStudentsIntake) {
                 throw new HttpException('Current number of total students are more than updated number of total students intake.', 409);
             }

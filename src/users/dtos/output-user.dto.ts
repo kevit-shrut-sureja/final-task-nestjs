@@ -19,6 +19,9 @@ export class OutputUserDTO {
     role: RoleType;
 
     @Expose()
+    @Transform(({ obj }) => {
+        return obj.branchId instanceof Types.ObjectId ? obj.branchId.toHexString() : obj.branchId;
+    })
     branchId?: string;
 
     @Expose()

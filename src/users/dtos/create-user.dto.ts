@@ -1,6 +1,8 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Max, Min, MinLength } from "class-validator";
 import { Types } from "mongoose";
 import { ROLE, RoleType } from "../../constants";
+import { IsValidObjectID } from "../../common/decorators";
+import { TransformObjectID } from "../../common/decorators/ToObjectID";
 
 export class CreateUserDTO {
     @IsString()
@@ -22,7 +24,8 @@ export class CreateUserDTO {
 
     @IsOptional()
     @IsNotEmpty()
-    @IsString()
+    @IsValidObjectID()
+    @TransformObjectID()
     branchId?: Types.ObjectId;
 
     @IsOptional()
