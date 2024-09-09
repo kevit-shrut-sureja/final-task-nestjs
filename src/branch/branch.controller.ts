@@ -38,7 +38,7 @@ export class BranchController {
 
     @Put(':id')
     @AccessControl(OPERATIONS.UPDATE, RESOURCE.BRANCH)
-    async updateBranch(@Param('id') id : string, @Body() updateBranchDto : UpdateBranchDTO){
-        return await this.branchService.updateBranch(id, updateBranchDto)
+    async updateBranch(@Param('id') id: string, @Body() updateBranchDto: UpdateBranchDTO) {
+        return await this.branchService.updateBranch(id, updateBranchDto);
     }
 }

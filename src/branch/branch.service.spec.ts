@@ -54,25 +54,25 @@ describe('BranchService', () => {
         updatedAt: new Date(),
         __v: 0,
     } as unknown as BranchDocument;
-    
-    const dummyBranchDocumentId = dummyBranchDocument._id.toHexString()
+
+    const dummyBranchDocumentId = dummyBranchDocument._id.toHexString();
     // dummy users
-    const dummyUsers : User[] = [
+    const dummyUsers: User[] = [
         {
-            email : "staff@email.com",
-            name : 'Staff',
-            password :"------------",
-            role : ROLE.STAFF,
-            branchId : getObjectID('66d4b489c71294301d3a1882')
+            email: 'staff@email.com',
+            name: 'Staff',
+            password: '------------',
+            role: ROLE.STAFF,
+            branchId: getObjectID('66d4b489c71294301d3a1882'),
         },
         {
-            email : "staff@email.com",
-            name : 'Staff',
-            password :"------------",
-            role : ROLE.STAFF,
-            branchId : getObjectID('66d4b489c71294301d3a1882')
-        }
-    ]
+            email: 'staff@email.com',
+            name: 'Staff',
+            password: '------------',
+            role: ROLE.STAFF,
+            branchId: getObjectID('66d4b489c71294301d3a1882'),
+        },
+    ];
 
     describe('createNewBranch', () => {
         const branch: Branch = {
@@ -138,10 +138,10 @@ describe('BranchService', () => {
                 },
             ];
             branchRepository.findBranch.mockResolvedValue(branch);
-            const result = await branchService.findBranch(branchQueryDto)
+            const result = await branchService.findBranch(branchQueryDto);
 
-            expect(result).toBeDefined()
-            expect(branchRepository.findBranch).toHaveBeenCalledTimes(1)
+            expect(result).toBeDefined();
+            expect(branchRepository.findBranch).toHaveBeenCalledTimes(1);
         });
 
         it('should throw an error if branch not found', async () => {
@@ -158,86 +158,84 @@ describe('BranchService', () => {
             userRepository.findUsersByBranchId.mockResolvedValue([]);
             branchRepository.deleteUserBranch.mockResolvedValue(dummyBranchDocument);
 
-            const result = await branchService.deleteBranch(dummyBranchDocumentId)
+            const result = await branchService.deleteBranch(dummyBranchDocumentId);
 
-            expect(result).toBeDefined()
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId)
-            expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId)
-        })
+            expect(result).toBeDefined();
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId);
+        });
 
         it('Should not delete a branch if users with that branch exists', async () => {
             // mocking the fucntions
             userRepository.findUsersByBranchId.mockResolvedValue(dummyUsers);
             branchRepository.deleteUserBranch.mockResolvedValue(dummyBranchDocument);
 
-            await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Users exists with this branch id so cannot delete branch.')
+            await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Users exists with this branch id so cannot delete branch.');
 
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId)
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledTimes(1)
-            expect(branchRepository.deleteUserBranch).toHaveBeenCalledTimes(0)
-        })
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledTimes(1);
+            expect(branchRepository.deleteUserBranch).toHaveBeenCalledTimes(0);
+        });
 
         it('Should not delete a branch that does not exists', async () => {
             // mocking the fucntions
             userRepository.findUsersByBranchId.mockResolvedValue([]);
             branchRepository.deleteUserBranch.mockResolvedValue(null);
 
-            await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Branch not found.')
+            await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Branch not found.');
 
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId)
-            expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId)
-        })
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId);
+        });
     });
 
     describe('updateBranch', () => {
         it('should throw 404 error if branch is not found', async () => {
             branchRepository.findBranchById.mockResolvedValue(null);
-    
-            await expect(
-                branchService.updateBranch(dummyBranchDocumentId, { name: 'Updated Name', batch: 2022 })
-            ).rejects.toThrow(HttpException);
+
+            await expect(branchService.updateBranch(dummyBranchDocumentId, { name: 'Updated Name', batch: 2022 })).rejects.toThrow(HttpException);
 
             expect(branchRepository.findBranchById).toHaveBeenCalledWith(dummyBranchDocumentId);
             expect(branchRepository.findBranchById).toHaveBeenCalledTimes(1);
         });
-    
+
         it('should throw 409 error if users exist and batch or name is being updated', async () => {
             branchRepository.findBranchById.mockResolvedValue(dummyBranchDocument);
             userRepository.findUsersByBranchId.mockResolvedValue(dummyUsers);
-    
-            await expect(
-                branchService.updateBranch(dummyBranchDocumentId, { name: 'Updated Name', batch: 2022 })
-            ).rejects.toThrow('Users exists with this branch id so cannot update batch or name.');
+
+            await expect(branchService.updateBranch(dummyBranchDocumentId, { name: 'Updated Name', batch: 2022 })).rejects.toThrow(
+                'Users exists with this branch id so cannot update batch or name.',
+            );
 
             expect(branchRepository.findBranchById).toHaveBeenCalledWith(dummyBranchDocument._id.toHexString());
             expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocument._id.toHexString());
         });
-    
+
         it('should throw 409 error if total students intake is less than the current number of students', async () => {
             branchRepository.findBranchById.mockResolvedValue(dummyBranchDocument);
             userRepository.findUsersByBranchId.mockResolvedValue([]);
             userRepository.findTotalNumberOfStudentsInABranch.mockResolvedValue(6); // More than the new intake
-    
-            await expect(
-                branchService.updateBranch(dummyBranchDocumentId, { totalStudentsIntake: 4 })
-            ).rejects.toThrow('Current number of total students are more than updated number of total students intake.');
+
+            await expect(branchService.updateBranch(dummyBranchDocumentId, { totalStudentsIntake: 4 })).rejects.toThrow(
+                'Current number of total students are more than updated number of total students intake.',
+            );
 
             expect(branchRepository.findBranchById).toHaveBeenCalledWith(dummyBranchDocumentId);
             expect(userRepository.findTotalNumberOfStudentsInABranch).toHaveBeenCalledWith(getObjectID(dummyBranchDocumentId));
         });
-    
+
         it('should update the branch successfully', async () => {
             const updatedBranch: Branch = { ...dummyBranchDocument, name: 'Updated Name', batch: 2022 };
             branchRepository.findBranchById.mockResolvedValue(dummyBranchDocument);
             userRepository.findUsersByBranchId.mockResolvedValue([]);
             userRepository.findTotalNumberOfStudentsInABranch.mockResolvedValue(4); // Less than or equal to new intake
             branchRepository.updateBranch.mockResolvedValue(updatedBranch);
-    
+
             const result = await branchService.updateBranch(dummyBranchDocumentId, {
                 name: 'Updated Name',
                 batch: 2022,
             });
-    
+
             expect(result).toEqual(updatedBranch);
             expect(branchRepository.updateBranch).toHaveBeenCalledWith(dummyBranchDocument, {
                 name: 'Updated Name',

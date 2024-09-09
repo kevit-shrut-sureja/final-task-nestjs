@@ -4,6 +4,6 @@ import { AccessControlGuard } from './access-control.guard';
 
 @Module({
     providers: [AccessControlGuard, AccessControlService],
-    exports: [AccessControlGuard, AccessControlService]
+    exports: [AccessControlGuard, AccessControlService],
 })
 export class AccessControlModule {}

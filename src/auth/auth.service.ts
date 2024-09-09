@@ -34,7 +34,7 @@ export class AuthService {
 
             const tokens = user.tokens.concat(token);
             await this.userRepository.updateUserTokens(user, tokens);
-            
+
             return { token };
         } catch (error) {
             if (error instanceof HttpException) {

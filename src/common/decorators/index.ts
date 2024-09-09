@@ -1,1 +1,1 @@
-export * from './IsValidObjectID'
+export * from './IsValidObjectID';

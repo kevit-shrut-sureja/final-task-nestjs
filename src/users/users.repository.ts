@@ -53,9 +53,9 @@ export class UserRepository {
         }
     }
 
-    async findTotalNumberOfStudentsInABranch(branchId : Types.ObjectId) {
+    async findTotalNumberOfStudentsInABranch(branchId: Types.ObjectId) {
         try {
-            return await this.userModel.find({ role: ROLE.STUDENT, branchId }).countDocuments()
+            return await this.userModel.find({ role: ROLE.STUDENT, branchId }).countDocuments();
         } catch (error) {
             throw new ServiceUnavailableException();
         }
@@ -85,7 +85,7 @@ export class UserRepository {
         }
     }
 
-    async updatedUser(user: User, editedUser: UpdateUserDTO ): Promise<User> {
+    async updatedUser(user: User, editedUser: UpdateUserDTO): Promise<User> {
         try {
             const fields = Object.keys(editedUser);
             const updatedUserDetails = user;
@@ -93,7 +93,7 @@ export class UserRepository {
                 updatedUserDetails[field] = editedUser[field];
             });
             const validatedUserData = this.validateRoleSpecificDetails<UpdateUserDTO>(updatedUserDetails);
-            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, validatedUserData, { new : true})
+            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, validatedUserData, { new: true });
         } catch (error) {
             if (error.code === 11000) {
                 throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
@@ -106,16 +106,16 @@ export class UserRepository {
         }
     }
 
-    async updateUserTokens(user : User, tokens : string[]){
+    async updateUserTokens(user: User, tokens: string[]) {
         try {
             let updatedUser = user;
             updatedUser.tokens = tokens;
-            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, updatedUser, { new : true })
+            return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, updatedUser, { new: true });
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
-    
+
     validateRoleSpecificDetails<T extends CreateUserDTO | UpdateUserDTO>(user: T): T {
         const { role } = user;
 
@@ -258,8 +258,8 @@ export class UserRepository {
         }
     }
 
-    async getVacantAnalysis(query : VacantSeatQueryDTO): Promise<any[]> {
-        const {batch, branchName} = query
+    async getVacantAnalysis(query: VacantSeatQueryDTO): Promise<any[]> {
+        const { batch, branchName } = query;
         try {
             const stages: any = [
                 {

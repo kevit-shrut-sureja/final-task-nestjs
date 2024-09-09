@@ -310,64 +310,60 @@ describe('UsersService', () => {
 
         it('should throw HttpException when authedUser does not have permission to update user data', async () => {
             const authedUserDocument: UserDocument = authedUser.staff[0] as UserDocument;
-            const id = "123";
+            const id = '123';
             const editedUser: UpdateUserDTO = authedUserDocument;
             const requestedUser: User = authedUser.staff[0];
-        
+
             // Mock repository calls
             userRepository.findUserById.mockResolvedValue(requestedUser as UserDocument);
-        
+
             // Mock the access control to return false (no permission)
             accessControlService.checkAccessPermission.mockResolvedValue(false);
-        
+
             // Test the function and expect a ForbiddenException
-            await expect(usersService.updateUser(authedUserDocument, id, editedUser))
-                .rejects.toThrow(HttpException);
+            await expect(usersService.updateUser(authedUserDocument, id, editedUser)).rejects.toThrow(HttpException);
         });
-       
+
         it('should throw HttpException if staff tries to change details of a student from another branch', async () => {
             const authedUserDocument: UserDocument = { ...authedUser.staff[0] } as UserDocument;
-            const id = "123";
-            const editedUser: UpdateUserDTO = {...authedUser.student[1], name : "edited name"};
-            const requestedUser: User = editedUser as User
-        
+            const id = '123';
+            const editedUser: UpdateUserDTO = { ...authedUser.student[1], name: 'edited name' };
+            const requestedUser: User = editedUser as User;
+
             // Mock repository calls
             userRepository.findUserById.mockResolvedValue(requestedUser as UserDocument);
-        
+
             // Mock the access control to allow permission for the operation
             accessControlService.checkAccessPermission.mockResolvedValue(true);
-        
+
             // Test the function and expect a ForbiddenException
-            await expect(usersService.updateUser(authedUserDocument, id, editedUser))
-                .rejects.toThrow(HttpException);
+            await expect(usersService.updateUser(authedUserDocument, id, editedUser)).rejects.toThrow(HttpException);
         });
-        
 
         it('should successfully update the user', async () => {
             const authedUserDocument: UserDocument = authedUser.admin[0] as UserDocument;
-            const id = "123";
-            const editedUser: UpdateUserDTO = {...authedUser.staff[0], name : "Edited user name"};
+            const id = '123';
+            const editedUser: UpdateUserDTO = { ...authedUser.staff[0], name: 'Edited user name' };
             const requestedUser: User = authedUser.staff[0];
             const updatedUser: User = { ...requestedUser, ...editedUser };
-        
+
             // Mock repository calls
             userRepository.findUserById.mockResolvedValue(requestedUser as UserDocument);
             userRepository.updatedUser.mockResolvedValue(updatedUser);
-        
+
             // Mock access control to allow permission and no forbidden fields
             accessControlService.checkAccessPermission.mockResolvedValue([]);
-        
+
             // Mock branch repository to find branch
             branchRepository.findBranchById.mockResolvedValue(branches.CE);
-        
+
             // Test the function and expect the updated user
             const result = await usersService.updateUser(authedUserDocument, id, editedUser);
-        
+
             // Verify the expected outcome
             expect(result).toEqual(updatedUser);
             expect(userRepository.updatedUser).toHaveBeenCalledWith(requestedUser, editedUser);
         });
-        
     });
 
     describe('batchAnalysis', () => {

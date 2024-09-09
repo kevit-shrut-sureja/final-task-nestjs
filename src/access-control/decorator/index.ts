@@ -1,1 +1,1 @@
-export * from './access-control.decorator'
+export * from './access-control.decorator';

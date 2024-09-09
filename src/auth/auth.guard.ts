@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
         try {
             const PUBLIC_KEY = Buffer.from(this.configService.get<string>('PUBLIC_KEY'), 'base64').toString('utf-8');
             const payload = await this.jwtService.verifyAsync(token, { publicKey: PUBLIC_KEY, algorithms: ['RS256'] });
-            
+
             const user = await this.userRepository.findUserById(payload.id);
             if (!user) {
                 throw new NotFoundException('User not found');
@@ -42,9 +42,9 @@ export class AuthGuard implements CanActivate {
             return true;
         } catch (error) {
             // in case of user not found or if token is invalid or any other
-            if(error instanceof HttpException){ 
+            if (error instanceof HttpException) {
                 throw error;
-            }           
+            }
             throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
     }

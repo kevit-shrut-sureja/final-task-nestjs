@@ -42,14 +42,14 @@ export class AttendanceController {
         }
 
         // in case, if all have failed
-        if (result.successRecords.length === 0 ){
+        if (result.successRecords.length === 0) {
             return res.status(400).json({
-                status : "failed",
-                message : 'Due to some error no records have been saved successfully.',
-                ...result
-            })
+                status: 'failed',
+                message: 'Due to some error no records have been saved successfully.',
+                ...result,
+            });
         }
-        
+
         return res.status(201).json({
             status: 'success',
             message: 'All records were successfully created.',
@@ -65,7 +65,7 @@ export class AttendanceController {
 
     @Delete()
     @AccessControl(OPERATIONS.DELETE, RESOURCE.ATTENDANCE)
-    async deleteAttendance(@Body() deleteAttendance: AttendanceDTO) : Promise<Attendance> {
+    async deleteAttendance(@Body() deleteAttendance: AttendanceDTO): Promise<Attendance> {
         return await this.attendanceService.deleteAttendance(deleteAttendance);
     }
 }

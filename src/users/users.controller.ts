@@ -36,7 +36,7 @@ export class UsersController {
 
     @Get('analysis/vacantSeats')
     @AccessControl(OPERATIONS.READ, RESOURCE.BATCH_ANALYSIS)
-    async getVacantAnalysis(@Query() query: VacantSeatQueryDTO) : Promise<any[]> {
+    async getVacantAnalysis(@Query() query: VacantSeatQueryDTO): Promise<any[]> {
         return await this.userService.vacantAnalysis(query);
     }
 

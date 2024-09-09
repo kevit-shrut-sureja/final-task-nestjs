@@ -55,5 +55,4 @@ describe('BranchController', () => {
     describe.skip('getBranch', () => {});
     describe.skip('deleteBranch', () => {});
     describe.skip('updateBranch', () => {});
-
 });

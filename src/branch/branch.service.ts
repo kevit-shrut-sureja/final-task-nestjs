@@ -44,7 +44,7 @@ export class BranchService {
         if (usersWithBranchId.length > 0) {
             throw new HttpException('Users exists with this branch id so cannot delete branch.', 409);
         }
-        
+
         const branch = await this.branchRepository.deleteUserBranch(id);
         if (!branch) {
             throw new HttpException('Branch not found.', 404);

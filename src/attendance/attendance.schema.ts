@@ -14,6 +14,6 @@ export class Attendance {
 }
 
 export const AttendanceSchema = SchemaFactory.createForClass(Attendance);
-AttendanceSchema.index({ studentId : 1, date : 1}, { unique : true })
+AttendanceSchema.index({ studentId: 1, date: 1 }, { unique: true });
 
 export type AttendanceDocument = HydratedDocument<Attendance>;

@@ -75,7 +75,7 @@ describe('AuthService', () => {
 
             expect(result).toEqual({ token });
             expect(userRepository.findUserByEmail).toHaveBeenCalledWith('test@test.com');
-            expect(userRepository.updateUserTokens).toHaveBeenCalledTimes(1)
+            expect(userRepository.updateUserTokens).toHaveBeenCalledTimes(1);
         });
 
         it('should throw HttpException if an internal error occurs', async () => {
@@ -104,7 +104,7 @@ describe('AuthService', () => {
         });
 
         it('should throw HttpException if an internal error occurs', async () => {
-            const user = { } as unknown as UserDocument;
+            const user = {} as unknown as UserDocument;
 
             await expect(authService.logoutUser(user, false, 'this is token')).rejects.toThrow(HttpException);
         });

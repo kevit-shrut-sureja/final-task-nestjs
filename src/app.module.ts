@@ -33,20 +33,20 @@ import { UserRepository } from './users/users.repository';
 })
 export class AppModule {
     private readonly logger = new Logger(AppModule.name);
-    constructor(private readonly usersRepository : UserRepository){
-        this.createSuperUser()
+    constructor(private readonly usersRepository: UserRepository) {
+        this.createSuperUser();
     }
-    
-    private async createSuperUser(){
-        const user = await this.usersRepository.findUserByEmail('super@email.com')
-        if(!user){
+
+    private async createSuperUser() {
+        const user = await this.usersRepository.findUserByEmail('super@email.com');
+        if (!user) {
             await this.usersRepository.createUser({
-                email : "super@email.com",
-                name : "Super Admin",
-                password : 'kevit@123',
-                role : 'super-admin'
-            })
-            this.logger.debug('Super Admin created')
+                email: 'super@email.com',
+                name: 'Super Admin',
+                password: 'kevit@123',
+                role: 'super-admin',
+            });
+            this.logger.debug('Super Admin created');
         }
     }
 }

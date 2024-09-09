@@ -55,7 +55,7 @@ export class UsersService {
 
         // check if the totalStudentsIntake is less or not
         const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(newUser.branchId);
-        
+
         if (studentCount + 1 > branch.totalStudentsIntake) {
             throw new HttpException('Total students count exceeding.', HttpStatus.NOT_FOUND);
         }
@@ -225,7 +225,7 @@ export class UsersService {
         return await this.userRepository.getBatchWiseAnalysis();
     }
 
-    async vacantAnalysis(query : VacantSeatQueryDTO): Promise<any[]> {
+    async vacantAnalysis(query: VacantSeatQueryDTO): Promise<any[]> {
         return await this.userRepository.getVacantAnalysis(query);
     }
 }

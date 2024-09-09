@@ -41,7 +41,7 @@ export class BranchRepository {
 
     async deleteUserBranch(id: string) {
         try {
-            return await this.branchModel.findOneAndDelete({ _id : id });
+            return await this.branchModel.findOneAndDelete({ _id: id });
         } catch (error) {
             throw new ServiceUnavailableException();
         }

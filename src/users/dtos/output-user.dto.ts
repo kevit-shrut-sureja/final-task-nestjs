@@ -1,6 +1,6 @@
-import { Expose, Transform } from "class-transformer";
-import { Types } from "mongoose";
-import { RoleType } from "../../constants";
+import { Expose, Transform } from 'class-transformer';
+import { Types } from 'mongoose';
+import { RoleType } from '../../constants';
 
 export class OutputUserDTO {
     @Expose()

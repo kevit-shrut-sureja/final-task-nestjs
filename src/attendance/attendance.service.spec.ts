@@ -205,8 +205,7 @@ describe('AttendanceService', () => {
         it('should fetch list of attendance record', async () => {
             attendanceRepository.getAbsentStudentList.mockResolvedValue([]);
 
-            const result = await attendanceService.absentStudentList(absentStudent
-            );
+            const result = await attendanceService.absentStudentList(absentStudent);
 
             expect(result).toBeInstanceOf(Array);
         });
@@ -214,9 +213,7 @@ describe('AttendanceService', () => {
         it('should throw error', async () => {
             attendanceRepository.getAbsentStudentList.mockRejectedValue(new Error('Cannot fetch the data'));
 
-            const result = await expect(
-                attendanceService.absentStudentList(absentStudent),
-            ).rejects.toThrow('Cannot fetch the data');
+            const result = await expect(attendanceService.absentStudentList(absentStudent)).rejects.toThrow('Cannot fetch the data');
 
             expect(result).not.toBeDefined();
         });

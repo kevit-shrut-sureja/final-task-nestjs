@@ -144,11 +144,11 @@ describe('UsersController', () => {
     describe('getBatchAnalysis', () => {
         it('should call userService.batchAnalysis and return analysis', async () => {
             const expectedResult = [{ batch: 'Batch 1', analysis: 'Details' }];
-    
+
             service.batchAnalysis.mockResolvedValue(expectedResult);
-    
+
             const result = await controller.getBatchAnalysis();
-    
+
             expect(result).toEqual(expectedResult);
             expect(service.batchAnalysis).toHaveBeenCalled();
         });
@@ -156,28 +156,28 @@ describe('UsersController', () => {
 
     describe('getVacantAnalysis', () => {
         it('should call userService.vacantAnalysis and return vacant seat analysis', async () => {
-            const query : VacantSeatQueryDTO = { batch : 2022, branchName : "CE" };  // Mock query
+            const query: VacantSeatQueryDTO = { batch: 2022, branchName: 'CE' }; // Mock query
             const expectedResult = [];
-    
+
             service.vacantAnalysis.mockResolvedValue(expectedResult);
-    
+
             const result = await controller.getVacantAnalysis(query);
-    
+
             expect(result).toEqual(expectedResult);
             expect(service.vacantAnalysis).toHaveBeenCalledWith(query);
-        }); 
+        });
     });
 
     describe('getUserById', () => {
         it('should call userService.getUserById and return the user', async () => {
-            const authedUserDocument : UserDocument = {...authedUser.staff[0], _id : getObjectID()} as UserDocument;
-            const expectedResult : UserDocument = {...authedUser.student[0], _id : getObjectID()} as UserDocument;
+            const authedUserDocument: UserDocument = { ...authedUser.staff[0], _id: getObjectID() } as UserDocument;
+            const expectedResult: UserDocument = { ...authedUser.student[0], _id: getObjectID() } as UserDocument;
             const id = expectedResult._id.toString();
-    
+
             service.getUserById.mockResolvedValue(expectedResult);
-    
+
             const result = await controller.getUserById(authedUserDocument, id);
-    
+
             expect(result).toEqual(expectedResult);
             expect(service.getUserById).toHaveBeenCalledWith(authedUserDocument, id);
         });
@@ -185,14 +185,14 @@ describe('UsersController', () => {
 
     describe('deleteUser', () => {
         it('should call userService.deleteUserWithId and return the deleted user', async () => {
-            const authedUserDocument : UserDocument = {...authedUser.staff[0], _id : getObjectID()} as UserDocument;
-            const expectedResult : UserDocument = {...authedUser.student[0], _id : getObjectID()} as UserDocument;
+            const authedUserDocument: UserDocument = { ...authedUser.staff[0], _id: getObjectID() } as UserDocument;
+            const expectedResult: UserDocument = { ...authedUser.student[0], _id: getObjectID() } as UserDocument;
             const id = expectedResult._id.toString();
-    
+
             service.deleteUserWithId.mockResolvedValue(expectedResult);
-    
+
             const result = await controller.deleteUser(authedUserDocument, id);
-    
+
             expect(result).toEqual(expectedResult);
             expect(service.deleteUserWithId).toHaveBeenCalledWith(authedUserDocument, id);
         });
@@ -200,14 +200,14 @@ describe('UsersController', () => {
 
     describe('editUser', () => {
         it('should call userService.updateUser and return the updated user', async () => {
-            const authedUserDocument : UserDocument = {...authedUser.staff[0], _id : getObjectID()} as UserDocument;
-            const editedUser: UpdateUserDTO = {...authedUser.student[0], name : "edited username"};
+            const authedUserDocument: UserDocument = { ...authedUser.staff[0], _id: getObjectID() } as UserDocument;
+            const editedUser: UpdateUserDTO = { ...authedUser.student[0], name: 'edited username' };
             const expectedResult = editedUser as User;
-            const id = getObjectID().toString()
+            const id = getObjectID().toString();
             service.updateUser.mockResolvedValue(expectedResult);
-    
+
             const result = await controller.editUser(authedUserDocument, id, editedUser);
-    
+
             expect(result).toEqual(expectedResult);
             expect(service.updateUser).toHaveBeenCalledWith(authedUserDocument, id, editedUser);
         });

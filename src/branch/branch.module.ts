@@ -9,9 +9,9 @@ import { UsersModule } from '../users/users.module';
 import { AccessControlModule } from '../access-control/access-control.module';
 
 @Module({
-    imports: [forwardRef(() => UsersModule) ,JwtModule, AccessControlModule, MongooseModule.forFeature([{ name: Branch.name, schema: BranchSchema }])],
+    imports: [forwardRef(() => UsersModule), JwtModule, AccessControlModule, MongooseModule.forFeature([{ name: Branch.name, schema: BranchSchema }])],
     controllers: [BranchController],
     providers: [BranchService, BranchRepository],
-    exports : [BranchRepository]
+    exports: [BranchRepository],
 })
 export class BranchModule {}

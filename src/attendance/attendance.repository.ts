@@ -12,7 +12,7 @@ export class AttendanceRepository {
         private readonly userRepository: UserRepository,
     ) {}
 
-    async createSingleAttendance(data: AttendanceDTO) : Promise<Attendance> {
+    async createSingleAttendance(data: AttendanceDTO): Promise<Attendance> {
         try {
             const studentExists = await this.userRepository.findStudentById(data.studentId.toString());
             if (!studentExists) {
@@ -49,7 +49,7 @@ export class AttendanceRepository {
         }
     }
 
-    async deleteAttendance({ date, studentId }: AttendanceDTO) : Promise<Attendance> {
+    async deleteAttendance({ date, studentId }: AttendanceDTO): Promise<Attendance> {
         try {
             const attendance = await this.attendanceModel.findOne({ date, studentId: new Types.ObjectId(studentId) });
             if (!attendance) {

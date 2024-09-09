@@ -69,18 +69,17 @@ describe('AuthController', () => {
         const mockAll = false;
 
         it('should call logoutUser on the service and return success', async () => {
-            service.logoutUser.mockResolvedValue({message : 'success'});
-    
+            service.logoutUser.mockResolvedValue({ message: 'success' });
+
             const result = await controller.logoutUser(mockUser, mockAll, mockReq);
-    
+
             expect(service.logoutUser).toHaveBeenCalledWith(mockUser, mockAll, mockReq.token);
             expect(result.message).toBe('success');
         });
-    
+
         it('should handle errors thrown by logoutUser', async () => {
             service.logoutUser.mockRejectedValue(new Error('Logout error'));
             await expect(controller.logoutUser(mockUser, mockAll, mockReq)).rejects.toThrow(Error);
         });
     });
-    
 });

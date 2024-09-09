@@ -184,7 +184,6 @@ describe('AttendanceController', () => {
                 ],
             });
 
-
             const result = await controller.createAttendance(attendanceDTO, res);
 
             expect(result.status).toHaveBeenCalledWith(207);

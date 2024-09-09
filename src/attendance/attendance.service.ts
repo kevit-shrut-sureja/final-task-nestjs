@@ -9,7 +9,6 @@ export class AttendanceService {
     constructor(private readonly attendanceRepository: AttendanceRepository) {}
 
     async createAttendance(data: AttendanceDTO[]): Promise<PartialAttendanceType> {
-
         // pushing all the attendance
         const results = await Promise.allSettled(
             data.map(async (record) => {
@@ -44,7 +43,7 @@ export class AttendanceService {
         return await this.attendanceRepository.editAttendance(data);
     }
 
-    async deleteAttendance(data: AttendanceDTO) : Promise<Attendance> {
+    async deleteAttendance(data: AttendanceDTO): Promise<Attendance> {
         return await this.attendanceRepository.deleteAttendance(data);
     }
 
