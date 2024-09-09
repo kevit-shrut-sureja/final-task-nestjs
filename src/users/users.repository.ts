@@ -3,7 +3,7 @@ import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { ROLE } from '../constants';
-import { CreateUserDTO, UpdateUserDTO } from './dtos';
+import { CreateUserDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
 
 @Injectable()
 export class UserRepository {
@@ -258,7 +258,8 @@ export class UserRepository {
         }
     }
 
-    async getVacantAnalysis(batch: number, branch: string): Promise<any[]> {
+    async getVacantAnalysis(query : VacantSeatQueryDTO): Promise<any[]> {
+        const {batch, branchName} = query
         try {
             const stages: any = [
                 {
@@ -364,9 +365,9 @@ export class UserRepository {
                 },
             ];
             const matchStage = {};
-            if (branch) {
+            if (branchName) {
                 // eslint-disable-next-line
-                matchStage['branchName'] = branch;
+                matchStage['branchName'] = branchName;
             }
             if (batch) {
                 // eslint-disable-next-line

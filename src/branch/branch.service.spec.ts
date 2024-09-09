@@ -223,7 +223,7 @@ describe('BranchService', () => {
             ).rejects.toThrow('Current number of total students are more than updated number of total students intake.');
 
             expect(branchRepository.findBranchById).toHaveBeenCalledWith(dummyBranchDocumentId);
-            expect(userRepository.findTotalNumberOfStudentsInABranch).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(userRepository.findTotalNumberOfStudentsInABranch).toHaveBeenCalledWith(getObjectID(dummyBranchDocumentId));
         });
     
         it('should update the branch successfully', async () => {

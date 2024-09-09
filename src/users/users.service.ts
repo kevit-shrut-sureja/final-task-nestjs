@@ -4,9 +4,8 @@ import { User, UserDocument } from './users.schema';
 import { OPERATIONS, RESOURCE, ROLE, RoleType } from '../constants';
 import { AccessControlService } from '../access-control/access-control.service';
 import { BranchRepository } from '../branch/branch.repository';
-import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO } from './dtos';
+import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
 import { Branch } from '../branch/branch.schema';
-import { Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -90,7 +89,7 @@ export class UsersService {
 
     async getUserById(authedUser: UserDocument, id: string): Promise<User> {
         // for users self data
-        if (authedUser.id === id) {
+        if (authedUser._id.toString() === id) {
             if (!this.accessControlService.checkAccessPermission(authedUser.role, OPERATIONS.READ, RESOURCE.SELF)) {
                 throw new HttpException('This resource is not allowed for your role.', HttpStatus.FORBIDDEN);
             }
@@ -226,7 +225,7 @@ export class UsersService {
         return await this.userRepository.getBatchWiseAnalysis();
     }
 
-    async vacantAnalysis(batch: number, branch: string): Promise<any[]> {
-        return await this.userRepository.getVacantAnalysis(batch, branch);
+    async vacantAnalysis(query : VacantSeatQueryDTO): Promise<any[]> {
+        return await this.userRepository.getVacantAnalysis(query);
     }
 }
