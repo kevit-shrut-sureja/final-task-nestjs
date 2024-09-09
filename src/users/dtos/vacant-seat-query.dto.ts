@@ -1,4 +1,5 @@
-import { IsNumberString, IsOptional, IsString } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsInt, IsOptional, IsString, Max, Min } from "class-validator";
 
 export class VacantSeatQueryDTO {
     @IsOptional()
@@ -6,6 +7,9 @@ export class VacantSeatQueryDTO {
     branchName : string;
 
     @IsOptional()
-    @IsNumberString()
-    batch : string;
+    @Transform(({value}) => Number(value))
+    @IsInt()
+    @Max(9999)
+    @Min(1900)
+    batch : number;
 }
