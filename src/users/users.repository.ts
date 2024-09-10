@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { ROLE } from '../constants';
 import { CreateUserDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
+import { getObjectID } from '../utils/helper-functions';
 
 @Injectable()
 export class UserRepository {
@@ -47,7 +48,7 @@ export class UserRepository {
 
     async findUsersByBranchId(branchId: string): Promise<User[]> {
         try {
-            return await this.userModel.find({ branchId });
+            return await this.userModel.find({ branchId: getObjectID(branchId) });
         } catch (error) {
             throw new ServiceUnavailableException();
         }
