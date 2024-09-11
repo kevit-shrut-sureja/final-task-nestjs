@@ -9,6 +9,7 @@ import { AccessControlModule } from './access-control/access-control.module';
 import { BranchModule } from './branch/branch.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { UserRepository } from './users/users.repository';
+import { ROLE } from './constants';
 
 @Module({
     imports: [
@@ -38,13 +39,13 @@ export class AppModule {
     }
 
     private async createSuperUser() {
-        const user = await this.usersRepository.findUserByEmail('super@email.com');
+        const user = await this.usersRepository.findOneUser({ role: ROLE.SUPER_ADMIN });
         if (!user) {
             await this.usersRepository.createUser({
-                email: 'super@email.com',
+                email: 'super-admin@email.com',
                 name: 'Super Admin',
                 password: 'kevit@123',
-                role: 'super-admin',
+                role: ROLE.SUPER_ADMIN,
             });
             this.logger.debug('Super Admin created');
         }

@@ -1,4 +1,4 @@
-import { Model, Mongoose, Types } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
@@ -114,6 +114,14 @@ export class UserRepository {
             return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, updatedUser, { new: true });
         } catch (error) {
             throw new ServiceUnavailableException();
+        }
+    }
+
+    async findOneUser(query : FilterQuery<UserDocument>){
+        try {
+            return await this.userModel.findOne(query)
+        } catch (error) {
+            throw new ServiceUnavailableException()
         }
     }
 

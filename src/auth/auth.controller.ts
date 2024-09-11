@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInUser } from './dtos';
 import { AuthGuard } from './auth.guard';
@@ -19,7 +19,7 @@ export class AuthController {
     @Post('logout')
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard)
-    async logoutUser(@AuthedUser<UserDocument>() user: UserDocument, @Body('all') all: boolean, @Req() req: AuthedUserType<UserDocument>) {
+    async logoutUser(@AuthedUser<UserDocument>() user: UserDocument, @Body('all') all: boolean = false, @Req() req: AuthedUserType<UserDocument>) {
         return await this.authService.logoutUser(user, all, req.token);
     }
 }
