@@ -10,7 +10,6 @@ import { BranchRepository } from '../branch/branch.repository';
 import { Branch, BranchSchema } from '../branch/branch.schema';
 
 @Module({
-    // imports: [forwardRef(() => BranchModule), JwtModule, MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), AccessControlModule],
     imports: [
         JwtModule,
         MongooseModule.forFeature([
