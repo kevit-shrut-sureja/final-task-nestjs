@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument, Types, Schema as MongoSchema } from 'mongoose';
 import { ROLE, RoleType } from '../constants';
 import { hash } from 'bcrypt';
 
@@ -20,7 +20,7 @@ export class User {
     @Prop([String])
     tokens?: string[];
 
-    @Prop({ type: Types.ObjectId, ref: 'Branch' })
+    @Prop({ type: MongoSchema.Types.ObjectId, ref: 'Branch' })
     branchId?: Types.ObjectId;
 
     @Prop({ type: String })

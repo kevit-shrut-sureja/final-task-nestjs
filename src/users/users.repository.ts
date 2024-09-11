@@ -46,9 +46,9 @@ export class UserRepository {
         }
     }
 
-    async findUsersByBranchId(branchId: Types.ObjectId): Promise<User[]> {
+    async findUsersByBranchId(branchId: Types.ObjectId | string): Promise<User[]> {
         try {
-            return await this.userModel.find({ branchId: getObjectID(branchId) });
+            return await this.userModel.find({ branchId });
         } catch (error) {
             throw new ServiceUnavailableException();
         }
@@ -117,11 +117,11 @@ export class UserRepository {
         }
     }
 
-    async findOneUser(query : FilterQuery<UserDocument>){
+    async findOneUser(query: FilterQuery<UserDocument>) {
         try {
-            return await this.userModel.findOne(query)
+            return await this.userModel.findOne(query);
         } catch (error) {
-            throw new ServiceUnavailableException()
+            throw new ServiceUnavailableException();
         }
     }
 

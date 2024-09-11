@@ -71,7 +71,7 @@ function getRandomBoolean(probability) {
 async function main() {
     try {
         // Login as super admin
-        const { token: superAdminToken } = await loginUser('super@email.com', password);
+        const { token: superAdminToken } = await loginUser('super-admin@email.com', password);
 
         // Create admin users
         const adminUsers = [
