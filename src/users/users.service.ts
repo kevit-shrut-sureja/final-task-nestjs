@@ -57,7 +57,7 @@ export class UsersService {
         const studentCount = await this.userRepository.findTotalNumberOfStudentsInABranch(newUser.branchId);
 
         if (studentCount + 1 > branch.totalStudentsIntake) {
-            throw new HttpException('Total students count exceeding.', HttpStatus.NOT_FOUND);
+            throw new HttpException('Total students count exceeding.', HttpStatus.CONFLICT);
         }
         return newUser;
     }
