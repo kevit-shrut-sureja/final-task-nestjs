@@ -7,6 +7,8 @@ import { UserRepository } from '../users/users.repository';
 import { AuthGuard } from '../auth/auth.guard';
 import { AccessControlGuard } from '../access-control/access-control.guard';
 import { mock } from 'jest-mock-extended';
+import { Branch } from './branch.schema';
+import { CreateBranchDTO, GetBranchQueryDTO, UpdateBranchDTO } from './dtos';
 
 const mockAuthGuard = {
     canActivate: jest.fn(() => true),
@@ -50,9 +52,70 @@ describe('BranchController', () => {
         expect(controller).toBeDefined();
     });
 
-    describe.skip('createNewBranch', () => {});
-    describe.skip('getBranchWithId', () => {});
-    describe.skip('getBranch', () => {});
-    describe.skip('deleteBranch', () => {});
-    describe.skip('updateBranch', () => {});
+    const createBranchDto: CreateBranchDTO = { name: 'New Branch', batch: 2022, totalStudentsIntake: 3 };
+    const expectedResult: Branch = { name: 'New Branch', batch: 2022, totalStudentsIntake: 3 };
+
+    describe('createNewBranch', () => {
+        it('should create a new branch successfully', async () => {
+            service.createNewBranch.mockResolvedValue(expectedResult);
+
+            const result = await controller.createNewBranch(createBranchDto);
+
+            expect(result).toEqual(expectedResult);
+            expect(service.createNewBranch).toHaveBeenCalledWith(createBranchDto);
+        });
+    });
+
+    describe('getBranchWithId', () => {
+        it('should return branch by id', async () => {
+            const branchId = 'this is branchid';
+            service.findBranchById.mockResolvedValue(expectedResult);
+
+            const result = await controller.getBranchWithId(branchId);
+
+            expect(result).toEqual(expectedResult);
+            expect(service.findBranchById).toHaveBeenCalledWith(branchId);
+        });
+    });
+
+    describe('getBranch', () => {
+        it('should return list of branches based on query', async () => {
+            const query: GetBranchQueryDTO = { order: 'asce', skip: 0 };
+            const expectedBranches = [expectedResult];
+
+            service.findBranch.mockResolvedValue(expectedBranches); // Mock service method
+
+            const result = await controller.getBranch(query);
+
+            expect(result).toEqual(expectedBranches);
+            expect(service.findBranch).toHaveBeenCalledWith(query);
+        });
+    });
+
+    describe('deleteBranch', () => {
+        it('should delete a branch by id', async () => {
+            const branchId = 'branchId';
+
+            service.deleteBranch.mockResolvedValue(expectedResult); // Mock service method
+
+            const result = await controller.deleteBranch(branchId);
+
+            expect(result).toEqual(expectedResult);
+            expect(service.deleteBranch).toHaveBeenCalledWith(branchId);
+        });
+    });
+
+    describe('updateBranch', () => {
+        it('should update a branch by id', async () => {
+            const branchId = 'branchId';
+            const updateBranchDto : UpdateBranchDTO = { name: 'Updated Branch' };
+
+            service.updateBranch.mockResolvedValue(expectedResult); // Mock service method
+
+            const result = await controller.updateBranch(branchId, updateBranchDto);
+
+            expect(result).toEqual(expectedResult);
+            expect(service.updateBranch).toHaveBeenCalledWith(branchId, updateBranchDto);
+        });
+    });
 });
