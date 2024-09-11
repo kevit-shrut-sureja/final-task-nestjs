@@ -16,7 +16,9 @@ const createBranch = <T extends Branch | BranchDocument>(name: string, batch: nu
         description,
     }) as T;
 
-export const branchData = <T extends Branch | BranchDocument>(): Record<BRANCH_NAME_TYPE, T> => ({
+const createbranchData = <T extends Branch | BranchDocument>(): Record<BRANCH_NAME_TYPE, T> => ({
     CE: createBranch<T>(BRANCH_NAME.CE, 2022, 2, 'This is the branch description'),
     IT: createBranch<T>(BRANCH_NAME.IT, 2022, 2, 'This is the branch description'),
 });
+
+export const branchDataDocument = createbranchData<BranchDocument>()
