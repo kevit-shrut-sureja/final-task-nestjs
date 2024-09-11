@@ -45,7 +45,7 @@ export class UserRepository {
         }
     }
 
-    async findUsersByBranchId(branchId: string): Promise<User[]> {
+    async findUsersByBranchId(branchId: Types.ObjectId): Promise<User[]> {
         try {
             return await this.userModel.find({ branchId });
         } catch (error) {
