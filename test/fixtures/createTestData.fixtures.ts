@@ -5,6 +5,8 @@ import { BranchSchema } from '../../src/branch/branch.schema';
 import { branchDataDocument } from '../seeds/branch.seed';
 import { UserSchema } from '../../src/users/users.schema';
 import { adminUserDocument, staffUserDocument, studentUserDocument, superAdminUserDocument } from '../seeds/users.seed';
+import { AttendanceSchema } from '../../src/attendance/attendance.schema';
+import { attendanceData } from '../seeds/attendance.seed';
 
 const storeBranchData = async () => {
     const branchModel = mongoose.model('Branch', BranchSchema);
@@ -28,8 +30,15 @@ const storeUsersData = async () => {
     await userModel.create([...studentUserDocument.CE, ...studentUserDocument.IT]);
 };
 
-export async function clearAndStoreDummyData() {
+const storeAttendanceData = async() => {
+    const attendanceModel = mongoose.model('Attendance', AttendanceSchema)
+
+    await attendanceModel.create([...attendanceData.CE, ...attendanceData.IT])
+}
+
+export async function clearAndStoreDummyData(attendanceRequired : boolean = false) {
     await mongoose.connection.dropDatabase();
     await storeBranchData();
     await storeUsersData();
+    if(attendanceRequired) await storeAttendanceData()
 }
