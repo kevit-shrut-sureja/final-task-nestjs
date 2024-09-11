@@ -34,8 +34,11 @@ import { ROLE } from './constants';
 })
 export class AppModule {
     private readonly logger = new Logger(AppModule.name);
-    constructor(private readonly usersRepository: UserRepository) {
-        this.createSuperUser();
+    constructor(
+        private readonly usersRepository: UserRepository,
+        configService: ConfigService,
+    ) {
+        if (configService.get<string>('NODE_ENV') !== 'test') this.createSuperUser();
     }
 
     private async createSuperUser() {

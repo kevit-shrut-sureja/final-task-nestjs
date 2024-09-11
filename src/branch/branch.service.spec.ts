@@ -161,7 +161,7 @@ describe('BranchService', () => {
             const result = await branchService.deleteBranch(dummyBranchDocumentId);
 
             expect(result).toBeDefined();
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(getObjectID(dummyBranchDocumentId));
             expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId);
         });
 
@@ -172,7 +172,7 @@ describe('BranchService', () => {
 
             await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Users exists with this branch id so cannot delete branch.');
 
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(getObjectID(dummyBranchDocumentId));
             expect(userRepository.findUsersByBranchId).toHaveBeenCalledTimes(1);
             expect(branchRepository.deleteUserBranch).toHaveBeenCalledTimes(0);
         });
@@ -184,7 +184,7 @@ describe('BranchService', () => {
 
             await expect(branchService.deleteBranch(dummyBranchDocumentId)).rejects.toThrow('Branch not found.');
 
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocumentId);
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(getObjectID(dummyBranchDocumentId));
             expect(branchRepository.deleteUserBranch).toHaveBeenCalledWith(dummyBranchDocumentId);
         });
     });
@@ -208,7 +208,7 @@ describe('BranchService', () => {
             );
 
             expect(branchRepository.findBranchById).toHaveBeenCalledWith(dummyBranchDocument._id.toHexString());
-            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocument._id.toHexString());
+            expect(userRepository.findUsersByBranchId).toHaveBeenCalledWith(dummyBranchDocument._id);
         });
 
         it('should throw 409 error if total students intake is less than the current number of students', async () => {

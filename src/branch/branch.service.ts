@@ -40,7 +40,7 @@ export class BranchService {
 
     async deleteBranch(id: string): Promise<Branch> {
         // findind users for the branch
-        const usersWithBranchId = await this.usersRepository.findUsersByBranchId(id);
+        const usersWithBranchId = await this.usersRepository.findUsersByBranchId(new Types.ObjectId(id));
         if (usersWithBranchId.length > 0) {
             throw new HttpException('Users exists with this branch id so cannot delete branch.', 409);
         }
@@ -60,7 +60,7 @@ export class BranchService {
         }
 
         if (editedBranch.batch !== branch.batch || editedBranch.name !== branch.name) {
-            const usersWithBranchId = await this.usersRepository.findUsersByBranchId(id);
+            const usersWithBranchId = await this.usersRepository.findUsersByBranchId(new Types.ObjectId(id));
             // since users are using the branchName and batch cant update this
             if (usersWithBranchId.length > 0) {
                 throw new HttpException('Users exists with this branch id so cannot update batch or name.', 409);
