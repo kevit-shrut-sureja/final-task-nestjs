@@ -1,0 +1,68 @@
+import { BadRequestException, HttpException, HttpStatus, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { SignInUser } from './dtos';
+import { compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { Serialize } from '../users/users.interceptor';
+import { OutputUserDTO } from '../users/dtos';
+import { UserRepository } from '../users/users.repository';
+import { UserDocument } from '../users/users.schema';
+
+@Injectable()
+@Serialize(OutputUserDTO)
+export class AuthService {
+    private readonly logger = new Logger(AuthService.name);
+
+    constructor(
+        private readonly userRepository: UserRepository,
+        private jwtService: JwtService,
+    ) {}
+
+    async validateUser({ email, password }: SignInUser) {
+        try {
+            const user = await this.userRepository.findUserByEmail(email);
+            if (!user) {
+                throw new NotFoundException('User not found.');
+            }
+
+            const isPasswordMatch = await compare(password, user.password);
+
+            if (!isPasswordMatch) {
+                throw new BadRequestException('User email and password not found.');
+            }
+
+            // generate JWT token and return the token to the user
+            const payload = { id: user.id, role: user.role };
+            const token = await this.jwtService.signAsync(payload);
+
+            const tokens = user.tokens.concat(token);
+            await this.userRepository.updateUserTokens(user, tokens);
+
+            return { token };
+        } catch (error) {
+            this.logger.error(error);
+
+            if (error instanceof HttpException) {
+                throw error;
+            }
+
+            throw new HttpException('Error in token generation.', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async logoutUser(user: UserDocument, all: boolean, token: string) {
+        try {
+            let tokens: string[];
+            if (all) {
+                tokens = [];
+            } else {
+                tokens = user.tokens.filter((t) => t !== token);
+            }
+            await this.userRepository.updateUserTokens(user, tokens);
+            return { message: 'success' };
+        } catch (error) {
+            this.logger.error(error);
+
+            throw new HttpException('Error in token deletion.', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+}

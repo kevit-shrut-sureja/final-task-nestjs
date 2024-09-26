@@ -1,0 +1,4436 @@
+{
+	"info": {
+		"_postman_id": "dbf0fe01-7a10-48f5-bef4-d9719babc407",
+		"name": "Final Task NestJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35959489"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set(\"authToken\", pm.response.json().token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin-1@email.com\",\r\n    \"password\" : \"kevit@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Super Admin login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"super@email.com\",\r\n    \"password\" : \"kevit@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "845"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34d-CppS0DshzMUK73irCf2mlzq1hV4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:20:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDFhYWQwNmFjZmEyY2M4MzViNGJlYyIsInJvbGUiOiJzdXBlci1hZG1pbiIsImlhdCI6MTcyNTAxNjgwMn0.aFWMqOzEQiebmbwSeiy0Rve2JpaEKRU_lNOic89D7OxKKVkDaai47dDVVRubNfB-FNhAN3eMs59Ym15ASUl2r9agiQVn-GEcaUCBio3tpnrTRbchsD2-e_H1KaprLWl3eE7oClfZNRxNOfVBGblJo2lXLXZlcrIGfKnLtCG5UELBz8I502kxKCc7uBOfQgAnLiqPy2J9tAvC5ccBb3OOiEeWYJ6RjYTsEKx3gtEneMpl13VIvH9K_CeuNCK-axdoVKqYqXh1jalild-ae1PTVhFZKUdN6htvhC4JFdvWrfQx-KideswW3nyNCi-ik7ne4jx4SKCeMKdaUPGzwLz9yYdwWArdVCc4k2pz-iZSO9u6-S6QCaJUlxZs1MdBjKfTPQluenA6m81dMmexOtxxFLtTyixg0M2h97I-9jGrI3Nthxl6iBEzHsPRixb4-3wSEESwGu3HhHXvEjW5j0P9tykciaSZbdOfEWMUR_1NilX0OeIe4wlXXv2HPrCXOlwENMZRFku_j3RPXxXRtNqeLbE6Bd8kwDan9AQhBM1Req3E0W6_H5ijdHxvdXwuo8DvmU-lBuBJHKfTYeSQnup0t4NBo_8WJDFExa_mpoBIcdS0eyUsX3jmx_d1FSwOfGWzBYF_rStV4QnNtxjBCKVatxVubz9z7rFmhxRhBgzuHHA\"\n}"
+						},
+						{
+							"name": "Admin Login Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin-1@email.com\",\r\n    \"password\" : \"kevit@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "837"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"345-ngTWCfXGSDVkhEizk/CQTTXj/MQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:22:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDFhYjA5NmFjZmEyY2M4MzViNGJmNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTAxNjk0OH0.PW4HYPEVT9s4cUeYVyBKonW1E0tiNBdpZLa6bTxhL1abS47WqvaouUTCANLSBCGYnQAU5deyxG3CSj6aMLUwBU1OJANg-4sqAfPpU1GsSNHQOfidlYRL1avhLw1xBS27p67p8hlAMf2PJY81M4ztNTKJadTY4tO7AmqdEihMpPvRGQ8FcthLw6QHVaDFqeLCf7l3I3buqCw11TdpfPpT0DYNOIHz_K7QMcpAkIxJWebjaCOPbFC_o5WU36MV4x6OBc8VsuTiSfVfMozX2hXuQPp-8JRr0P_ABVG-XVRhLVpbgeFlOYPq6t0ZS-sjTiPCkYU1BDRMqXTRIr6gIO-YoKNzINIpN516chHzcXqu0lDpvev6VGjz9sTotd7-UJjUw_qNhz4F7G1WLzj8E98TrfZb9m6juTvws7XqH9XOU4YPXriKy9sP3-U9Sv23sH-9a_Lf0fEF2mhDc8JKbySUbz39lXw4ltY2LMho-6pcZIOw3_BZI1Af9boCje7g8Fja43_D92DFnVIlMf1S-uN7Yna9T-n5Uk2QCe4-etk9di_2JfkvYJFY-TkqsD5UE3G74wMn609AG3522jt0K2jKk35Of3xISfFbSo_l6I_X-K5Cz2qS8FkxnLRNfX5BAizZkpeZbarUWPr2Y7UWtTMGGgyxLtUibQwGOyM-e1HhUB8\"\n}"
+						},
+						{
+							"name": "Staff Login Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"staff-ce-2021@email.com\",\r\n    \"password\" : \"kevit@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "837"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"345-GKaf1fD/+wByMnjXhFoiHRzFfrg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:27:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDFhYzgwODZjNGNmMzkwNGJhZmRmNCIsInJvbGUiOiJzdGFmZiIsImlhdCI6MTcyNTAxNzIzMn0.SrGoKB_GbkCwhB14KOCN5MdqTdd7S--3TmrPUyqMy61CB-5d4FnxuN5jFkJp3kAnTWgcThxWEkFokUCwOC1fJbtGEecYOb1IgLQrUkeMCZZYJ8-V-0LuhygTkvpOhWJJ99SzLz6X207XCaSvTwqj-IxZ66KxVTlbh1g9IJMrqIYgcoaKRxuzRe3_kXdAA1C5tN93Vvb-gwWtlECeGRddwuaOslhhvGPugrRYonXco14ecILI4T5KaRljktSh9-sQs5iynL5zF2Hixf-GLGTY0iCJtgIjEhUTsSCyUzcvRhZu3CagJN1gXUFddax0HTubBzna_aQIAcbW2T-tahNS_WCCyet7Cv9OFdTzJIah_jy60QR-UfLZyGwjy7L8i685WgBI7aFebmkxcf8HqJSjeAToIo2N6y_OXeu45lhRxX5jUwHqZsuzusHdT2D8_JituVcTtL_VeW-tw9mOEYjAbXbedLvS0dX6e1NjYzuRR_IsfPAf5lIFeRLWi3NOEDo8WdbBGhBTu7q8CXKryFEAn2_Vqu0b1f6ZNmPvoPEoCVMPivQayVybPrmbQTyoTRFuieXqiG2F_RYRvrVv5ueIIF4SB6Rtk_2yrJVv9VrT9IiMMgbjpQHZQjB3HwUVT6H5ltY8XIcfz5MwwZf9XTCq87l0w-1i6Lzt_lYwzldArvI\"\n}"
+						},
+						{
+							"name": "Student Login Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"student-ce-2021-1@email.com\",\r\n    \"password\" : \"kevit@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "840"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"348-uCYBIoKN1wo4H5WTa0Su3MC2yrA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:29:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDFhY2MxODZjNGNmMzkwNGJhZmRmZCIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzI1MDE3MzY3fQ.FhTf4-qgveCVawJTd8ldlNLsWC6yY7u2ukuzlrthOSKWMhISAbFrCOkSVFXbAfRJVd0orYHYdsODtpzt4DH9ioIWUY8vrUPUa1X9P5W0ovDGegIaVa-G9WW7M_GhSOIMCTSxi0TV_V__ni6amNx_x_HZwKvHkUTi05f-pmYvqzCr_Wu7Nq_lrP8DltCpJEhJ32SKDN0zcBWXd1zEbLRCqVWvf47HbYeuDUtMx-sbq-UJgshW-M1PzeC1qxfQhUaoXahd2QLfpwd_Q_26GyN0XqWjqCHmmsQhDTctlTILCsWvEKLcbpt5pGAx5cHLEnJBbmpQEpdvl83YQK7YxA5NLOYZdtnbWVhCIHzbZcJDfWxXBnOqa6_0k0TIhbiQIJ0h3krzoiKeDUKpwJNWdjap-NhnYBdkQ36LPJXUCm2Ieb2VoF_T_0KjbVj4UedqhcD_i4E9Qo1tyrASWGlH99TIXrBsiDT72bq5wtM3IfaFGhKwtxLLklWzhO6X-huCwtvS8LSrKKCPvZyhn5YKR0QqWnq14iB5CHU0pcF7pexL6TL2CYSBeotlac9FowrtyXfsRTuyfnpvqdCPWL0yUahQkgapNDz4LPC40R-zcYyRxvPgnRN1vUIo1A1SB4lBMYWYzl9I5wtDIeot7CV-02etiIU5JJYX_gt-cW2lcGIt-t4\"\n}"
+						},
+						{
+							"name": "Mistake in Email or Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"student-ce-1@email.com\",\r\n    \"password\" : \"kevit123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-Z39OVfv6jhtNhzsbyz5cJ5xDWO4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:29:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User email and password not found.\",\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"student-ce-4\",\r\n    \"email\": \"student-ce-4@email.com\",\r\n    \"role\": \"student\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Super Admin Create Admin User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"admin -1\",\r\n    \"email\": \"admin-1@email.com\",\r\n    \"role\": \"admin\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d192f347fff6ee5fbd3e33\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-rCtbII34mIqV+09DLI0UIU1dssA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:20:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"admin-1\",\n    \"email\": \"admin-1@email.com\",\n    \"role\": \"admin\"\n}"
+						},
+						{
+							"name": "Super Admin cannot create admin user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"staff\",\r\n    \"email\": \"staff@email.com\",\r\n    \"role\": \"staff\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d192f347fff6ee5fbd3e33\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-K7cgPPNwqPbaBMzB6dHDakNpaew\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:21:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Forbidden from access.\",\n    \"error\": \"Forbidden\",\n    \"statusCode\": 403\n}"
+						},
+						{
+							"name": "Admin -> Staff Branch Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"staff\",\r\n    \"email\": \"staff@email.com\",\r\n    \"role\": \"staff\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d192f347fff6ee5fbd3e33\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-zCsgbBP5JhuqAZRx3h9iEnpdfFc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:24:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Branch not found.\"\n}"
+						},
+						{
+							"name": "Staff Member Created Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"staff-ict-1\",\r\n    \"email\": \"staff-ict-1@email.com\",\r\n    \"role\": \"staff\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "107"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6b-qCDCg4MGZljT0Hc+lCgjPtMOPEY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:25:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ict-1\",\n    \"email\": \"staff-ict-1@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n}"
+						},
+						{
+							"name": "User Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"staff-ict-1\",\r\n    \"email\": \"staff-ict-1@email.com\",\r\n    \"role\": \"staff\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-nE4WyIfzpW2A2SC8sT6m6Xrz/pw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:26:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"User already exists\"\n}"
+						},
+						{
+							"name": "Staff->Staff Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"student-ce-1\",\r\n    \"email\": \"student-ce-1@email.com\",\r\n    \"role\": \"staff\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-K7cgPPNwqPbaBMzB6dHDakNpaew\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:27:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Forbidden from access.\",\n    \"error\": \"Forbidden\",\n    \"statusCode\": 403\n}"
+						},
+						{
+							"name": "Staff creating Student",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"student-ce-1\",\r\n    \"email\": \"student-ce-1@email.com\",\r\n    \"role\": \"student\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66dac7f5b2035175977e858a\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-c4uAPD/4H+oE1TWXLloUI0BNarM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:28:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"student-ce-1\",\n    \"email\": \"student-ce-1@email.com\",\n    \"role\": \"student\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n    \"branchName\": \"CE\",\n    \"phone\": \"1234567890\",\n    \"batch\": 2020,\n    \"currentSemester\": 1\n}"
+						},
+						{
+							"name": "Staff cannot create student in other branch",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"student-ict-1\",\r\n    \"email\": \"student-ict-1@email.com\",\r\n    \"role\": \"student\",\r\n    \"password\": \"kevit@123\",\r\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\",\r\n    \"phone\": \"1234567890\",\r\n    \"currentSemester\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-IjamSHlEA+qQRc69ewC3OSPXRkA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:28:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"Staff user cannot change details of other staff user\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users?sortBy=role",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "matchingBy",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "role",
+									"description": "['name', 'createdAt', 'updatedAt', 'batch', 'role', 'email', 'currentSemester']"
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"description": "default is asce",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Student forbidden from accessing users data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?sortBy=role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "matchingBy",
+											"value": "admin",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "role",
+											"description": "['name', 'createdAt', 'updatedAt', 'batch', 'role', 'email', 'currentSemester']"
+										},
+										{
+											"key": "order",
+											"value": "desc",
+											"description": "default is asce",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-c3tDsKmKvMXvyegqMK6KxqATYkE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:30:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"This resource is not allowed for your role.\"\n}"
+						},
+						{
+							"name": "Admin can access data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?sortBy=role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "matchingBy",
+											"value": "admin",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "role",
+											"description": "['name', 'createdAt', 'updatedAt', 'batch', 'role', 'email', 'currentSemester']"
+										},
+										{
+											"key": "order",
+											"value": "desc",
+											"description": "default is asce",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "676"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a4-vI7eGCbtvk6rQJxcRH/qaUedBwU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:31:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"admin -1\",\n        \"email\": \"admin-1@email.com\",\n        \"role\": \"admin\"\n    },\n    {\n        \"name\": \"staff-ict-1\",\n        \"email\": \"staff-ict-1@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n    },\n    {\n        \"name\": \"staff-ict-2\",\n        \"email\": \"staff-ict-2@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n    },\n    {\n        \"name\": \"staff-ce-2\",\n        \"email\": \"staff-ce-2@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n    },\n    {\n        \"name\": \"staff-ce-1\",\n        \"email\": \"staff-ce-1@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n    },\n    {\n        \"name\": \"student-ce-1\",\n        \"email\": \"student-ce-1@email.com\",\n        \"role\": \"student\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n        \"branchName\": \"CE\",\n        \"phone\": \"1234567890\",\n        \"batch\": 2020,\n        \"currentSemester\": 1\n    }\n]"
+						},
+						{
+							"name": "Staff can access the data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?sortBy=role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "matchingBy",
+											"value": "admin",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "role",
+											"description": "['name', 'createdAt', 'updatedAt', 'batch', 'role', 'email', 'currentSemester']"
+										},
+										{
+											"key": "order",
+											"value": "desc",
+											"description": "default is asce",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "613"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"265-NmNhtmcmTpI5mhwgLEWjPrRW5Y4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:31:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"staff-ict-1\",\n        \"email\": \"staff-ict-1@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n    },\n    {\n        \"name\": \"staff-ict-2\",\n        \"email\": \"staff-ict-2@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n    },\n    {\n        \"name\": \"staff-ce-2\",\n        \"email\": \"staff-ce-2@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n    },\n    {\n        \"name\": \"staff-ce-1\",\n        \"email\": \"staff-ce-1@email.com\",\n        \"role\": \"staff\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n    },\n    {\n        \"name\": \"student-ce-1\",\n        \"email\": \"student-ce-1@email.com\",\n        \"role\": \"student\",\n        \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n        \"branchName\": \"CE\",\n        \"phone\": \"1234567890\",\n        \"batch\": 2020,\n        \"currentSemester\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66d1acc186c4cf3904bafdfd"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admin can not access other admin data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ab096acfa2cc835b4bf4"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-c3tDsKmKvMXvyegqMK6KxqATYkE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:32:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"This resource is not allowed for your role.\"\n}"
+						},
+						{
+							"name": "Super Admin can access admin datas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ab096acfa2cc835b4bf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-rCtbII34mIqV+09DLI0UIU1dssA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:32:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"admin -1\",\n    \"email\": \"admin-1@email.com\",\n    \"role\": \"admin\"\n}"
+						},
+						{
+							"name": "Admin can access self data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ab096acfa2cc835b4bf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-rCtbII34mIqV+09DLI0UIU1dssA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:33:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"admin -1\",\n    \"email\": \"admin-1@email.com\",\n    \"role\": \"admin\"\n}"
+						},
+						{
+							"name": "Admin can access any staff and student data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac3786c4cf3904bafddd"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "107"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6b-qCDCg4MGZljT0Hc+lCgjPtMOPEY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:33:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ict-1\",\n    \"email\": \"staff-ict-1@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\"\n}"
+						},
+						{
+							"name": "Staff cannot access other staff data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac3786c4cf3904bafddd"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-c3tDsKmKvMXvyegqMK6KxqATYkE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:34:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"This resource is not allowed for your role.\"\n}"
+						},
+						{
+							"name": "Staff can access self data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac8086c4cf3904bafdf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-VnHQUIIxlcfHNWHP6N/rVqLXRNo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:34:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ce-1\",\n    \"email\": \"staff-ce-1@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n}"
+						},
+						{
+							"name": "Staff can fetch any student details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1aea886c4cf3904bafe27"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-LcRbR1DrOT2Hq3kG5NRJ+RBA3uA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:40:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"student-ict-1\",\n    \"email\": \"student-ict-1@email.com\",\n    \"role\": \"student\",\n    \"branchId\": \"66d1abfe86c4cf3904bafdd8\",\n    \"branchName\": \"ICT\",\n    \"phone\": \"1234567890\",\n    \"batch\": 2020,\n    \"currentSemester\": 1\n}"
+						},
+						{
+							"name": "Student cannot fetch other student details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1aea886c4cf3904bafe27"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-c3tDsKmKvMXvyegqMK6KxqATYkE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:41:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"This resource is not allowed for your role.\"\n}"
+						},
+						{
+							"name": "Student can fetch the self details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1acc186c4cf3904bafdfd"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-c4uAPD/4H+oE1TWXLloUI0BNarM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:41:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"student-ce-1\",\n    \"email\": \"student-ce-1@email.com\",\n    \"role\": \"student\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n    \"branchName\": \"CE\",\n    \"phone\": \"1234567890\",\n    \"batch\": 2020,\n    \"currentSemester\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66dac7f1b2035175977e8578"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66bed2ac6bdab63d0a624f29"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-7dsO5LJbH+bIfRGvh2fjufiOW7s\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:41:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User not found\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1acc186c4cf3904bafdfd"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-c3tDsKmKvMXvyegqMK6KxqATYkE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:42:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"This resource is not allowed for your role.\"\n}"
+						},
+						{
+							"name": "Staff can delete student from their branch",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1b079454f62c331263f28"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-JeaRr8NlsTbDUE+MbIOBdZCBkSo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:44:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"student-ce-2\",\n    \"email\": \"student-ce-2@email.com\",\n    \"role\": \"student\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n    \"branchName\": \"CE\",\n    \"phone\": \"1234567890\",\n    \"batch\": 2020,\n    \"currentSemester\": 1\n}"
+						},
+						{
+							"name": "Staff cannot delete users from others branch",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1aea886c4cf3904bafe27"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-8kH1A+ISPc1Fme+jIO3sySskHNM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:44:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"Staff user cannot delete students from other branchs.\"\n}"
+						},
+						{
+							"name": "Admin can delete staff user",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac7b86c4cf3904bafdef"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-SY/elS8DsQArmp7rr0CzWPnS/wo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:45:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ce-2\",\n    \"email\": \"staff-ce-2@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n}"
+						},
+						{
+							"name": "Super Admin can delete Admin users",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1b126454f62c331263f37"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-HFhf8VBFqiUKi58iYhPU7qxboF8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:46:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"admin-2\",\n    \"email\": \"admin-2@email.com\",\n    \"role\": \"admin\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit User Details",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"name \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66d5996f6aff78c7a36f3a1b"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Super Admin can edit the admin details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"admin-edited-1\",\r\n  \"email\": \"admin-1@email.com\"\r\n//   \"password\": \"$2b$13$wgXjvubAOu5O3sFgfyM3k.2Mrvu7.bVU.yHBZAyLZHbbhq0IJi6w2\",\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ab096acfa2cc835b4bf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42-xwzw+vef6U1DzRTmP9B8YTtJe14\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:56:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"admin-edited-1\",\n    \"email\": \"admin@email.com\",\n    \"role\": \"admin\"\n}"
+						},
+						{
+							"name": "Admin can edit the staff details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-edited\",\r\n  \"email\": \"staff-ce-1@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac8086c4cf3904bafdf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "112"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"70-qd0j0+zPxCKSa/jMFGnF0Dg/ct8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 11:59:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ce-1-edited\",\n    \"email\": \"staff-ce-1@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n}"
+						},
+						{
+							"name": "Cannot some specific details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-edited\",\r\n  \"email\": \"staff-ce-1@email.com\",\r\n  \"role\" : \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac8086c4cf3904bafdf4"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-gZhfVQx6My0mt//yKBpIzm9HxH4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 12:00:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"User does not have access level to edit some of the input fields.\"\n}"
+						},
+						{
+							"name": "Edit User Details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-edited\",\r\n  \"email\": \"staff-ce-1@email.com\",\r\n  \"role\" : \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac8086c4cf3904bafdf4"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-gZhfVQx6My0mt//yKBpIzm9HxH4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 12:01:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"User does not have access level to edit some of the input fields.\"\n}"
+						},
+						{
+							"name": "Staff can edit self data",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-self-edit\",\r\n  \"email\": \"staff-ce-1@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1ac8086c4cf3904bafdf4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"73-dy/Pnnfvr5IHyjh2Bi6S+YHMf54\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 12:02:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ce-1-self-edit\",\n    \"email\": \"staff-ce-1@email.com\",\n    \"role\": \"staff\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\"\n}"
+						},
+						{
+							"name": "Staff cannot change other branch students details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-self-edit\",\r\n  \"email\": \"staff-ce-1@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1aea886c4cf3904bafe27"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5e-nUZUJosuMlTmgouGPEIMciCauEw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 12:03:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 403,\n    \"message\": \"Staff can only change the data of the students in their branch.\"\n}"
+						},
+						{
+							"name": "Edit User Details",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"staff-ce-1-self-edit\",\r\n  \"email\": \"student1@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66d1acc186c4cf3904bafdfd"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bb-cxojALvMuh/tNBV9JUcks+M5Myo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 30 Aug 2024 12:05:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"staff-ce-1-self-edit\",\n    \"email\": \"student1@email.com\",\n    \"role\": \"student\",\n    \"branchId\": \"66d1ac6f86c4cf3904bafdea\",\n    \"branchName\": \"CE\",\n    \"phone\": \"1234567890\",\n    \"batch\": 2020,\n    \"currentSemester\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Batch Wise Analysis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/analysis/batch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"analysis",
+								"batch"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "sample",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/analysis/branch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"analysis",
+										"branch"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "283"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11b-6OyELHHRf0OXRVncKKckBwFo2sA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 07:37:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"analysis\": [\n            {\n                \"totalStudents\": 28,\n                \"batch\": 2024,\n                \"branches\": {\n                    \"ME\": 9,\n                    \"CE\": 10,\n                    \"ICT\": 9\n                }\n            },\n            {\n                \"totalStudents\": 27,\n                \"batch\": 2022,\n                \"branches\": {\n                    \"CE\": 9,\n                    \"ME\": 9,\n                    \"ICT\": 9\n                }\n            },\n            {\n                \"totalStudents\": 27,\n                \"batch\": 2023,\n                \"branches\": {\n                    \"ICT\": 9,\n                    \"CE\": 9,\n                    \"ME\": 9\n                }\n            }\n        ]\n    },\n    \"message\": \"Success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Vacant Seats Analysis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/analysis/vacantSeats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"analysis",
+								"vacantSeats"
+							],
+							"query": [
+								{
+									"key": "branch",
+									"value": "CE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Vacant Seats Analysis",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/analysis/vacantSeats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"analysis",
+										"vacantSeats"
+									],
+									"query": [
+										{
+											"key": "branch",
+											"value": "CE",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "465"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d1-loQGjw39Is9Nbn9II1V2bCG3MOI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 10:07:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"totalStudents\": 8,\n        \"totalStudentsIntake\": 10,\n        \"totalVacantSeats\": 2,\n        \"batch\": 2021,\n        \"branches\": {\n            \"IT\": {\n                \"totalStudents\": 4,\n                \"totalStudentsIntake\": 5,\n                \"totalVacantSeats\": 1\n            },\n            \"CE\": {\n                \"totalStudents\": 4,\n                \"totalStudentsIntake\": 5,\n                \"totalVacantSeats\": 1\n            }\n        }\n    },\n    {\n        \"totalStudents\": 8,\n        \"totalStudentsIntake\": 10,\n        \"totalVacantSeats\": 2,\n        \"batch\": 2022,\n        \"branches\": {\n            \"IT\": {\n                \"totalStudents\": 4,\n                \"totalStudentsIntake\": 5,\n                \"totalVacantSeats\": 1\n            },\n            \"CE\": {\n                \"totalStudents\": 4,\n                \"totalStudentsIntake\": 5,\n                \"totalVacantSeats\": 1\n            }\n        }\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "Create New Branch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ICT\",\n    \"batch\": 2021,\n    \"totalStudentsIntake\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/branch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"branch"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Staff and Student cannot create a branch",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"ICT\",\n    \"batch\": 2022,\n    \"totalStudentsIntake\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/branch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-R6j0W32sXte0cGKy/2iZqvGvyHo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 07:39:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 403,\n    \"errorType\": \"FORBIDDEN\",\n    \"errorCode\": \"NOT_ALLOWED_TO_CREATE_THIS_ROLE\",\n    \"originalError\": null,\n    \"meta\": null\n}"
+						},
+						{
+							"name": "Branch Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"ICT\",\n    \"batch\": 2022,\n    \"totalStudentsIntake\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/branch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e-UPbzEqFk9QlyV+b7ODjIVVFZdCk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 07:41:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 409,\n    \"errorType\": \"CONFLICT\",\n    \"errorCode\": \"BRANCH_ALREADY_EXISTS\",\n    \"originalError\": null,\n    \"meta\": null\n}"
+						},
+						{
+							"name": "Created a new Branch",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"ICT\",\n    \"batch\": 2019,\n    \"totalStudentsIntake\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/branch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "252"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fc-4zPepe338r6y8ESpOpdcbVYiSnY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 07:42:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"data\": {\n        \"name\": \"ICT\",\n        \"batch\": 2019,\n        \"totalStudentsIntake\": 2,\n        \"_id\": \"66bf02cbe34ccfb08940c84e\",\n        \"createdAt\": \"2024-08-16T07:42:03.701Z\",\n        \"updatedAt\": \"2024-08-16T07:42:03.701Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Branch created successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Branch by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/branch/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"branch",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66d166b85ece21813863af52"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Branches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/branch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"branch"
+							],
+							"query": [
+								{
+									"key": "matchBy",
+									"value": "C",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "batch",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all branches",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/branch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch"
+									],
+									"query": [
+										{
+											"key": "matchBy",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "batch",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "desc",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2464"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9a0-BBZFbvD9oP53VbL0SESO+NDHVJE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 07:44:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"branch\": [\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e3b\",\n                \"name\": \"CE\",\n                \"description\": \"This is the Computer Engineering branch for 2022.\",\n                \"batch\": 2022,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e38\",\n                \"name\": \"CE\",\n                \"description\": \"This is the Computer Engineering branch for 2023.\",\n                \"batch\": 2023,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e35\",\n                \"name\": \"CE\",\n                \"description\": \"This is the Computer Engineering branch for 24.\",\n                \"batch\": 2024,\n                \"totalStudentsIntake\": 15,\n                \"createdAt\": \"2024-08-16T07:41:11.927Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.927Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf02cbe34ccfb08940c84e\",\n                \"name\": \"ICT\",\n                \"batch\": 2019,\n                \"totalStudentsIntake\": 2,\n                \"createdAt\": \"2024-08-16T07:42:03.701Z\",\n                \"updatedAt\": \"2024-08-16T07:42:03.701Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e3c\",\n                \"name\": \"ICT\",\n                \"description\": \"This is the Information and Communication Technology branch for 2022.\",\n                \"batch\": 2022,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e39\",\n                \"name\": \"ICT\",\n                \"description\": \"This is the Information and Communication Technology branch for 2023.\",\n                \"batch\": 2023,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e36\",\n                \"name\": \"ICT\",\n                \"description\": \"This is the Information and Communication Technology branch for 2024.\",\n                \"batch\": 2024,\n                \"totalStudentsIntake\": 15,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e3d\",\n                \"name\": \"ME\",\n                \"description\": \"This is the Mechanical Engineering branch for 2022.\",\n                \"batch\": 2022,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e3a\",\n                \"name\": \"ME\",\n                \"description\": \"This is the Mechanical Engineering branch for 2023.\",\n                \"batch\": 2023,\n                \"totalStudentsIntake\": 10,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"66bf0296fa12a57c6ba07e37\",\n                \"name\": \"ME\",\n                \"description\": \"This is the Mechanical Engineering branch for 2024.\",\n                \"batch\": 2024,\n                \"totalStudentsIntake\": 15,\n                \"createdAt\": \"2024-08-16T07:41:11.928Z\",\n                \"updatedAt\": \"2024-08-16T07:41:11.928Z\",\n                \"__v\": 0\n            }\n        ]\n    },\n    \"message\": \"Branch Fetched Successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete branch by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/branch/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"branch",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66d166965ece21813863af4a"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "branch not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/branch/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66bc57fd3e6efa5f416e9929"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "122"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7a-4Fv6sWuG3MMVyIYk2q9109OMYUA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:00:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 404,\n    \"errorType\": \"NOT_FOUND\",\n    \"errorCode\": \"BRANCH_NOT_FOUND\",\n    \"originalError\": null,\n    \"meta\": null\n}"
+						},
+						{
+							"name": "If students exists with branch then we can not delete it",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/branch/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66bf0296fa12a57c6ba07e35"
+										}
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "131"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"83-D3XSIcJgbFam2gDWYY3Zb9rgSSA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:00:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 409,\n    \"errorType\": \"CONFLICT\",\n    \"errorCode\": \"USERS_WITH_BRANCHID_EXISTS\",\n    \"originalError\": null,\n    \"meta\": null\n}"
+						},
+						{
+							"name": "Branch Deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/branch/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66bf02cbe34ccfb08940c84e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "251"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fb-6G0voB01YNbeUFboL8zFkO3DrXA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:01:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"_id\": \"66bf02cbe34ccfb08940c84e\",\n        \"name\": \"ICT\",\n        \"batch\": 2019,\n        \"totalStudentsIntake\": 2,\n        \"createdAt\": \"2024-08-16T07:42:03.701Z\",\n        \"updatedAt\": \"2024-08-16T07:42:03.701Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Branch deleted successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Branch Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"CE\",\r\n    \"batch\": 2021,\r\n    \"totalStudentsIntake\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/branch/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"branch",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66dac7f5b2035175977e858a"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "If Users using the branch data then cannot edit",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"ICT\",\r\n    \"batch\": 2022,\r\n    \"totalStudentsIntake\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/branch/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"branch",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "66bf0296fa12a57c6ba07e35"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"86-bRg5yK+Xrr37M1NvS9ifugKvqs8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:02:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 403,\n    \"errorType\": \"FORBIDDEN\",\n    \"errorCode\": \"USERS_WITH_BATCH_YEAR_EXISTS\",\n    \"originalError\": null,\n    \"meta\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "Add attendance single and multiple",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n    \"studentId\": \"66d4b48ac71294301d3a18b7\",\n    \"date\": \"2024-10-30\"\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Single student attendance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"studentId\" : \"66d4b48ac71294301d3a18b7\",\n    \"date\" : \"2024-10-01\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attendance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d1-GxKFaVAp9a2fFEyalWe2AJtF6Bs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 19:04:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"studentId\": \"66d4b48ac71294301d3a18b7\",\n    \"date\": \"2024-10-01T00:00:00.000Z\",\n    \"present\": false,\n    \"_id\": \"66d4bab96b04fb7af1166b91\",\n    \"createdAt\": \"2024-09-01T19:04:25.520Z\",\n    \"updatedAt\": \"2024-09-01T19:04:25.520Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "Partial success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-10\"\n    },\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-11\",\n        \"present\": true\n    },\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-13\",\n        \"present\": false\n    },\n    {\n        \"studentId\": \"66a4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-14\"\n    },\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-10\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attendance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance"
+									]
+								}
+							},
+							"status": "Multi-Status",
+							"code": 207,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1256"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e8-4xUDC8dla5id39zMUVnp2+XzTJI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 19:20:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"partial\",\n    \"message\": \"Some records were successfully created, but some failed.\",\n    \"successRecords\": [\n        {\n            \"status\": \"fulfilled\",\n            \"value\": {\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-10T00:00:00.000Z\",\n                \"present\": false,\n                \"_id\": \"66d4be92157a89680012b5c2\",\n                \"createdAt\": \"2024-09-01T19:20:50.180Z\",\n                \"updatedAt\": \"2024-09-01T19:20:50.180Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"status\": \"fulfilled\",\n            \"value\": {\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-11T00:00:00.000Z\",\n                \"present\": true,\n                \"_id\": \"66d4be92157a89680012b5c6\",\n                \"createdAt\": \"2024-09-01T19:20:50.185Z\",\n                \"updatedAt\": \"2024-09-01T19:20:50.185Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"status\": \"fulfilled\",\n            \"value\": {\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-13T00:00:00.000Z\",\n                \"present\": false,\n                \"_id\": \"66d4be92157a89680012b5c4\",\n                \"createdAt\": \"2024-09-01T19:20:50.183Z\",\n                \"updatedAt\": \"2024-09-01T19:20:50.183Z\",\n                \"__v\": 0\n            }\n        }\n    ],\n    \"failedRecords\": [\n        {\n            \"record\": {\n                \"present\": false,\n                \"studentId\": \"66a4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-14\"\n            },\n            \"error\": {\n                \"response\": \"Student not found.\",\n                \"status\": 404,\n                \"message\": \"Student not found.\",\n                \"name\": \"HttpException\"\n            }\n        },\n        {\n            \"record\": {\n                \"present\": false,\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-10\"\n            },\n            \"error\": {\n                \"response\": \"Attendance already exists\",\n                \"status\": 400,\n                \"message\": \"Attendance already exists\",\n                \"name\": \"HttpException\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "All success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-30\"\n    },\n    {\n        \"studentId\": \"66d4b48ac71294301d3a18b7\",\n        \"date\": \"2024-10-29\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attendance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "572"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23c-/fBDx+45GpCBUOaH/FxRfyT3eH8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 19:21:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"All records were successfully created.\",\n    \"successRecords\": [\n        {\n            \"status\": \"fulfilled\",\n            \"value\": {\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-30T00:00:00.000Z\",\n                \"present\": false,\n                \"_id\": \"66d4beb7157a89680012b5cd\",\n                \"createdAt\": \"2024-09-01T19:21:27.751Z\",\n                \"updatedAt\": \"2024-09-01T19:21:27.751Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"status\": \"fulfilled\",\n            \"value\": {\n                \"studentId\": \"66d4b48ac71294301d3a18b7\",\n                \"date\": \"2024-10-29T00:00:00.000Z\",\n                \"present\": false,\n                \"_id\": \"66d4beb7157a89680012b5cf\",\n                \"createdAt\": \"2024-09-01T19:21:27.753Z\",\n                \"updatedAt\": \"2024-09-01T19:21:27.753Z\",\n                \"__v\": 0\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Absent List Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance/absentList?date=2024-08-01&semester=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"absentList"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-08-01"
+								},
+								{
+									"key": "semester",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Absent List Students on Date",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/attendance/absentList?date=2024-08-02",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance",
+										"absentList"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2024-08-02"
+										},
+										{
+											"key": "branch",
+											"value": "CE",
+											"disabled": true
+										},
+										{
+											"key": "batch",
+											"value": "2024",
+											"disabled": true
+										},
+										{
+											"key": "semester",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4747"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"128b-Q0sSP5J3wULpJSHjayej+GlI7DA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:09:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"result\": [\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"ce24-student-7@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"CE\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-3\",\n                \"email\": \"ict24-student-3@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-4\",\n                \"email\": \"ict24-student-4@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 5\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-5\",\n                \"email\": \"ict24-student-5@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-6\",\n                \"email\": \"ict24-student-6@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 5\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"ict24-student-7@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 8\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-9\",\n                \"email\": \"ict24-student-9@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ICT\",\n                \"semester\": 6\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-2\",\n                \"email\": \"me24-student-2@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"ME\",\n                \"semester\": 1\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-2\",\n                \"email\": \"ce23-student-2@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"CE\",\n                \"semester\": 3\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-3\",\n                \"email\": \"ce23-student-3@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"CE\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-4\",\n                \"email\": \"ce23-student-4@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"CE\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-5\",\n                \"email\": \"ce23-student-5@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"CE\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-1\",\n                \"email\": \"ict23-student-1@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ICT\",\n                \"semester\": 6\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-2\",\n                \"email\": \"ict23-student-2@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ICT\",\n                \"semester\": 5\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-8\",\n                \"email\": \"ce23-student-8@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"CE\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-5\",\n                \"email\": \"ict23-student-5@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ICT\",\n                \"semester\": 4\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-3\",\n                \"email\": \"me23-student-3@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ME\",\n                \"semester\": 1\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-4\",\n                \"email\": \"me23-student-4@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ME\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"me23-student-7@student.com\",\n                \"batch\": 2023,\n                \"branch\": \"ME\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-1\",\n                \"email\": \"ce22-student-1@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"CE\",\n                \"semester\": 7\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-3\",\n                \"email\": \"ce22-student-3@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"CE\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-6\",\n                \"email\": \"ce22-student-6@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"CE\",\n                \"semester\": 3\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-8\",\n                \"email\": \"ce22-student-8@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"CE\",\n                \"semester\": 6\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-9\",\n                \"email\": \"ce22-student-9@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"CE\",\n                \"semester\": 5\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-1\",\n                \"email\": \"ict22-student-1@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ICT\",\n                \"semester\": 3\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-3\",\n                \"email\": \"ict22-student-3@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ICT\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"ict22-student-7@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ICT\",\n                \"semester\": 6\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-2\",\n                \"email\": \"me22-student-2@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ME\",\n                \"semester\": 5\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"me22-student-7@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ME\",\n                \"semester\": 2\n            },\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-9\",\n                \"email\": \"me22-student-9@student.com\",\n                \"batch\": 2022,\n                \"branch\": \"ME\",\n                \"semester\": 5\n            }\n        ]\n    },\n    \"message\": \"Success\"\n}"
+						},
+						{
+							"name": "Absent List Students with parameters",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/attendance/absentList?date=2024-08-02&branch=CE&batch=2024",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance",
+										"absentList"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2024-08-02"
+										},
+										{
+											"key": "branch",
+											"value": "CE"
+										},
+										{
+											"key": "batch",
+											"value": "2024"
+										},
+										{
+											"key": "semester",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "228"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e4-2TmZIODYOCehD/AMO1G6F46V10U\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:09:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"result\": [\n            {\n                \"date\": \"2024-08-02T00:00:00.000Z\",\n                \"present\": false,\n                \"studentName\": \"student-7\",\n                \"email\": \"ce24-student-7@student.com\",\n                \"batch\": 2024,\n                \"branch\": \"CE\",\n                \"semester\": 7\n            }\n        ]\n    },\n    \"message\": \"Success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "attendace percentage Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test to verify the length of the \"result\" array in the response\r",
+									"pm.test(\"The length of the result array is greater than 0\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    const resultArray = responseData.data.result;\r",
+									"\r",
+									"    pm.expect(resultArray).to.be.an('array').that.is.not.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance/attendancePercentage?batch=2021&branch=CE&percentage=99",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"attendancePercentage"
+							],
+							"query": [
+								{
+									"key": "batch",
+									"value": "2021"
+								},
+								{
+									"key": "semester",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "branch",
+									"value": "CE"
+								},
+								{
+									"key": "percentage",
+									"value": "99"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List of Students with Attendance less than percentage",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/attendance/attendancePercentage?percentage=75",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance",
+										"attendancePercentage"
+									],
+									"query": [
+										{
+											"key": "batch",
+											"value": "2024",
+											"disabled": true
+										},
+										{
+											"key": "semester",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "branch",
+											"value": "CE",
+											"disabled": true
+										},
+										{
+											"key": "percentage",
+											"value": "75"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11103"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b5f-DUOnyqgWdkkHGMtSnvDngECisKI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2024 08:10:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"result\": [\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-4\",\n                \"email\": \"ict22-student-4@student.com\",\n                \"batch\": 2022,\n                \"semester\": 5,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-9\",\n                \"email\": \"ce23-student-9@student.com\",\n                \"batch\": 2023,\n                \"semester\": 2,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-2\",\n                \"email\": \"ict22-student-2@student.com\",\n                \"batch\": 2022,\n                \"semester\": 6,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-8\",\n                \"email\": \"me22-student-8@student.com\",\n                \"batch\": 2022,\n                \"semester\": 6,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 46.666666666666664,\n                \"studentName\": \"student-1\",\n                \"email\": \"ce24-student-1@student.com\",\n                \"batch\": 2024,\n                \"semester\": 3,\n                \"totalDaysPresent\": 14\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-9\",\n                \"email\": \"me23-student-9@student.com\",\n                \"batch\": 2023,\n                \"semester\": 1,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 73.33333333333333,\n                \"studentName\": \"student-9\",\n                \"email\": \"ict23-student-9@student.com\",\n                \"batch\": 2023,\n                \"semester\": 6,\n                \"totalDaysPresent\": 22\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 60,\n                \"studentName\": \"student-2\",\n                \"email\": \"me22-student-2@student.com\",\n                \"batch\": 2022,\n                \"semester\": 5,\n                \"totalDaysPresent\": 18\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 53.333333333333336,\n                \"studentName\": \"student-1\",\n                \"email\": \"ict22-student-1@student.com\",\n                \"batch\": 2022,\n                \"semester\": 3,\n                \"totalDaysPresent\": 16\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-3\",\n                \"email\": \"ce22-student-3@student.com\",\n                \"batch\": 2022,\n                \"semester\": 2,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-1\",\n                \"email\": \"ce22-student-1@student.com\",\n                \"batch\": 2022,\n                \"semester\": 7,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-5\",\n                \"email\": \"ce23-student-5@student.com\",\n                \"batch\": 2023,\n                \"semester\": 2,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 33,\n                \"attendancePercentage\": 69.6969696969697,\n                \"studentName\": \"student-2\",\n                \"email\": \"ict24-student-2@student.com\",\n                \"batch\": 2024,\n                \"semester\": 2,\n                \"totalDaysPresent\": 23\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 73.33333333333333,\n                \"studentName\": \"student-8\",\n                \"email\": \"ce24-student-8@student.com\",\n                \"batch\": 2024,\n                \"semester\": 7,\n                \"totalDaysPresent\": 22\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-6\",\n                \"email\": \"me23-student-6@student.com\",\n                \"batch\": 2023,\n                \"semester\": 4,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-7\",\n                \"email\": \"me24-student-7@student.com\",\n                \"batch\": 2024,\n                \"semester\": 6,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 32,\n                \"attendancePercentage\": 62.5,\n                \"studentName\": \"student-4\",\n                \"email\": \"ict24-student-4@student.com\",\n                \"batch\": 2024,\n                \"semester\": 5,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-8\",\n                \"email\": \"me24-student-8@student.com\",\n                \"batch\": 2024,\n                \"semester\": 3,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-6\",\n                \"email\": \"ict23-student-6@student.com\",\n                \"batch\": 2023,\n                \"semester\": 6,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-6\",\n                \"email\": \"me22-student-6@student.com\",\n                \"batch\": 2022,\n                \"semester\": 4,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 56.666666666666664,\n                \"studentName\": \"student-9\",\n                \"email\": \"ict24-student-9@student.com\",\n                \"batch\": 2024,\n                \"semester\": 6,\n                \"totalDaysPresent\": 17\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-9\",\n                \"email\": \"me24-student-9@student.com\",\n                \"batch\": 2024,\n                \"semester\": 4,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-1\",\n                \"email\": \"me23-student-1@student.com\",\n                \"batch\": 2023,\n                \"semester\": 8,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-4\",\n                \"email\": \"ce23-student-4@student.com\",\n                \"batch\": 2023,\n                \"semester\": 7,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 43.333333333333336,\n                \"studentName\": \"student-6\",\n                \"email\": \"ce22-student-6@student.com\",\n                \"batch\": 2022,\n                \"semester\": 3,\n                \"totalDaysPresent\": 13\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-5\",\n                \"email\": \"me24-student-5@student.com\",\n                \"batch\": 2024,\n                \"semester\": 8,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-2\",\n                \"email\": \"me24-student-2@student.com\",\n                \"batch\": 2024,\n                \"semester\": 1,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-6\",\n                \"email\": \"ict24-student-6@student.com\",\n                \"batch\": 2024,\n                \"semester\": 5,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 33,\n                \"attendancePercentage\": 54.54545454545454,\n                \"studentName\": \"student-5\",\n                \"email\": \"ict24-student-5@student.com\",\n                \"batch\": 2024,\n                \"semester\": 7,\n                \"totalDaysPresent\": 18\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 46.666666666666664,\n                \"studentName\": \"student-5\",\n                \"email\": \"ict23-student-5@student.com\",\n                \"batch\": 2023,\n                \"semester\": 4,\n                \"totalDaysPresent\": 14\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-4\",\n                \"email\": \"ict23-student-4@student.com\",\n                \"batch\": 2023,\n                \"semester\": 2,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 50,\n                \"studentName\": \"student-3\",\n                \"email\": \"me24-student-3@student.com\",\n                \"batch\": 2024,\n                \"semester\": 1,\n                \"totalDaysPresent\": 15\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-7\",\n                \"email\": \"ce23-student-7@student.com\",\n                \"batch\": 2023,\n                \"semester\": 5,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-3\",\n                \"email\": \"ict23-student-3@student.com\",\n                \"batch\": 2023,\n                \"semester\": 6,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-5\",\n                \"email\": \"ce22-student-5@student.com\",\n                \"batch\": 2022,\n                \"semester\": 5,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-8\",\n                \"email\": \"ict22-student-8@student.com\",\n                \"batch\": 2022,\n                \"semester\": 3,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-1\",\n                \"email\": \"ict23-student-1@student.com\",\n                \"batch\": 2023,\n                \"semester\": 6,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 31,\n                \"attendancePercentage\": 74.19354838709677,\n                \"studentName\": \"student-1\",\n                \"email\": \"ict24-student-1@student.com\",\n                \"batch\": 2024,\n                \"semester\": 6,\n                \"totalDaysPresent\": 23\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-9\",\n                \"email\": \"ce24-student-9@student.com\",\n                \"batch\": 2024,\n                \"semester\": 2,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-9\",\n                \"email\": \"ict22-student-9@student.com\",\n                \"batch\": 2022,\n                \"semester\": 2,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-4\",\n                \"email\": \"me22-student-4@student.com\",\n                \"batch\": 2022,\n                \"semester\": 4,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 46.666666666666664,\n                \"studentName\": \"student-2\",\n                \"email\": \"me23-student-2@student.com\",\n                \"batch\": 2023,\n                \"semester\": 8,\n                \"totalDaysPresent\": 14\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-9\",\n                \"email\": \"me22-student-9@student.com\",\n                \"batch\": 2022,\n                \"semester\": 5,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 50,\n                \"studentName\": \"student-5\",\n                \"email\": \"me23-student-5@student.com\",\n                \"batch\": 2023,\n                \"semester\": 6,\n                \"totalDaysPresent\": 15\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-2\",\n                \"email\": \"ce22-student-2@student.com\",\n                \"batch\": 2022,\n                \"semester\": 7,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 60,\n                \"studentName\": \"student-7\",\n                \"email\": \"ict24-student-7@student.com\",\n                \"batch\": 2024,\n                \"semester\": 8,\n                \"totalDaysPresent\": 18\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-9\",\n                \"email\": \"ce22-student-9@student.com\",\n                \"batch\": 2022,\n                \"semester\": 5,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-2\",\n                \"email\": \"ce24-student-2@student.com\",\n                \"batch\": 2024,\n                \"semester\": 7,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-3\",\n                \"email\": \"ict22-student-3@student.com\",\n                \"batch\": 2022,\n                \"semester\": 2,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 60,\n                \"studentName\": \"student-8\",\n                \"email\": \"ce22-student-8@student.com\",\n                \"batch\": 2022,\n                \"semester\": 6,\n                \"totalDaysPresent\": 18\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 73.33333333333333,\n                \"studentName\": \"student-3\",\n                \"email\": \"ce24-student-3@student.com\",\n                \"batch\": 2024,\n                \"semester\": 2,\n                \"totalDaysPresent\": 22\n            },\n            {\n                \"totalDays\": 32,\n                \"attendancePercentage\": 62.5,\n                \"studentName\": \"student-3\",\n                \"email\": \"ict24-student-3@student.com\",\n                \"batch\": 2024,\n                \"semester\": 7,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-6\",\n                \"email\": \"ce24-student-6@student.com\",\n                \"batch\": 2024,\n                \"semester\": 5,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 56.666666666666664,\n                \"studentName\": \"student-6\",\n                \"email\": \"me24-student-6@student.com\",\n                \"batch\": 2024,\n                \"semester\": 4,\n                \"totalDaysPresent\": 17\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-1\",\n                \"email\": \"ce23-student-1@student.com\",\n                \"batch\": 2023,\n                \"semester\": 3,\n                \"totalDaysPresent\": 19\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 56.666666666666664,\n                \"studentName\": \"student-3\",\n                \"email\": \"me23-student-3@student.com\",\n                \"batch\": 2023,\n                \"semester\": 1,\n                \"totalDaysPresent\": 17\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 56.666666666666664,\n                \"studentName\": \"student-7\",\n                \"email\": \"ict22-student-7@student.com\",\n                \"batch\": 2022,\n                \"semester\": 6,\n                \"totalDaysPresent\": 17\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 70,\n                \"studentName\": \"student-7\",\n                \"email\": \"ce24-student-7@student.com\",\n                \"batch\": 2024,\n                \"semester\": 7,\n                \"totalDaysPresent\": 21\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 53.333333333333336,\n                \"studentName\": \"student-3\",\n                \"email\": \"me22-student-3@student.com\",\n                \"batch\": 2022,\n                \"semester\": 8,\n                \"totalDaysPresent\": 16\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-3\",\n                \"email\": \"ce23-student-3@student.com\",\n                \"batch\": 2023,\n                \"semester\": 7,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 73.33333333333333,\n                \"studentName\": \"student-6\",\n                \"email\": \"ce23-student-6@student.com\",\n                \"batch\": 2023,\n                \"semester\": 1,\n                \"totalDaysPresent\": 22\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 56.666666666666664,\n                \"studentName\": \"student-1\",\n                \"email\": \"me22-student-1@student.com\",\n                \"batch\": 2022,\n                \"semester\": 8,\n                \"totalDaysPresent\": 17\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 66.66666666666666,\n                \"studentName\": \"student-6\",\n                \"email\": \"ict22-student-6@student.com\",\n                \"batch\": 2022,\n                \"semester\": 6,\n                \"totalDaysPresent\": 20\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 73.33333333333333,\n                \"studentName\": \"student-4\",\n                \"email\": \"ce22-student-4@student.com\",\n                \"batch\": 2022,\n                \"semester\": 4,\n                \"totalDaysPresent\": 22\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 50,\n                \"studentName\": \"student-7\",\n                \"email\": \"me22-student-7@student.com\",\n                \"batch\": 2022,\n                \"semester\": 2,\n                \"totalDaysPresent\": 15\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 60,\n                \"studentName\": \"student-7\",\n                \"email\": \"ict23-student-7@student.com\",\n                \"batch\": 2023,\n                \"semester\": 7,\n                \"totalDaysPresent\": 18\n            },\n            {\n                \"totalDays\": 30,\n                \"attendancePercentage\": 63.33333333333333,\n                \"studentName\": \"student-4\",\n                \"email\": \"me23-student-4@student.com\",\n                \"batch\": 2023,\n                \"semester\": 2,\n                \"totalDaysPresent\": 19\n            }\n        ]\n    },\n    \"message\": \"Success\"\n}"
+						},
+						{
+							"name": "attendace percentage Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/attendance/attendancePercentage?batch=2021&branch=CE&percentage=99",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance",
+										"attendancePercentage"
+									],
+									"query": [
+										{
+											"key": "batch",
+											"value": "2021"
+										},
+										{
+											"key": "semester",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "branch",
+											"value": "CE"
+										},
+										{
+											"key": "percentage",
+											"value": "99"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "739"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e3-I/uzg8S5N5iGdM0T6m/awjWdZy0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 19:03:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"totalDays\": 30,\n        \"attendancePercentage\": 80,\n        \"studentName\": \"student-CE-2021-2\",\n        \"email\": \"student-ce-2021-2@email.com\",\n        \"batch\": 2021,\n        \"branch\": \"CE\",\n        \"semester\": 7,\n        \"totalDaysPresent\": 24\n    },\n    {\n        \"totalDays\": 30,\n        \"attendancePercentage\": 83.33333333333334,\n        \"studentName\": \"student-CE-2021-4\",\n        \"email\": \"student-ce-2021-4@email.com\",\n        \"batch\": 2021,\n        \"branch\": \"CE\",\n        \"semester\": 3,\n        \"totalDaysPresent\": 25\n    },\n    {\n        \"totalDays\": 30,\n        \"attendancePercentage\": 83.33333333333334,\n        \"studentName\": \"student-CE-2021-1\",\n        \"email\": \"student-ce-2021-1@email.com\",\n        \"batch\": 2021,\n        \"branch\": \"CE\",\n        \"semester\": 2,\n        \"totalDaysPresent\": 25\n    },\n    {\n        \"totalDays\": 30,\n        \"attendancePercentage\": 70,\n        \"studentName\": \"student-CE-2021-3\",\n        \"email\": \"student-ce-2021-3@email.com\",\n        \"batch\": 2021,\n        \"branch\": \"CE\",\n        \"semester\": 6,\n        \"totalDaysPresent\": 21\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Edit Attendance record",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentId\" : \"66d4b48ac71294301d3a18b7\",\n    \"date\" : \"2024-08-30\",\n    \"present\" : true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Attendance record",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"studentId\" : \"66d4b48ac71294301d3a18b7\",\n    \"date\" : \"2024-08-30\",\n    \"present\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attendance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "208"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d0-tKQt4qn+sEJl6ILTQIoHHQ3bxn0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 18:43:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"66d4b48cc71294301d3a1b5b\",\n    \"studentId\": \"66d4b48ac71294301d3a18b7\",\n    \"date\": \"2024-08-30T00:00:00.000Z\",\n    \"present\": true,\n    \"createdAt\": \"2024-09-01T18:38:04.728Z\",\n    \"updatedAt\": \"2024-09-01T18:43:12.273Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Attendance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentId\" : \"66d4b48ac71294301d3a18b7\",\r\n    \"date\" : \"2024-10-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "studentId",
+									"value": "66d4b48ac71294301d3a18b7",
+									"disabled": true
+								},
+								{
+									"key": "date",
+									"value": "2024-09-01",
+									"disabled": true
+								},
+								{
+									"key": "present",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "deleted successfully",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentId\" : \"66d4b48ac71294301d3a18b7\",\r\n    \"date\" : \"2024-10-30\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attendance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attendance"
+									],
+									"query": [
+										{
+											"key": "studentId",
+											"value": "66d4b48ac71294301d3a18b7",
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": "2024-09-01",
+											"disabled": true
+										},
+										{
+											"key": "present",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-fgR5yLHQ1Hpp6zDESHaY9wJreYE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 01 Sep 2024 19:25:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"acknowledged\": true,\n    \"deletedCount\": 1\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "...",
+			"type": "string"
+		}
+	]
+}
