@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsOptional, IsNotEmpty, IsIn, IsNumberString, IsNumber, IsInt, Max } from 'class-validator';
+import { IsOptional, IsNotEmpty, IsIn, IsInt, Max } from 'class-validator';
 
 export class GetBranchQueryDTO {
     @IsOptional()

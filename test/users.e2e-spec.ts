@@ -8,7 +8,6 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as supertest from 'supertest';
 import { BRANCH_NAME_TYPE, branchDataDocument } from './seeds/branch.seed';
-import { BranchDocument } from '../src/branch/branch.schema';
 import { User } from '../src/users/users.schema';
 import { adminUserDocument, staffUserDocument, studentUserDocument } from './seeds/users.seed';
 import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO, VacantSeatQueryDTO } from '../src/users/dtos';
@@ -61,7 +60,6 @@ describe('UsersController (e2e)', () => {
      * Constants
      */
     const AUTH = 'Authorization';
-    const branchData: Record<BRANCH_NAME_TYPE, BranchDocument> = branchDataDocument;
     const staffUser = staffUserDocument as Record<BRANCH_NAME_TYPE, User[]>;
     const adminUser = adminUserDocument as User;
     const studentUser = studentUserDocument as Record<BRANCH_NAME_TYPE, User[]>;

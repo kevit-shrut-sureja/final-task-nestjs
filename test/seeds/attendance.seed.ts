@@ -50,6 +50,6 @@ export const attendanceData: Record<BRANCH_NAME_TYPE, Attendance[]> = {
             date: new Date('2024-09-03'),
             studentId: studentUserDocument.IT[0]._id,
             present: true,
-        }
+        },
     ],
 };

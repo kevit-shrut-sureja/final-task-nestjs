@@ -1,4 +1,4 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { SignInUser } from './dtos';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -10,6 +10,8 @@ import { UserDocument } from '../users/users.schema';
 @Injectable()
 @Serialize(OutputUserDTO)
 export class AuthService {
+    private readonly logger = new Logger(AuthService.name);
+
     constructor(
         private readonly userRepository: UserRepository,
         private jwtService: JwtService,
@@ -37,6 +39,8 @@ export class AuthService {
 
             return { token };
         } catch (error) {
+            this.logger.error(error);
+
             if (error instanceof HttpException) {
                 throw error;
             }
@@ -56,6 +60,8 @@ export class AuthService {
             await this.userRepository.updateUserTokens(user, tokens);
             return { message: 'success' };
         } catch (error) {
+            this.logger.error(error);
+
             throw new HttpException('Error in token deletion.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

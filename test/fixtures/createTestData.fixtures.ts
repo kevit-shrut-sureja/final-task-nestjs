@@ -30,15 +30,15 @@ const storeUsersData = async () => {
     await userModel.create([...studentUserDocument.CE, ...studentUserDocument.IT]);
 };
 
-const storeAttendanceData = async() => {
-    const attendanceModel = mongoose.model('Attendance', AttendanceSchema)
+const storeAttendanceData = async () => {
+    const attendanceModel = mongoose.model('Attendance', AttendanceSchema);
 
-    await attendanceModel.create([...attendanceData.CE, ...attendanceData.IT])
-}
+    await attendanceModel.create([...attendanceData.CE, ...attendanceData.IT]);
+};
 
-export async function clearAndStoreDummyData(attendanceRequired : boolean = false) {
+export async function clearAndStoreDummyData(attendanceRequired: boolean = false) {
     await mongoose.connection.dropDatabase();
     await storeBranchData();
     await storeUsersData();
-    if(attendanceRequired) await storeAttendanceData()
+    if (attendanceRequired) await storeAttendanceData();
 }

@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsDateString, IsInt, IsOptional, IsString, Min, Max, IsNumberString } from 'class-validator';
+import { IsDateString, IsInt, IsOptional, IsString, Min, Max } from 'class-validator';
 
 export class GetAbsentStudentsListDTO {
     @IsDateString({ strict: true })

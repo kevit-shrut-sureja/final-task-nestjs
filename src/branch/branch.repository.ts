@@ -1,4 +1,4 @@
-import { HttpException, Injectable, ServiceUnavailableException } from '@nestjs/common';
+import { HttpException, Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Branch, BranchDocument } from './branch.schema';
 import { Model } from 'mongoose';
@@ -6,12 +6,16 @@ import { UpdateBranchDTO } from './dtos';
 
 @Injectable()
 export class BranchRepository {
+    private readonly logger = new Logger(BranchRepository.name);
+
     constructor(@InjectModel(Branch.name) private branchModel: Model<BranchDocument>) {}
 
     async createBranch(newBranch: Branch): Promise<Branch> {
         try {
             return await this.branchModel.create(newBranch);
         } catch (error) {
+            this.logger.error(error);
+
             if (error.code === 11000) {
                 throw new HttpException('Branch already exists', 400);
             }
@@ -24,6 +28,8 @@ export class BranchRepository {
         try {
             return await this.branchModel.findById(id);
         } catch (error) {
+            this.logger.error(error);
+
             if (error instanceof HttpException) {
                 throw error;
             }
@@ -35,6 +41,8 @@ export class BranchRepository {
         try {
             return await this.branchModel.find(match).sort(sort).limit(limit).skip(skip);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -43,6 +51,8 @@ export class BranchRepository {
         try {
             return await this.branchModel.findOneAndDelete({ _id: id });
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -57,7 +67,6 @@ export class BranchRepository {
                 batch: editedBranch.batch,
             };
 
-            // eslint-disable-next-line
             if (editedBranch.description !== branch.description) updatedBranch['description'] = editedBranch.description;
 
             // Apply the updates to the found branch document
@@ -65,6 +74,8 @@ export class BranchRepository {
 
             return await branch.save();
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }

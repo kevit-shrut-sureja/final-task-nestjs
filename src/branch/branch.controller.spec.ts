@@ -108,7 +108,7 @@ describe('BranchController', () => {
     describe('updateBranch', () => {
         it('should update a branch by id', async () => {
             const branchId = 'branchId';
-            const updateBranchDto : UpdateBranchDTO = { name: 'Updated Branch' };
+            const updateBranchDto: UpdateBranchDTO = { name: 'Updated Branch' };
 
             service.updateBranch.mockResolvedValue(expectedResult); // Mock service method
 

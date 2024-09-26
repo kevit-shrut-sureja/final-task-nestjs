@@ -12,7 +12,6 @@ import { User } from '../src/users/users.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AttendanceDTO, GetAbsentStudentsListDTO, GetAttendancePercentageDTO } from '../src/attendance/dtos';
 import { getBearerString } from './fixtures/helper.fixtures';
-import { attendanceData } from './seeds/attendance.seed';
 
 describe('AttendanceController (e2e)', () => {
     let app: INestApplication;
@@ -183,12 +182,12 @@ describe('AttendanceController (e2e)', () => {
                 .send(allSuccessAttendanceData)
                 .expect(201)
                 .expect((res) => {
-                    expect(res.body).toHaveProperty('successRecords')
-                    expect(res.body.successRecords.length).toEqual(2)
-                    expect(res.body).not.toHaveProperty('failedRecords')
+                    expect(res.body).toHaveProperty('successRecords');
+                    expect(res.body.successRecords.length).toEqual(2);
+                    expect(res.body).not.toHaveProperty('failedRecords');
                 });
         });
-        
+
         it('should push half the attendance', () => {
             return request
                 .post(route)
@@ -196,13 +195,13 @@ describe('AttendanceController (e2e)', () => {
                 .send(halfSuccessAttendanceData)
                 .expect(207)
                 .expect((res) => {
-                    expect(res.body).toHaveProperty('successRecords')
-                    expect(res.body.successRecords.length).toEqual(1)
-                    expect(res.body).toHaveProperty('failedRecords')
-                    expect(res.body.failedRecords.length).toEqual(1)
+                    expect(res.body).toHaveProperty('successRecords');
+                    expect(res.body.successRecords.length).toEqual(1);
+                    expect(res.body).toHaveProperty('failedRecords');
+                    expect(res.body.failedRecords.length).toEqual(1);
                 });
         });
-        
+
         it('should not push all the attendance', () => {
             return request
                 .post(route)
@@ -210,75 +209,85 @@ describe('AttendanceController (e2e)', () => {
                 .send(noSuccessAttendanceData)
                 .expect(400)
                 .expect((res) => {
-                    expect(res.body).toHaveProperty('successRecords')
-                    expect(res.body.successRecords.length).toEqual(0)
-                    expect(res.body).toHaveProperty('failedRecords')
-                    expect(res.body.failedRecords.length).toEqual(2)
+                    expect(res.body).toHaveProperty('successRecords');
+                    expect(res.body.successRecords.length).toEqual(0);
+                    expect(res.body).toHaveProperty('failedRecords');
+                    expect(res.body.failedRecords.length).toEqual(2);
                 });
         });
     });
 
     describe('PUT /attendance', () => {
         afterAll(async () => {
-            await clearAndStoreDummyData(true)
-        })
-        
-        const route = '/attendance'
-        const editAttendance : AttendanceDTO = {
-            date : '2024-09-01',
-            studentId : studentUserDocument.CE[0]._id, 
-            present : false
-        }
-        const notFoundAttendance : AttendanceDTO = {
-            date : '2024-08-01',
-            studentId : studentUserDocument.CE[0]._id, 
-            present : false
-        }
+            await clearAndStoreDummyData(true);
+        });
+
+        const route = '/attendance';
+        const editAttendance: AttendanceDTO = {
+            date: '2024-09-01',
+            studentId: studentUserDocument.CE[0]._id,
+            present: false,
+        };
+        const notFoundAttendance: AttendanceDTO = {
+            date: '2024-08-01',
+            studentId: studentUserDocument.CE[0]._id,
+            present: false,
+        };
 
         it('should edit the attendance', () => {
-            return request.put(route).set(AUTH, getBearerString(adminUser)).send(editAttendance).expect(200).expect(res => {
-                expect(res.body).toBeDefined()
-            })
-        })
+            return request
+                .put(route)
+                .set(AUTH, getBearerString(adminUser))
+                .send(editAttendance)
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body).toBeDefined();
+                });
+        });
 
         it('should return 404 not found attendance', () => {
-            return request.put(route).set(AUTH, getBearerString(adminUser)).send(notFoundAttendance).expect(404)
-        })
+            return request.put(route).set(AUTH, getBearerString(adminUser)).send(notFoundAttendance).expect(404);
+        });
 
         it('should return 403 when student access the attendance', () => {
-            return request.put(route).set(AUTH, getBearerString(studentUser.CE[0])).send(editAttendance).expect(403)
-        })
+            return request.put(route).set(AUTH, getBearerString(studentUser.CE[0])).send(editAttendance).expect(403);
+        });
     });
 
     describe('DELETE /attendance', () => {
         afterAll(async () => {
-            await clearAndStoreDummyData(true)
-        })
-        
-        const route = '/attendance'
-        const deleteAttendance : AttendanceDTO = {
-            date : '2024-09-01',
-            studentId : studentUserDocument.CE[0]._id, 
-            present : false
-        }
-        const notFoundAttendance : AttendanceDTO = {
-            date : '2024-08-01',
-            studentId : studentUserDocument.CE[0]._id, 
-            present : false
-        }
+            await clearAndStoreDummyData(true);
+        });
+
+        const route = '/attendance';
+        const deleteAttendance: AttendanceDTO = {
+            date: '2024-09-01',
+            studentId: studentUserDocument.CE[0]._id,
+            present: false,
+        };
+        const notFoundAttendance: AttendanceDTO = {
+            date: '2024-08-01',
+            studentId: studentUserDocument.CE[0]._id,
+            present: false,
+        };
 
         it('should delete the attendance', () => {
-            return request.delete(route).set(AUTH, getBearerString(adminUser)).send(deleteAttendance).expect(200).expect(res => {
-                expect(res.body).toBeDefined()
-            })
-        })
+            return request
+                .delete(route)
+                .set(AUTH, getBearerString(adminUser))
+                .send(deleteAttendance)
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body).toBeDefined();
+                });
+        });
 
         it('should return 404 not found attendance', () => {
-            return request.delete(route).set(AUTH, getBearerString(adminUser)).send(notFoundAttendance).expect(404)
-        })
+            return request.delete(route).set(AUTH, getBearerString(adminUser)).send(notFoundAttendance).expect(404);
+        });
 
         it('should return 403 when student access the attendance', () => {
-            return request.delete(route).set(AUTH, getBearerString(studentUser.CE[0])).send(notFoundAttendance).expect(403)
-        })
+            return request.delete(route).set(AUTH, getBearerString(studentUser.CE[0])).send(notFoundAttendance).expect(403);
+        });
     });
 });

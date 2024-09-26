@@ -21,4 +21,4 @@ const createbranchData = <T extends Branch | BranchDocument>(): Record<BRANCH_NA
     IT: createBranch<T>(BRANCH_NAME.IT, 2022, 2, 'This is the branch description'),
 });
 
-export const branchDataDocument = createbranchData<BranchDocument>()
+export const branchDataDocument = createbranchData<BranchDocument>();

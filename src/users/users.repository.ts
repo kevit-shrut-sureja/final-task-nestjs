@@ -1,13 +1,14 @@
 import { FilterQuery, Model, Types } from 'mongoose';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import { ROLE } from '../constants';
 import { CreateUserDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
-import { getObjectID } from '../utils/helper-functions';
 
 @Injectable()
 export class UserRepository {
+    private readonly logger = new Logger(UserRepository.name);
+
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
     async createUser(userData: CreateUserDTO): Promise<User> {
@@ -15,6 +16,8 @@ export class UserRepository {
             const validatedUserData = this.validateRoleSpecificDetails<CreateUserDTO>(userData);
             return await this.userModel.create(validatedUserData);
         } catch (error) {
+            this.logger.error(error);
+
             if (error.code === 11000) {
                 throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
             }
@@ -31,6 +34,8 @@ export class UserRepository {
         try {
             return await this.userModel.findOne({ email });
         } catch (error) {
+            this.logger.error(error);
+
             if (error instanceof HttpException) {
                 throw error;
             }
@@ -42,6 +47,8 @@ export class UserRepository {
         try {
             return this.userModel.findById(id);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -50,6 +57,8 @@ export class UserRepository {
         try {
             return await this.userModel.find({ branchId });
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -58,6 +67,8 @@ export class UserRepository {
         try {
             return await this.userModel.find({ role: ROLE.STUDENT, branchId }).countDocuments();
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -66,6 +77,8 @@ export class UserRepository {
         try {
             return await this.userModel.find(match).sort(sort).limit(limit).skip(skip);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -74,6 +87,8 @@ export class UserRepository {
         try {
             return await this.userModel.findByIdAndDelete(id);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -82,6 +97,8 @@ export class UserRepository {
         try {
             return await this.userModel.findOne({ _id: new Types.ObjectId(id), role: ROLE.STUDENT });
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -96,6 +113,8 @@ export class UserRepository {
             const validatedUserData = this.validateRoleSpecificDetails<UpdateUserDTO>(updatedUserDetails);
             return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, validatedUserData, { new: true });
         } catch (error) {
+            this.logger.error(error);
+
             if (error.code === 11000) {
                 throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
             }
@@ -109,10 +128,12 @@ export class UserRepository {
 
     async updateUserTokens(user: User, tokens: string[]) {
         try {
-            let updatedUser = user;
+            const updatedUser = user;
             updatedUser.tokens = tokens;
             return await this.userModel.findByIdAndUpdate((user as UserDocument)._id, updatedUser, { new: true });
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -121,6 +142,8 @@ export class UserRepository {
         try {
             return await this.userModel.findOne(query);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -263,6 +286,8 @@ export class UserRepository {
                 },
             ]);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -391,6 +416,8 @@ export class UserRepository {
 
             return await this.userModel.aggregate(stages);
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }

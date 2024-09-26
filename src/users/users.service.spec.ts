@@ -6,7 +6,7 @@ import { UsersService } from './users.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User, UserDocument } from './users.schema';
 import { OPERATIONS, RESOURCE, RoleType } from '../constants';
-import { Branch, BranchDocument } from '../branch/branch.schema';
+import { BranchDocument } from '../branch/branch.schema';
 import { getObjectID } from '../utils/helper-functions';
 import { CreateUserDTO, GetUsersQueryDTO, UpdateUserDTO, VacantSeatQueryDTO } from './dtos';
 import { ForbiddenException, HttpException, NotFoundException } from '@nestjs/common';

@@ -33,7 +33,6 @@ export class BranchService {
 
         const match = {};
 
-        // eslint-disable-next-line
         if (matchBy) match['$or'] = [{ name: new RegExp(matchBy as string, 'i') }];
         return await this.branchRepository.findBranch(match, sort, limit, skip);
     }

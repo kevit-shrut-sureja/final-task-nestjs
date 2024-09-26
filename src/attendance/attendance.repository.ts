@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import { Model, Types } from 'mongoose';
 import { Attendance, AttendanceDocument } from './attendance.schema';
 import { AttendanceDTO } from './dtos';
@@ -7,6 +7,8 @@ import { UserRepository } from '../users/users.repository';
 
 @Injectable()
 export class AttendanceRepository {
+    private readonly logger = new Logger(AttendanceRepository.name);
+
     constructor(
         @InjectModel(Attendance.name) private attendanceModel: Model<AttendanceDocument>,
         private readonly userRepository: UserRepository,
@@ -20,6 +22,8 @@ export class AttendanceRepository {
             }
             return await this.attendanceModel.create({ ...data, studentId: new Types.ObjectId(data.studentId) });
         } catch (error) {
+            this.logger.error(error);
+
             if (error.code === 11000) {
                 throw new HttpException('Attendance already exists', HttpStatus.BAD_REQUEST);
             }
@@ -41,6 +45,8 @@ export class AttendanceRepository {
             findAttendance.present = present;
             return await findAttendance.save();
         } catch (error) {
+            this.logger.error(error);
+
             if (error instanceof HttpException) {
                 throw error;
             }
@@ -57,6 +63,8 @@ export class AttendanceRepository {
             }
             return await this.attendanceModel.findOneAndDelete({ date, studentId: new Types.ObjectId(studentId) });
         } catch (error) {
+            this.logger.error(error);
+
             if (error instanceof HttpException) {
                 throw error;
             }
@@ -115,21 +123,19 @@ export class AttendanceRepository {
                 },
             ];
             const matchStage = {};
-            // eslint-disable-next-line
             if (branch) matchStage['studentDetails.branchName'] = branch;
-            // eslint-disable-next-line
             if (batch) matchStage['studentDetails.batch'] = batch;
-            // eslint-disable-next-line
             if (semester) matchStage['studentDetails.currentSemester'] = semester;
             if (Object.keys(matchStage).length > 0) {
                 const stageToAdd = {};
-                // eslint-disable-next-line
                 stageToAdd['$match'] = matchStage;
                 stages.splice(3, 0, stageToAdd);
             }
             const result = await this.attendanceModel.aggregate(stages);
             return result;
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }
@@ -222,15 +228,11 @@ export class AttendanceRepository {
             });
 
             const matchStage = {};
-            // eslint-disable-next-line
             if (branch) matchStage['studentDetails.branchName'] = branch;
-            // eslint-disable-next-line
             if (batch) matchStage['studentDetails.batch'] = batch;
-            // eslint-disable-next-line
             if (semester) matchStage['studentDetails.currentSemester'] = semester;
             if (Object.keys(matchStage).length > 0) {
                 const stageToAdd = {};
-                // eslint-disable-next-line
                 stageToAdd['$match'] = matchStage;
                 stages.splice(5, 0, stageToAdd);
             }
@@ -238,6 +240,8 @@ export class AttendanceRepository {
             const result = await this.attendanceModel.aggregate(stages);
             return result;
         } catch (error) {
+            this.logger.error(error);
+
             throw new ServiceUnavailableException();
         }
     }

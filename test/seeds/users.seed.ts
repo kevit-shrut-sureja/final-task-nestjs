@@ -2,7 +2,7 @@ import { Types } from 'mongoose';
 import { ROLE } from '../../src/constants';
 import { User, UserDocument } from '../../src/users/users.schema';
 import { getObjectID } from '../../src/utils/helper-functions';
-import { BRANCH_NAME_TYPE, branchDataDocument, } from './branch.seed';
+import { BRANCH_NAME_TYPE, branchDataDocument } from './branch.seed';
 import * as dotenv from 'dotenv';
 import { JwtService } from '@nestjs/jwt';
 
