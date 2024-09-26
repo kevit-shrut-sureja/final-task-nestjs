@@ -36,7 +36,7 @@ describe('AuthController (e2e)', () => {
 
     afterAll(async () => {
         await mongoose.disconnect();
-        await app.close()
+        await app.close();
     });
 
     /**
@@ -107,8 +107,6 @@ describe('AuthController (e2e)', () => {
         });
 
         it('200 (should logout all user tokens)', () => {
-            // console.log(getBearerString(adminUser));
-
             return request
                 .post(route)
                 .set(AUTH, getBearerString(adminUser))
