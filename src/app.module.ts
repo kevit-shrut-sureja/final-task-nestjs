@@ -36,9 +36,13 @@ export class AppModule {
     private readonly logger = new Logger(AppModule.name);
     constructor(
         private readonly usersRepository: UserRepository,
-        configService: ConfigService,
-    ) {
-        if (configService.get<string>('NODE_ENV') !== 'test') this.createSuperUser();
+        private readonly configService: ConfigService,
+    ) {}
+
+    async onModuleInit() {
+        if (this.configService.get<string>('NODE_ENV') !== 'test') {
+            await this.createSuperUser();
+        }
     }
 
     private async createSuperUser() {
